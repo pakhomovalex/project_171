@@ -1,0 +1,95 @@
+@import '../../styles/mixins.scss';
+
+.header {
+  width: 100%;
+  height: 100px;
+  box-sizing: border-box;
+  z-index: 1000;
+
+  position: fixed;
+  background-color: var(--background-color);
+  border-bottom: 1px solid #1c1c1c;
+
+  &__container {
+    @include page-grid();
+    @include padding-inline();
+    align-items: center;
+    padding-block: 15px;
+  }
+
+  &__link {
+    position: relative;
+    grid-column: 1 / 3;
+    height: 70px;
+  }
+
+  &__logo {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__login {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    grid-column: 10 / 13;
+
+    &__link {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      position: relative;
+      gap: 8px;
+      padding: 10px 16px;
+
+      @include main-text();
+
+      text-decoration: none;
+      color: var(--black-color);
+
+      & div {
+        position: relative;
+        width: 18px;
+        height: 18px;
+      }
+
+      & p {
+        margin: 0;
+      }
+    }
+
+    &__button {
+      @include yellow-button(178px, 48px);
+
+      background-color: var(--background-color);
+    }
+  }
+}
+
+.nav {
+  grid-column: 5 / 9;
+
+  &__list {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__link {
+    @include main-text();
+
+    padding-block: 16px;
+
+    text-decoration: none;
+    color: var(--black-color);
+    transition: .3s;
+
+    &:hover {
+      color: var(--button-blue-color);
+    }
+  }
+}
