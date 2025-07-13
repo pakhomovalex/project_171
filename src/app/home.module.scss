@@ -44,3 +44,44 @@
     margin-top: 32px;
   }
 }
+
+.secondTitle {
+  @include h2();
+  margin: 0;
+  text-align: center;
+  grid-column: 1/-1;
+}
+
+.projectsSection {
+  position: relative;
+
+  &__desc {
+    margin: 0;
+    margin-top: 16px;
+    text-align: center;
+    grid-column: 1/-1;
+
+    @include main-text();
+  }
+
+  &__fondsBox {
+    grid-column: 1 / -1;
+
+    @include page-grid();
+    
+    margin-top: 25px;
+    z-index: 100;
+  }
+
+  &__blueLine {
+    position: absolute;
+    top: 50%;
+    left: -20%;
+  }
+
+  &__yellowLine {
+    position: absolute;
+    top: 40%;
+    right: -20%;
+  }
+}
