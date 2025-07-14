@@ -52,7 +52,7 @@
   grid-column: 1/-1;
 }
 
-.projectsSection {
+.fondsSection {
   position: relative;
 
   &__desc {
@@ -83,5 +83,33 @@
     position: absolute;
     top: 40%;
     right: -20%;
+  }
+}
+
+.projectsSection {
+  &__projectsBox {
+    margin-top: 32px;
+    grid-column: 1/-1;
+
+    @include page-grid();
+
+    gap: 24px;
+  }
+
+  &__link {
+    text-align: center;
+    grid-column: 6 / 8;
+
+    @include button-text();
+
+    color: var(--button-blue-color);
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    margin: 0;
+    margin-top: 32px;
   }
 }

@@ -1,16 +1,13 @@
+import { FondCardType } from '@/types/FondCard';
 import styles from './FondCard.module.scss';
 
-type Props = {
-  title: string,
-  money: string,
-  achivements: string[],
-}
+
 
 export default function FondCard({
   title,
   money,
   achivements,
-}: Props) {
+}: FondCardType) {
   return (
     <article className={styles.card}>
       <h4 className={styles.card__title}>

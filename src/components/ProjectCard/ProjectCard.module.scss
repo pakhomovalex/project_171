@@ -1,0 +1,75 @@
+@import '../../styles/mixins';
+
+.card {
+  grid-column: span 4;
+  border: 1px solid var(--gray-50-color);
+  border-radius: 20px;
+  padding: 16px;
+  position: relative;
+
+  &__category {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 8px;
+    background-color: var(--background-color);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    @include small-text();
+
+    z-index: 100;
+  }
+
+  &__imageBox {
+    position: relative;
+    width: 379px;
+    height: 280px;
+  }
+
+  &__image {
+    border-radius: 16px;
+  }
+
+
+  &__title {
+    @include h4();
+
+    margin: 0;
+    margin-top: 24px;
+  }
+
+  &__description {
+    margin: 0;
+    margin-top: 16px;
+
+    @include main-text();
+  }
+
+  &__type,
+  &__termin {
+    @include secondary-text();
+
+    margin: 0;
+    margin-top: 8px;
+    color: var(--gray-75-color);
+  }
+
+  &__percent,
+  &__lastDate {
+    @include main-text();
+
+    margin: 0;
+    margin-top: 4px;
+  }
+
+  &__button {
+    @include blue-button(100%, 48px);
+    margin-top: 16px;
+  }
+}
