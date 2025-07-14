@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ProjectCardType } from "@/types/ProjectCard";
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
+import ForWhoCard from "@/components/ForWhoCard/ForWhoCard";
 
 const FONDS = [
   {
@@ -182,17 +183,196 @@ export default function Home() {
           </div>
           <Link href={"/projects"} className={styles.projectsSection__link}>
             Усі проекти
-            <Image 
-            src={"/right-arrow-icon.svg"}
-             alt={"arrow"}
-             width={18}
-             height={18}
-              />
+            <Image
+              src={"/right-arrow-icon.svg"}
+              alt={"arrow"}
+              width={18}
+              height={18}
+            />
           </Link>
         </section>
-        <section></section>
+        <section className={`${styles.section} ${styles.forWhoSection}`}>
+          <h2 className={styles.secondTitle}>
+            Для кого ця платформа?
+          </h2>
+          <div className={styles.forWhoSection__cardBox}>
+            <ForWhoCard
+              icon="/painters-icon.svg"
+              title="Художники"
+              description="Для митців, які прагнуть підтримати армію своїми картинами,
+               ілюстраціями чи постерами"
+            />
+            <ForWhoCard
+              icon="/clothes-icon.svg"
+              title="Дизайнери одягу"
+              description="Для виконавців і композиторів, які
+               хочуть донатити через авторську музику або треки"
+            />
+            <ForWhoCard
+              icon="/plants-icon.svg"
+              title="Флористи та декоратори"
+              description="Для тих, хто перетворює простір,
+               створюючи красу та незабутню атмосферу через квіти і дизайн"
+            />
+            <ForWhoCard
+              icon="/graphics-icon.svg"
+              title="Фотографи"
+              description="Для тих, хто бачить історію
+               через об'єктив і хоче допомагати через свої фотопроєкти"
+            />
+            <ForWhoCard
+              icon="/masters-icon.svg"
+              title="Майстри та ремісники"
+              description="Для творців унікальних речей,
+               які перетворюють ручну роботу на підтримку ЗСУ"
+            />
+            <ForWhoCard
+              icon="/digital-icon.svg"
+              title="Digital-артисти"
+              description="Для тих, хто створює графіку,
+               шаблони, іконки чи інші цифрові продукти"
+            />
+          </div>
+        </section>
+        <section className={`${styles.section} ${styles.aboutUsSection}`}>
+          <h2 className={styles.secondTitle}>Хто ми?</h2>
+          <div className={styles.aboutUsSection__imageBox}>
+            <Image
+              src={"/about-us.png"}
+              alt={"about us photo"}
+              fill
+              className={styles.aboutUsSection__image}
+            />
+          </div>
+          <h3 className={styles.aboutUsSection__subtitle}>
+            Ми — ті, хто не міг залишитись осторонь
+          </h3>
+          <p className={styles.aboutUsSection__description}>
+            Ми — незалежна команда з ІТ та креативної
+            сфери, яку об’єднує спільна цінність: підтримати
+            ЗСУ через силу української творчості.
+          </p>
+          <p className={styles.aboutUsSection__description}>
+            Цей проєкт народився з віри в те, що креатив
+            може бути не лише красивим, а й корисним. Ми
+            створили платформу, яка поєднує митців і людей
+            доброї волі — тих, хто хоче допомагати армії через
+            мистецтво, дизайн, музику чи тексти.
+          </p>
+          <p className={styles.aboutUsSection__description}>
+            Це наш спосіб сказати: ми теж у
+            строю — своїми вміннями, діями та небайдужістю.
+          </p>
+          <Link className={styles.aboutUsSection__link} href={"/about-us"}>
+            Дізнатись більше
+            <Image
+              src={"/right-arrow-icon.svg"}
+              alt={"arrow"}
+              width={18}
+              height={18}
+            />
+          </Link>
+        </section>
+        <section className={styles.supportSection}>
+          <Image
+            src={"/support-image.png"}
+            alt={"background image"}
+            fill
+            className={styles.supportSection__image}
+          />
+          <h2 className={styles.supportSection__title}>
+            Твоя творчість — твій внесок у перемогу
+          </h2>
+          <p className={styles.supportSection__description}>
+            Підтримай ЗСУ донатом або власним талантом.
+            <br />
+            Разом сильніші. Разом переможемо.
+          </p>
+          <div className={styles.supportSection__buttonBox}>
+            <button className={styles.supportSection__blueButton}>
+              Підртримати проекти
+            </button>
+            <button className={styles.supportSection__yellowButton}>
+              Стати автором
+            </button>
+          </div>
+        </section>
       </main>
-      <footer></footer>
+      <footer className={styles.footer}>
+        <div className={styles.footer__firstColumn}>
+          <Image
+            src={"/Logo-mini.svg"}
+            alt={"logo image"}
+            className={styles.footer__logo}
+            width={205}
+            height={72}
+          />
+          <p className={styles.footer__description}>
+            Платформа, де творчість перетворюється на допомогу.
+            Разом — до перемоги
+          </p>
+          <Link href={""} className={styles.footer__link}>
+            Політика конфіденційності
+          </Link>
+        </div>
+        <div className={styles.footer__secondColumn}>
+          <h5 className={styles.footer__subtitle}>
+            Навігація
+          </h5>
+          <nav className={styles.footer__nav}>
+            <ul className={styles.footer__list}>
+              <li className={styles.footer__item}>
+                <Link href={""} className={styles.footer__navLink}>
+                  Проекти
+                </Link>
+              </li>
+              <li className={styles.footer__item}>
+                <Link href={""} className={styles.footer__navLink}>
+                  Автори
+                </Link>
+              </li>
+              <li className={styles.footer__item}>
+                <Link href={""} className={styles.footer__navLink}>
+                  Стати автором
+                </Link>
+              </li>
+              <li className={styles.footer__item}>
+                <Link href={""} className={styles.footer__navLink}>
+                  Про нас
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div className={styles.footer__thirdColumn}>
+          <h5 className={styles.footer__subtitle}>
+            Контакти
+          </h5>
+          <Link
+            href={`mailto:Pidtrymai.fond@gmail.com`}
+            className={styles.footer__email}
+          >
+            Pidtrymai.fond@gmail.com
+          </Link>
+        </div>
+        <div className={styles.footer__forthColumn}>
+          <h4 className={styles.footer__support}>
+            Допоможи ЗСУ вже зараз
+          </h4>
+          <button className={styles.footer__button}>
+            Підтримати проекти
+          </button>
+        </div>
+        <div className={styles.footer__line} />
+        <div className={styles.footer__info}>
+          <p className={styles.footer__copyright}>
+            © 2025 Підтримай ЗСУ талантом. Усі права захищено.
+          </p>
+          <p className={styles.footer__madeBy}>
+            Design & Development by Dobro.Studio
+          </p>
+        </div>
+      </footer>
     </>
   );
 }
