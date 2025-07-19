@@ -1,0 +1,70 @@
+@import '../../styles/mixins';
+
+.projectsSection {
+  @include padding-inline();
+
+  &__title {
+    margin: 0;
+    margin-top: 80px;
+
+    @include h1();
+    text-align: center;
+  }
+
+  &__description {
+    margin: 0;
+    margin-top: 16px;
+    text-align: center;
+    display: block;
+    width: 100%;
+
+    @include main-text();
+  }
+
+  
+}
+
+.supportSection {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 600px;
+
+  &__title {
+    @include h2();
+
+    margin: 0;
+    z-index: 10;
+    color: var(--white-color);
+  }
+
+  &__description {
+    margin: 0;
+    margin-top: 16px;
+    text-align: center;
+
+    @include main-text();
+
+    color: var(--white-color);
+    z-index: 10;
+  }
+
+  &__button {
+    @include yellow-button(410px, 48px);
+    background-color: transparent;
+    color: var(--button-yellow-color);
+
+    margin-top: 32px;
+    z-index: 10;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: var(--black-color);
+    }
+  }
+}

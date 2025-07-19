@@ -1,9 +1,10 @@
 import { ProjectCardType } from '@/types/ProjectCard';
 import styles from './ProjectCard.module.scss';
 import Image from 'next/image';
-
+import Link from 'next/link';
 
 export default function ProjectCard({
+  id,
   title,
   image,
   category,
@@ -30,7 +31,7 @@ export default function ProjectCard({
           />
         </div>
         <Image
-          src={image}
+          src={image[0]}
           alt={'image'}
           fill
           className={styles.card__image}
@@ -54,9 +55,9 @@ export default function ProjectCard({
       <p className={styles.card__lastDate}>
         До {lastDate}
       </p>
-      <button className={styles.card__button}>
+      <Link className={styles.card__button} href={`/projects/${id}`}>
         Підтримати
-      </button>
+      </Link>
     </article>
   );
 }

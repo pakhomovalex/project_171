@@ -70,6 +70,8 @@
 
   &__button {
     @include blue-button(100%, 48px);
+
     margin-top: 16px;
+    text-decoration: none;
   }
 }
