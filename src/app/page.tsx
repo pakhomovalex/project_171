@@ -39,7 +39,7 @@ const FONDS = [
   }
 ];
 
-export const author: UserType = {
+export const authors: UserType[] = [{
   id: 0,
   username: "АльонаАльона",
   email: 'user@gmail.com',
@@ -57,7 +57,92 @@ export const author: UserType = {
   telegram_url: '',
   instagram_url: '',
   facebook_url: '',
-};
+  specialization: [{
+    id: 0,
+    name: 'Хз',
+    slug: 'Донт пуш зе хорсес'
+  }],
+  projects: [0, 1, 2, 3],
+  createdAt: '21.07.2025'
+},
+{
+  id: 1,
+  username: "АльонаАльона",
+  email: 'user@gmail.com',
+  first_name: 'Олена',
+  last_name: 'Скоропацька',
+  avatar: '/avatar.png',
+  bio: `Молода українська художниця з Києва, яка присвятила
+   свою творчість підтримці Збройних Сил України. Олена створює 
+   емоційні та символічні роботи, що відображають дух незламності
+    українського народу. За два роки своєї благодійної діяльності
+     Олена зібрала понад 50,000 гривень для потреб 
+     фронту через продаж своїх цифрових робіт.`,
+  city: 'Миколаїв',
+  phone_number: '0974579737',
+  telegram_url: '',
+  instagram_url: '',
+  facebook_url: '',
+  specialization: [{
+    id: 0,
+    name: 'Хз',
+    slug: 'Донт пуш зе хорсес'
+  }],
+  projects: [6],
+  createdAt: '21.07.2025'
+},
+{
+  id: 2,
+  username: "АльонаАльона",
+  email: 'user@gmail.com',
+  first_name: 'Олена',
+  last_name: 'Скоропацька',
+  avatar: '/avatar.png',
+  bio: `Молода українська художниця з Києва, яка присвятила
+   свою творчість підтримці Збройних Сил України. Олена створює 
+   емоційні та символічні роботи, що відображають дух незламності
+    українського народу. За два роки своєї благодійної діяльності
+     Олена зібрала понад 50,000 гривень для потреб 
+     фронту через продаж своїх цифрових робіт.`,
+  city: 'Миколаїв',
+  phone_number: '0974579737',
+  telegram_url: '',
+  instagram_url: '',
+  facebook_url: '',
+  specialization: [{
+    id: 0,
+    name: 'Хз',
+    slug: 'Донт пуш зе хорсес'
+  }],
+  projects: [4],
+  createdAt: '21.07.2025'
+},
+{
+  id: 3,
+  username: "АльонаАльона",
+  email: 'user@gmail.com',
+  first_name: 'Олена',
+  last_name: 'Скоропацька',
+  avatar: '/avatar.png',
+  bio: `Молода українська художниця з Києва, яка присвятила
+   свою творчість підтримці Збройних Сил України. Олена створює 
+   емоційні та символічні роботи, що відображають дух незламності
+    українського народу. За два роки своєї благодійної діяльності
+     Олена зібрала понад 50,000 гривень для потреб 
+     фронту через продаж своїх цифрових робіт.`,
+  city: 'Миколаїв',
+  phone_number: '0974579737',
+  telegram_url: '',
+  instagram_url: '',
+  facebook_url: '',
+  specialization: [{
+    id: 0,
+    name: 'Хз',
+    slug: 'Донт пуш зе хорсес'
+  }],
+  projects: [5],
+  createdAt: '21.07.2025'
+}];
 
 export const projects: ProjectCardType[] = [{
   id: 1,

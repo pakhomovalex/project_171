@@ -1,0 +1,82 @@
+@import '../../styles/mixins';
+
+.authors {
+  &__mainSection {
+    @include padding-inline();
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__title {
+    text-align: center;
+    margin: 0;
+    margin-top: 80px;
+
+    @include h1();
+  }
+
+  &__description {
+    @include main-text();
+
+    margin: 0;
+    margin-top: 16px;
+    text-align: center;
+  }
+
+  &__authorsBox {
+    margin-top: 80px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  &__supportSection {
+    min-height: 600px;
+    width: 100%;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__secondTitle {
+    @include h2();
+
+    margin: 0;
+    z-index: 1;
+    color: var(--white-color);
+  }
+
+  &__secondDescription {
+    margin: 0;
+    margin-top: 16px;
+
+    @include main-text();
+
+    text-align: center;
+    color: var(--white-color);
+    z-index: 1;
+  }
+
+  &__button {
+    @include yellow-button(302px, 48px);
+
+    background-color: transparent;
+    text-decoration: none;
+    margin: 0;
+    margin-top: 32px;
+    z-index: 1;
+
+    color: var(--button-yellow-color);
+
+    &:hover,
+    &:focus {
+      color: var(--black-color);
+    }
+  }
+}

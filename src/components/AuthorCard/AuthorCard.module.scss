@@ -1,0 +1,83 @@
+@import '../../styles/mixins';
+
+.card {
+  width: 100%;
+  border-radius: 20px;
+  padding: 32px;
+  background-color: var(--light-blue-color);
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.08);
+  display: flex;
+  gap: 32px;
+
+  &__avatar {
+    border-radius: 16px;
+  }
+
+  &__title {
+    margin: 0;
+
+    @include h3();
+  }
+
+  &__spezialization {
+    margin: 0;
+    margin-top: 4px;
+
+    @include secondary-text();
+    color: var(--gray-75-color);
+  }
+
+  &__slogan {
+    margin: 0;
+    margin-top: 8px;
+
+    @include main-text();
+  }
+
+  &__localInfoBox {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__localInfoSubBox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__localInfoText {
+    @include secondary-text();
+
+    margin: 0;
+  }
+
+  &__socials {
+    margin: 0;
+    margin-top: 8px;
+
+    @include small-text();
+
+    color: var(--gray-75-color);
+  }
+
+  &__socialsBox {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  &__button {
+    @include yellow-button(302px, 48px);
+
+    margin-top: 24px;
+    background-color: transparent;
+    text-decoration: none;
+  }
+}

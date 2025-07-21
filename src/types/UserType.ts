@@ -1,5 +1,5 @@
 export type UserType = {
-  id: 0,
+  id: number,
   username: string,
   email: string,
   first_name: string,
@@ -10,5 +10,14 @@ export type UserType = {
   phone_number: string,
   telegram_url: string,
   instagram_url: string,
-  facebook_url: string
+  facebook_url: string,
+  specialization: [
+    {
+      id: number,
+      name: string,
+      slug: string,
+    }
+  ],
+  projects: number[],
+  createdAt: string,
 }

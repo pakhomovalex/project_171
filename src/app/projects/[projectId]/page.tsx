@@ -1,4 +1,4 @@
-import { projects } from "@/app/page";
+import { projects as serverProjects } from "@/app/page";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import { ProjectCardType } from "@/types/ProjectCard";
@@ -6,10 +6,10 @@ import styles from './ProjectPage.module.scss';
 import Link from "next/link";
 import Image from "next/image";
 import { Slider } from "@/components/Slider/Slider";
-import { author } from "@/app/page";
+import { authors } from "@/app/page";
 
 export default function ProjectPage({ params }: { params: { projectId: string } }) {
-  const project: ProjectCardType = projects.find(p => p.id === +params.projectId) || projects[0];
+  const project: ProjectCardType = serverProjects.find(p => p.id === +params.projectId) || serverProjects[0];
 
   const {
     title,
@@ -21,6 +21,18 @@ export default function ProjectPage({ params }: { params: { projectId: string } 
     price,
     lastDate,
   } = project;
+
+  const {
+    username,
+    first_name,
+    last_name,
+    avatar,
+    id,
+    bio,
+    telegram_url,
+    instagram_url,
+    facebook_url,
+  } = authors[0];
 
   return (
     <>
@@ -142,7 +154,7 @@ export default function ProjectPage({ params }: { params: { projectId: string } 
             </h2>
             <div className={styles.authorArticle__box}>
               <Image
-                src={author.avatar}
+                src={avatar}
                 alt={"avatar"}
                 width={160}
                 height={160}
@@ -150,22 +162,22 @@ export default function ProjectPage({ params }: { params: { projectId: string } 
               />
               <div className={styles.authorArticle__info}>
                 <h4 className={styles.authorArticle__name}>
-                  {author.username ?
-                    author.username : `${author.first_name} ${author.last_name}`
+                  {username ?
+                    username : `${first_name} ${last_name}`
                   }
                 </h4>
                 <p className={styles.authorArticle__bio}>
-                  {author.bio}
+                  {bio}
                 </p>
                 <div className={styles.authorArticle__line} />
-                {(author.facebook_url || author.telegram_url || author.instagram_url)
+                {(facebook_url || telegram_url || instagram_url)
                   && <>
                     <h4 className={styles.authorArticle__socials}>
                       Соціальні мережі:
                     </h4>
                     <div className={styles.authorArticle__socialsBox}>
-                      {author.telegram_url && <Link
-                        href={author.telegram_url}
+                      {telegram_url && <Link
+                        href={telegram_url}
                         className={styles.authorArticle__icon}
                       >
                         <Image
@@ -174,8 +186,8 @@ export default function ProjectPage({ params }: { params: { projectId: string } 
                           fill
                         />
                       </Link>}
-                      {author.facebook_url && <Link
-                        href={author.facebook_url}
+                      {facebook_url && <Link
+                        href={facebook_url}
                         className={styles.authorArticle__icon}
                       >
                         <Image
@@ -184,8 +196,8 @@ export default function ProjectPage({ params }: { params: { projectId: string } 
                           fill
                         />
                       </Link>}
-                      {author.instagram_url && <Link
-                        href={author.instagram_url}
+                      {instagram_url && <Link
+                        href={instagram_url}
                         className={styles.authorArticle__icon}
                       >
                         <Image
@@ -196,7 +208,7 @@ export default function ProjectPage({ params }: { params: { projectId: string } 
                       </Link>}
                     </div>
                   </>}
-                <Link className={styles.authorArticle__button} href={`/authors/${author.id}`}>
+                <Link className={styles.authorArticle__button} href={`/authors/${id}`}>
                   Інші роботи автора
                 </Link>
               </div>
