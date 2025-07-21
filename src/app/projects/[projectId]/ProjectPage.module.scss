@@ -1,1 +1,275 @@
 @import '../../../styles/mixins';
+
+.project {
+  @include padding-inline();
+
+  &__categories {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  &__categoryLink {
+    @include secondary-text();
+
+    text-decoration: none;
+    color: var(--gray-50-color);
+    transition: .3s;
+
+    &:hover {
+      color: var(--button-blue-color);
+    }
+  }
+
+  &__categoryTitle {
+    @include secondary-text();
+
+    margin: 0;
+  }
+}
+
+.mainSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @include page-grid();
+
+  &__title {
+    @include h1();
+
+    grid-column: 1 / -1;
+    text-align: center;
+
+    margin: 0;
+    margin-top: 48px;
+  }
+
+  &__subtitle {
+    @include main-text();
+
+    grid-column: 4/ 10;
+    text-align: center;
+
+    margin: 0;
+    margin-top: 16px;
+  }
+
+  &__swiperBox {
+    grid-column: 1/-1;
+    min-height: 600px;
+    margin-top: 82px;
+  }
+}
+
+.infoSection {
+  @include page-grid();
+
+  position: relative;
+
+  width: 100%;
+  margin-top: 80px;
+
+  &__text {
+    grid-column: 1/9;
+  }
+
+  &__title {
+    @include h2();
+
+    margin: 0;
+
+    &:nth-of-type(2) {
+      margin-top: 80px
+    }
+  }
+
+  &__description {
+    @include main-text();
+
+    margin: 0;
+    margin-top: 32px;
+  }
+
+  &__fundraising_goal {
+    @include main-text();
+
+    margin: 0;
+    margin-top: 32px;
+  }
+
+  &__article {
+    position: absolute;
+    top: 0;
+    box-sizing: border-box;
+    padding: 32px 24px;
+    width: 100%;
+
+    grid-column: 9/ 13;
+    border: 1px solid var(--gray-50-color);
+    border-radius: 16px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 160px;
+      background-color: var(--light-blue-color);
+      pointer-events: none;
+      border-radius: 16px 16px 0 0;
+      z-index: 0;
+    }
+
+    &__title {
+      position: relative;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: center;
+      text-align: center;
+
+      @include h4();
+
+      color: var(--button-blue-color);
+      z-index: 10;
+    }
+
+    &__text {
+      position: relative;
+
+      @include main-text();
+
+      margin: 0;
+      margin-top: 8px;
+      text-align: center;
+      z-index: 1;
+    }
+
+    &__button {
+      @include blue-button(100%, 48px);
+
+      margin-top: 48px;
+    }
+  }
+
+  &__articleBox {
+    margin-top: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  &__articleElem {
+    box-sizing: border-box;
+    position: relative;
+    border-radius: 16px;
+    padding: 24px;
+    padding-left: calc(24px + 32px + 10px);
+    width: 100%;
+
+    background-color: var(--gray-10-color);
+
+    &__icon {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 24px;
+    }
+
+    &__text {
+      @include main-text();
+
+      margin: 0;
+      color: var(--gray-75-color);
+    }
+
+    &__value {
+      @include h4();
+      margin: 0;
+      margin-top: 8px;
+    }
+  }
+}
+
+.authroArticle {
+  margin-top: 80px;
+  margin-bottom: 64px;
+  border: 1px solid var(--gray-50-color);
+  border-radius: 20px;
+  padding: 32px;
+  grid-column: 1 / 9;
+
+  &__title {
+    @include h2();
+
+    margin: 0;
+  }
+
+  &__box {
+    margin-top: 32px;
+
+    display: flex;
+    gap: 24px;
+  }
+
+  &__avatar {
+    border-radius: 16px;
+  }
+
+  &__name {
+    margin: 0;
+
+    @include h4();
+  }
+
+  &__bio {
+    @include main-text();
+
+    margin: 0;
+    margin-top: 16px;
+  }
+
+  &__line {
+    width: 100%;
+    height: 2px;
+    background-color: var(--gray-50-color);
+    margin-top: 16px;
+  }
+
+  &__socials {
+    @include h4();
+
+    margin: 0;
+    margin-top: 16px;
+    color: var(--gray-75-color);
+  }
+
+  &__socialsBox {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  &__icon {
+    position: relative;
+    width: 20px;
+    height: 20px;
+  }
+
+  &__button {
+    @include yellow-button(302px, 48px);
+
+    margin-top: 40px;
+
+    text-decoration: none;
+    background-color: transparent;
+  }
+}

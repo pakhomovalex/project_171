@@ -234,9 +234,9 @@ export default function ProjectCategoryPagination() {
           const {
             id,
             title,
+            subtitle,
             percent,
-            description,
-            image,
+            images,
             lastDate,
             category,
           } = project;
@@ -245,9 +245,9 @@ export default function ProjectCategoryPagination() {
             key={id}
             id={id}
             title={title}
+            subtitle={subtitle}
             percent={percent}
-            description={description}
-            image={image}
+            images={images}
             lastDate={lastDate}
             category={category}
           />

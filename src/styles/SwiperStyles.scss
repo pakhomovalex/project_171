@@ -1,0 +1,51 @@
+.swiper:nth-of-type(2) {
+  & > .swiper-wrapper {
+
+    & > .swiper-slide {
+      filter: brightness(50%);
+    }
+
+    & > .swiper-slide-thumb-active {
+      filter: brightness(100%);
+    }
+  }
+
+
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  background-color: var(--gray-25-color);
+
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  transition: .3s;
+  z-index: 1000;
+}
+
+.swiper-button-next {
+  right: 40px;
+  background-image: url('/arrow-right.svg');
+}
+
+.swiper-button-prev {
+  left: 40px;
+  background-image: url('/arrow-left.svg');
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: var(--light-blue-color);
+}
+
+.swiper-button-disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}

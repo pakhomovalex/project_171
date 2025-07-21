@@ -6,12 +6,12 @@ import Link from 'next/link';
 export default function ProjectCard({
   id,
   title,
-  image,
+  subtitle,
+  images,
   category,
-  description,
   percent,
   lastDate,
-}: ProjectCardType) {
+}: Omit<ProjectCardType, 'description' | 'fundraising_goal' | 'price'>) {
   return (
     <article className={styles.card}>
       <div className={styles.card__imageBox}>
@@ -31,7 +31,7 @@ export default function ProjectCard({
           />
         </div>
         <Image
-          src={image[0]}
+          src={images[0]}
           alt={'image'}
           fill
           className={styles.card__image}
@@ -41,7 +41,7 @@ export default function ProjectCard({
         «{title}»
       </h4>
       <p className={styles.card__description}>
-        {description.length >= 112 ? `${description.slice(0, 111)}...` : description}
+        {subtitle.length >= 112 ? `${subtitle.slice(0, 111)}...` : subtitle}
       </p>
       <p className={styles.card__type}>
         Тип збору:
