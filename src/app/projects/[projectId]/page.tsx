@@ -19,7 +19,7 @@ export default function ProjectPage({ params }: { params: { projectId: string } 
     fundraising_goal,
     percent,
     price,
-    lastDate
+    lastDate,
   } = project;
 
   return (
@@ -136,49 +136,67 @@ export default function ProjectPage({ params }: { params: { projectId: string } 
             </button>
           </article>
 
-          <article className={styles.authroArticle}>
-            <h2 className={styles.authroArticle__title}>
+          <article className={styles.authorArticle}>
+            <h2 className={styles.authorArticle__title}>
               Про автора
             </h2>
-            <div className={styles.authroArticle__box}>
+            <div className={styles.authorArticle__box}>
               <Image
                 src={author.avatar}
                 alt={"avatar"}
                 width={160}
                 height={160}
-                className={styles.authroArticle__avatar}
+                className={styles.authorArticle__avatar}
               />
-              <div className={styles.authroArticle__info}>
-                <h4 className={styles.authroArticle__name}>
-                  {`${author.first_name} ${author.last_name}`}
+              <div className={styles.authorArticle__info}>
+                <h4 className={styles.authorArticle__name}>
+                  {author.username ?
+                    author.username : `${author.first_name} ${author.last_name}`
+                  }
                 </h4>
-                <p className={styles.authroArticle__bio}>
+                <p className={styles.authorArticle__bio}>
                   {author.bio}
                 </p>
-                <div className={styles.authroArticle__line} />
-                <h4 className={styles.authroArticle__socials}>
-                  Соціальні мережі:
-                </h4>
-                <div className={styles.authroArticle__socialsBox}>
-                  {[
-                    '/telegram-icon.svg',
-                    '/facebook-icon.svg',
-                    '/instagram-icon.svg'
-                  ].map(icon => (
-                    <Link
-                      href={icon}
-                      key={icon}
-                      className={styles.authroArticle__icon}
-                    >
-                      <Image
-                        src={icon}
-                        alt="icon"
-                        fill
-                      />
-                    </Link>
-                  ))}
-                </div>
-                <Link className={styles.authroArticle__button} href={""}>
+                <div className={styles.authorArticle__line} />
+                {(author.facebook_url || author.telegram_url || author.instagram_url)
+                  && <>
+                    <h4 className={styles.authorArticle__socials}>
+                      Соціальні мережі:
+                    </h4>
+                    <div className={styles.authorArticle__socialsBox}>
+                      {author.telegram_url && <Link
+                        href={author.telegram_url}
+                        className={styles.authorArticle__icon}
+                      >
+                        <Image
+                          src={'/telegram-icon.svg'}
+                          alt="icon"
+                          fill
+                        />
+                      </Link>}
+                      {author.facebook_url && <Link
+                        href={author.facebook_url}
+                        className={styles.authorArticle__icon}
+                      >
+                        <Image
+                          src={'/facebook-icon.svg'}
+                          alt="icon"
+                          fill
+                        />
+                      </Link>}
+                      {author.instagram_url && <Link
+                        href={author.instagram_url}
+                        className={styles.authorArticle__icon}
+                      >
+                        <Image
+                          src={'/instagram-icon.svg'}
+                          alt="icon"
+                          fill
+                        />
+                      </Link>}
+                    </div>
+                  </>}
+                <Link className={styles.authorArticle__button} href={`/authors/${author.id}`}>
                   Інші роботи автора
                 </Link>
               </div>
