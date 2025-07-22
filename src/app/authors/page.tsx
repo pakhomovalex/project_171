@@ -22,7 +22,7 @@ export default function Authors() {
           </p>
           <div className={styles.authors__authorsBox}>
             {authors.map(author => (
-              <AuthorCard key={author.id} id={author.id} />
+              <AuthorCard key={author.id} id={author.id} full={false} />
             ))}
           </div>
           <AuthorsPagination totalItems={authors.length} />
@@ -35,7 +35,7 @@ export default function Authors() {
           <p className={styles.authors__secondDescription}>
             Завантаж свою рбооту і перетвори творчість на підтримку тих, хто боронить Україну
           </p>
-          <Link className={styles.authors__button} href={""}>
+          <Link className={styles.authors__button} href={`/become-an-author`}>
             Стати автором
           </Link>
         </section>

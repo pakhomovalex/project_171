@@ -231,25 +231,10 @@ export default function ProjectCategoryPagination() {
       </p>
       <div className={styles.projects}>
         {projectsAndPage.map(project => {
-          const {
-            id,
-            title,
-            subtitle,
-            percent,
-            images,
-            lastDate,
-            category,
-          } = project;
 
           return <ProjectCard
-            key={id}
-            id={id}
-            title={title}
-            subtitle={subtitle}
-            percent={percent}
-            images={images}
-            lastDate={lastDate}
-            category={category}
+            key={project.id}
+            project={project}
           />
         })}
       </div>

@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from './AuthorCard.module.scss';
 import Link from "next/link";
 
-export const AuthorCard = ({ id }: { id: number }) => {
+export const AuthorCard = ({ id, full }: { id: number, full: boolean }) => {
   const author = authors.find(author => author.id === id) || authors[0];
 
   const {
@@ -11,6 +11,7 @@ export const AuthorCard = ({ id }: { id: number }) => {
     first_name,
     last_name,
     avatar,
+    bio,
     specialization,
     city,
     createdAt,
@@ -39,7 +40,7 @@ export const AuthorCard = ({ id }: { id: number }) => {
           {specialization[0].name}
         </p>
         <p className={styles.card__slogan}>
-          {specialization[0].slug}
+          {full ? bio : bio.split('.')[0]}
         </p>
         <div className={styles.card__localInfoBox}>
           <div className={styles.card__localInfoSubBox}>

@@ -4,14 +4,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function ProjectCard({
-  id,
-  title,
-  subtitle,
-  images,
-  category,
-  percent,
-  lastDate,
-}: Omit<ProjectCardType, 'description' | 'fundraising_goal' | 'price'>) {
+  project
+}: { project: ProjectCardType }) {
+  const {
+    category,
+    images,
+    title,
+    subtitle,
+    percent,
+    lastDate,
+    id
+  } = project;
+
   return (
     <article className={styles.card}>
       <div className={styles.card__imageBox}>

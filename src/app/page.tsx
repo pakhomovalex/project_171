@@ -62,7 +62,7 @@ export const authors: UserType[] = [{
     name: 'Хз',
     slug: 'Донт пуш зе хорсес'
   }],
-  projects: [0, 1, 2, 3],
+  projects: [1, 2, 3],
   createdAt: '21.07.2025'
 },
 {
@@ -391,25 +391,10 @@ export default function Home() {
           </h2>
           <div className={styles.projectsSection__projectsBox}>
             {projects.map(project => {
-              const {
-                id,
-                title,
-                subtitle,
-                percent,
-                images,
-                lastDate,
-                category,
-              } = project;
 
               return <ProjectCard
-                key={id}
-                id={id}
-                title={title}
-                subtitle={subtitle}
-                percent={percent}
-                images={images}
-                lastDate={lastDate}
-                category={category}
+                key={project.id}
+                project={project}
               />
             })}
           </div>
