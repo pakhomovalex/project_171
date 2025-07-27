@@ -1,0 +1,64 @@
+@import '../../styles/mixins';
+
+.article {
+  width: 100%;
+  border-radius: 16px;
+  padding: 24px;
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  transition: .3s;
+  overflow: hidden;
+  background-color: var(--light-blue-color);
+
+  height: 78px;
+
+  &:hover {
+    border: 2px solid #1976d2;
+  }
+
+  &--open {
+    height: 140px;
+    border: 2px solid #1976d2;
+
+    & .article__button {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__titleBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    margin: 0;
+
+    @include h4();
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+
+    background-color: transparent;
+    border: none;
+    transition: .3s;
+  }
+
+  &__description {
+    @include main-text();
+
+    color: var(--gray-100-color);
+    margin: 0;
+  }
+}
