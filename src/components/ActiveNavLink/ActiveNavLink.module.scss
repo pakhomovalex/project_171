@@ -1,0 +1,46 @@
+@import '../../styles/mixins';
+
+.navLink {
+  @include main-text();
+
+  position: relative;
+
+  padding-block: 16px;
+
+  text-decoration: none;
+  color: var(--black-color);
+  transition: .3s;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--button-blue-color);
+    transition: .3s;
+    transform-origin: left;
+  }
+
+  &:hover {
+    color: var(--button-blue-color);
+
+    &::after {
+      width: 100%;
+    }
+  }
+
+  &--active {
+    color: var(--button-blue-active-color);
+
+    &:hover {
+      color: var(--button-blue-active-color);
+    }
+
+     &::after {
+      width: 100%;
+      background-color: var(--button-blue-active-color);
+    }
+  }
+}

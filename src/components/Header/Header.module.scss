@@ -63,6 +63,7 @@
       @include yellow-button(178px, 48px);
 
       background-color: var(--background-color);
+      text-decoration: none;
     }
   }
 }
@@ -77,19 +78,5 @@
     align-items: center;
     padding: 0;
     list-style: none;
-  }
-
-  &__link {
-    @include main-text();
-
-    padding-block: 16px;
-
-    text-decoration: none;
-    color: var(--black-color);
-    transition: .3s;
-
-    &:hover {
-      color: var(--button-blue-color);
-    }
   }
 }
