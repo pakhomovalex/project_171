@@ -23,13 +23,13 @@ export const AuthorCard = ({ id, full }: { id: number, full: boolean }) => {
 
   return (
     <article className={styles.card}>
-      <Image
-        src={avatar}
-        alt={"avatar"}
-        width={160}
-        height={160}
-        className={styles.card__avatar}
-      />
+      <div className={styles.card__avatarBox}>
+        <Image
+          src={avatar}
+          alt={"avatar"}
+          fill
+        />
+      </div>
       <div className={styles.card__info}>
         <h3 className={styles.card__title}>
           {username ?

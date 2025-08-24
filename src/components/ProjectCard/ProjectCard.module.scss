@@ -7,6 +7,10 @@
   padding: 16px;
   position: relative;
 
+  @include on-phone() {
+    grid-column: span 2;
+  }
+
   &__category {
     position: absolute;
     top: 16px;
@@ -28,8 +32,16 @@
 
   &__imageBox {
     position: relative;
-    width: 379px;
+    width: 100%;
     height: 280px;
+
+    @include on-tablet() {
+      height: 200px;
+    }
+
+    @include on-phone() {
+      height: 164px;
+    }
   }
 
   &__image {

@@ -9,6 +9,14 @@
 
     @include h1();
     text-align: center;
+
+    @include on-tablet() {
+      margin-top: 64px;
+    }
+
+    @include on-phone() {
+      margin-top: 40px;
+    }
   }
 
   &__description {
@@ -32,7 +40,11 @@
   align-items: center;
   justify-content: center;
 
-  height: 600px;
+  min-height: 600px;
+
+  @include on-tablet() {
+    min-height: 400px;
+  }
 
   &__title {
     @include h2();
@@ -40,6 +52,11 @@
     margin: 0;
     z-index: 10;
     color: var(--white-color);
+
+    @include on-phone() {
+      max-width: 312px;
+      text-align: center;
+    }
   }
 
   &__description {
@@ -60,6 +77,14 @@
 
     margin-top: 32px;
     z-index: 10;
+
+    @include on-tablet() {
+      width: 344px;
+    }
+
+    @include on-tablet() {
+      width: 312px;
+    }
 
     &:hover,
     &:active,

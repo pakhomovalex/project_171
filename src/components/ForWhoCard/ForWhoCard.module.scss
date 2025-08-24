@@ -6,6 +6,10 @@
   border-left: 8px solid var(--button-yellow-color);
   padding-left: 24px;
   box-sizing: border-box;
+
+  @include on-phone() {
+    grid-column: span 2;
+  }
   
   &__title {
     @include h4();

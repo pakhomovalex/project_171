@@ -1,0 +1,372 @@
+@import './mixins';
+
+.auth {
+  &__sectionLeft {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-100%);
+    width: 50%;
+    max-width: 720px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 80px;
+    box-sizing: border-box;
+
+    @include on-tablet() {
+      @include padding-inline();
+      @include page-grid();
+
+      grid-auto-rows: min-content;
+      align-content: center;
+
+      transform: translateX(0%);
+      width: 100%;
+      left: 0;
+      height: 100%;
+    }
+  }
+
+  &__sectionRight {
+    position: absolute;
+    top: 0;
+    right: 50%;
+    transform: translateX(100%);
+    width: 50%;
+    max-width: 720px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 80px;
+    box-sizing: border-box;
+
+    @include on-tablet() {
+      @include padding-inline();
+      @include page-grid();
+
+      grid-auto-rows: min-content;
+      align-content: center;
+
+      transform: translateX(0%);
+      width: 100%;
+      right: 0;
+      padding: 0;
+    }
+  }
+
+  &__sectionCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    max-width: 720px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+
+    @include on-tablet() {
+      @include padding-inline();
+      @include page-grid();
+
+      grid-auto-rows: min-content;
+      align-content: center;
+
+      transform: translate(0%, 0%);
+      width: 100%;
+      left: 0;
+      top: 0;
+      padding: 0;
+    }
+  }
+
+  &__backLink {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    gap: 8px;
+
+    @include secondary-text();
+
+    position: absolute;
+    top: 40px;
+    left: 80px;
+    cursor: pointer;
+
+    @include on-tablet() {
+      top: 32px;
+      left: 32px;
+    }
+
+    @include on-phone() {
+      top: 24px;
+      left: 24px;
+    }
+  }
+
+  &__title {
+    @include h2();
+
+    margin: 0;
+    max-width: 411px;
+    text-align: center;
+
+    @include on-tablet() {
+      grid-column: 3/7;
+      text-align: center;
+    }
+
+    @include on-phone() {
+      grid-column: 1/-1;
+    }
+  }
+
+  &__description {
+    @include main-text();
+
+    margin: 0;
+    margin-top: 8px;
+    text-align: center;
+
+    @include on-tablet() {
+      grid-column: 3 / 7;
+    }
+
+    @include on-phone() {
+      grid-column: 1/-1;
+    }
+  }
+
+  &__imageBox {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+
+    @include on-tablet() {
+      display: none;
+    }
+  }
+
+  &__image {
+    position: absolute;
+    width: 100vw;
+    height: 100%;
+    transition: clip-path .25s linear;
+    clip-path: inset(0 0 0 0);
+  }
+
+  &__or {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 410px;
+    margin-top: 24px;
+
+    @include on-tablet() {
+      grid-column: 3 / 7;
+      width: 100%;
+    }
+
+    @include on-phone() {
+      grid-column: 1/-1;
+    }
+  }
+
+  &__line {
+    width: 184px;
+    background-color: var(--gray-50-color);
+    height: 2px;
+
+    @include on-tablet() {
+      width: 100%;
+    }
+  }
+
+  &__orText {
+    @include small-text();
+
+    color: var(--gray-75-color);
+    margin: 0;
+  }
+
+  &__google {
+    background-color: transparent;
+    border: 2px solid var(--gray-25-color);
+    width: 410px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+
+    @include button-text();
+
+    margin-top: 24px;
+    border-radius: 16px;
+    padding: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    @include on-tablet() {
+      grid-column: 3 / 7;
+      width: 100%;
+    }
+
+    @include on-phone() {
+      grid-column: 1/-1;
+    }
+  }
+
+  &__signUp {
+    display: flex;
+    margin-top: 24px;
+    gap: 8px;
+
+    @include on-tablet() {
+      grid-column: 3 / 7;
+      justify-content: center;
+    }
+
+    @include on-phone() {
+      grid-column: 1/-1;
+    }
+  }
+
+  &__signUpText {
+    margin: 0;
+
+    @include secondary-text();
+  }
+
+  &__signUpButton {
+    background-color: transparent;
+    border: none;
+    text-decoration: underline;
+    color: var(--button-blue-color);
+    display: flex;
+    align-items: center;
+    padding: 0;
+
+    @include secondary-text();
+    cursor: pointer;
+  }
+}
+
+.auth__form {
+  margin-top: 32px;
+
+  display: flex;
+  flex-direction: column;
+  width: 410px;
+
+  &--margin-top {
+    margin-top: 24px;
+  }
+
+  @include on-tablet() {
+    width: 100%;
+    grid-column: 3/7;
+  }
+
+  @include on-phone() {
+    grid-column: 1/-1;
+  }
+
+  &__label {
+    @include secondary-text();
+
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    margin-top: 16px;
+
+    &:nth-of-type(1) {
+      margin-top: 0;
+    }
+  }
+
+  &__input {
+    @include button-text();
+
+    border: 2px solid #bfdbff;
+    border-radius: 16px;
+    padding: 10px 24px;
+    transition: .3s;
+    outline: none;
+
+
+    &:hover {
+      border: 2px solid var(--button-blue-hover-color);
+    }
+
+    &:focus {
+      box-shadow: 0 0 6px 0 #1976d2;
+      border: 2px solid var(--button-blue-hover-color);
+    }
+  }
+
+  &__changeVisibility {
+    position: absolute;
+    z-index: 2;
+    bottom: 15px;
+    right: 24px;
+    width: 20px;
+    height: 20px;
+
+    background-color: transparent;
+    border: none;
+  }
+
+  &__link {
+    @include secondary-text();
+
+    margin-top: 8px;
+    text-align: end;
+    color: var(--button-blue-color);
+    background-color: transparent;
+    align-self: end;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+
+    &--margin-top {
+      margin-top: 24px;
+      text-align: center;
+      align-self: center;
+      padding: 0;
+      text-decoration: none;
+
+      @include on-tablet() {
+        grid-column: 1/-1;
+      }
+    }
+  }
+
+  &__submitButton {
+    @include blue-button(100%, 48px);
+
+    margin-top: 24px;
+    cursor: pointer;
+
+    &--disabled {
+      pointer-events: none;
+      background-color: var(--gray-25-color);
+      color: var(--gray-50-color);
+      border: 1px solid var(--gray-25-color);
+    }
+  }
+}

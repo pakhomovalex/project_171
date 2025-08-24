@@ -10,7 +10,12 @@
   overflow: hidden;
   background-color: var(--light-blue-color);
 
-  height: 78px;
+  height: 80px;
+
+  @include on-tablet() {
+    padding: 16px;
+    text-wrap: pretty;
+  }
 
   &:hover {
     border: 2px solid #1976d2;
@@ -19,6 +24,10 @@
   &--open {
     height: 140px;
     border: 2px solid #1976d2;
+
+    @include on-phone() {
+      height: calc-size(auto);
+    }
 
     & .article__button {
       transform: rotate(180deg);
@@ -29,6 +38,10 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+
+    @include on-tablet() {
+      gap: 24px;
+    }
   }
 
   &__titleBox {

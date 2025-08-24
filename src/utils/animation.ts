@@ -2,7 +2,7 @@ import gsap from "gsap";
 import { RefObject } from "react";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
-export const LogInAnimationOut = (
+export const logInAnimationOut = (
   ref: RefObject<HTMLDivElement | null>,
   href: string,
   router: AppRouterInstance
@@ -17,14 +17,14 @@ export const LogInAnimationOut = (
       {
         clipPath: 'inset(0 0 0 0)',
         left: '0',
-        duration: .25,
+        duration: .15,
         onComplete: () => {
           router.push(href)
         }
       }, 0)
 };
 
-export const SignUpAnimationOut = (
+export const signUpAnimationOut = (
   ref: RefObject<HTMLDivElement | null>,
   href: string,
   router: AppRouterInstance
@@ -39,14 +39,14 @@ export const SignUpAnimationOut = (
       {
         clipPath: 'inset(0 0 0 0)',
         left: '0',
-        duration: .25,
+        duration: .15,
         onComplete: () => {
           router.push(href)
         }
       }, 0)
 };
 
-export const LogInAnimationIn = (
+export const logInAnimationIn = (
   ref: RefObject<HTMLDivElement | null>,
 ) => {
   if (!ref.current) return;
@@ -55,14 +55,14 @@ export const LogInAnimationIn = (
   const tl = gsap.timeline();
 
   tl.to(image, {
-    delay: .1,
+    delay: .2,
     clipPath: 'inset(0 0 0 25%)',
     left: '25%',
-    duration: .3
+    duration: .2
   }, 0)
 };
 
-export const SignUpAnimationIn = (
+export const signUpAnimationIn = (
   ref: RefObject<HTMLDivElement | null>,
 ) => {
   if (!ref.current) return;
@@ -71,9 +71,46 @@ export const SignUpAnimationIn = (
   const tl = gsap.timeline();
 
   tl.to(image, {
-    delay: .1,
+    delay: .2,
     clipPath: 'inset(0 25% 0 0)',
     left: '-25%',
-    duration: .3,
+    duration: .2,
   }, 0)
 };
+
+export const forgotPasswordAnimationOut = (
+  ref: RefObject<HTMLDivElement | null>,
+  href: string,
+  router: AppRouterInstance
+) => {
+  if (!ref.current) return;
+
+  const image = ref.current;
+
+
+  gsap.fromTo(image, {
+    top: '-100%',
+  }, {
+    top: '0%',
+    duration: .5,
+    onComplete: () => {
+      router.push(href)
+    }
+  })
+};
+
+export const forgotPasswordAnimationIn = (
+  ref: RefObject<HTMLDivElement | null>,
+) => {
+  if (!ref.current) return;
+
+  const image = ref.current;
+
+
+  gsap.fromTo(image, {
+    top: '0%',
+  }, {
+    top: '-100%',
+    duration: .5
+  })
+}

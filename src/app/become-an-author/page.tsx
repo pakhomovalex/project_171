@@ -29,7 +29,7 @@ const FAQ = [
     answer: 'Проєкт активний 30 днів з можливістю продовження без створення нового проєкту.',
   },
   {
-    question: '6. Чи є можливість внести зміни в проєкт після публікації?',
+    question: '6. Внесення змін в проєкт після публікації?',
     answer: 'Так, ви можете оновлювати проєкт через свою адміністративну панель.',
   },
   {
@@ -54,43 +54,45 @@ export default function BecomeAnAuthor() {
           <Link href={""} className={styles.firstSection__button}>
             Стати автором
           </Link>
-          <article className={styles.firstSection__article}>
-            <div className={styles.firstSection__articleImage}>
-              <Image src={"/heart-icon.svg"} alt={"icon"} width={30} height={30} />
-            </div>
-            <h4 className={styles.firstSection__articleTitle}>
-              Підтримка України
-            </h4>
-            <p className={styles.firstSection__articleDescription}>
-              Кожен продаж безпосередньо сприяє підтримці Збройних Сил України
-              в їхній боротьбі за свободу
-            </p>
-          </article>
-          <article className={styles.firstSection__article}>
-            <div className={styles.firstSection__articleImage}>
-              <Image src={"/community-icon.svg"} alt={"icon"} width={30} height={30} />
-            </div>
-            <h4 className={styles.firstSection__articleTitle}>
-              Поділіться своєю творчістю
-            </h4>
-            <p className={styles.firstSection__articleDescription}>
-              Продемонструйте свої художні таланти глобальній аудиторії,
-              яка прагне змінити ситуацію
-            </p>
-          </article>
-          <article className={styles.firstSection__article}>
-            <div className={styles.firstSection__articleImage}>
-              <Image src={"/award-icon.svg"} alt={"icon"} width={30} height={30} />
-            </div>
-            <h4 className={styles.firstSection__articleTitle}>
-              Твій талант має значення
-            </h4>
-            <p className={styles.firstSection__articleDescription}>
-              Твій талант допомагає ЗСУ.
-              Кожна робота — реальна підтримка
-              на шляху до перемоги
-            </p>
-          </article>
+          <div className={styles.firstSection__articleBox}>
+            <article className={styles.firstSection__article}>
+              <div className={styles.firstSection__articleImage}>
+                <Image src={"/heart-icon.svg"} alt={"icon"} width={30} height={30} />
+              </div>
+              <h4 className={styles.firstSection__articleTitle}>
+                Підтримка України
+              </h4>
+              <p className={styles.firstSection__articleDescription}>
+                Кожен продаж безпосередньо сприяє підтримці Збройних Сил України
+                в їхній боротьбі за свободу
+              </p>
+            </article>
+            <article className={styles.firstSection__article}>
+              <div className={styles.firstSection__articleImage}>
+                <Image src={"/community-icon.svg"} alt={"icon"} width={30} height={30} />
+              </div>
+              <h4 className={styles.firstSection__articleTitle}>
+                Поділіться своєю творчістю
+              </h4>
+              <p className={styles.firstSection__articleDescription}>
+                Продемонструйте свої художні таланти глобальній аудиторії,
+                яка прагне змінити ситуацію
+              </p>
+            </article>
+            <article className={styles.firstSection__article}>
+              <div className={styles.firstSection__articleImage}>
+                <Image src={"/award-icon.svg"} alt={"icon"} width={30} height={30} />
+              </div>
+              <h4 className={styles.firstSection__articleTitle}>
+                Твій талант має значення
+              </h4>
+              <p className={styles.firstSection__articleDescription}>
+                Твій талант допомагає ЗСУ.
+                Кожна робота — реальна підтримка
+                на шляху до перемоги
+              </p>
+            </article>
+          </div>
         </section>
         <section className={styles.becomeAnAuthorSection}>
           <h2 className={styles.becomeAnAuthorSection__mainTitle}>

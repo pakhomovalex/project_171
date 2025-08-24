@@ -8,9 +8,42 @@
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.08);
   display: flex;
   gap: 32px;
+  box-sizing: border-box;
 
-  &__avatar {
-    border-radius: 16px;
+  @include on-tablet() {
+    padding: 24px;
+    gap: 24px;
+  }
+
+  @include on-phone() {
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+  }
+
+  &__avatarBox {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    flex-shrink: 0;
+
+    & img {
+      border-radius: 16px;
+    }
+
+    @include on-tablet() {
+      width: 140px;
+      height: 140px;
+    }
+
+    @include on-phone() {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  &__info {
+    width: fit-content;
   }
 
   &__title {
@@ -39,12 +72,22 @@
     display: flex;
     align-items: center;
     gap: 16px;
+
+    @include on-phone() {
+      flex-direction: column;
+      align-items: start;
+      gap: 8px;
+    }
   }
 
   &__localInfoSubBox {
     display: flex;
     align-items: center;
     gap: 8px;
+
+    @include on-tablet() {
+      gap: 4px;
+    }
   }
 
   &__localInfoText {

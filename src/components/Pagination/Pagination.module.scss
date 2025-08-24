@@ -11,6 +11,10 @@
   margin-top: 32px;
   margin-bottom: 80px;
 
+  @include on-tablet() {
+    gap: 48px;
+  }
+
   &__link {
     @include secondary-text();
 

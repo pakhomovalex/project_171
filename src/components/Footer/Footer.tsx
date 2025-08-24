@@ -29,22 +29,22 @@ export default function Footer() {
           <nav className={styles.footer__nav}>
             <ul className={styles.footer__list}>
               <li className={styles.footer__item}>
-                <Link href={""} className={styles.footer__navLink}>
+                <Link href={"/projects"} className={styles.footer__navLink}>
                   Проекти
                 </Link>
               </li>
               <li className={styles.footer__item}>
-                <Link href={""} className={styles.footer__navLink}>
+                <Link href={"/authors"} className={styles.footer__navLink}>
                   Автори
                 </Link>
               </li>
               <li className={styles.footer__item}>
-                <Link href={""} className={styles.footer__navLink}>
+                <Link href={"/become-an-author"} className={styles.footer__navLink}>
                   Стати автором
                 </Link>
               </li>
               <li className={styles.footer__item}>
-                <Link href={""} className={styles.footer__navLink}>
+                <Link href={"/about-us"} className={styles.footer__navLink}>
                   Про нас
                 </Link>
               </li>
