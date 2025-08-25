@@ -4,15 +4,33 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from './Header.module.scss';
 import ActiveLink from "../ActiveNavLink/ActiveNavLink";
+import { useEffect, useState } from "react";
 
 export default function Header() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsTablet(window.innerWidth < 1040);
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <header className={styles.header}>
       <div className={styles.header__container}>
         <Link href="/" className={styles.header__link}>
           <Image src="/Logo-mini.svg" fill alt="Logo image" className={styles.header__logo} />
         </Link>
-        <nav className={styles.nav}>
+        {!isTablet && <nav className={styles.nav}>
           <ul className={styles.nav__list}>
             <li className={styles.nav__elem}>
               <ActiveLink href="/projects">Проекти</ActiveLink>
@@ -27,8 +45,8 @@ export default function Header() {
               <ActiveLink href="/about-us">Про нас</ActiveLink>
             </li>
           </ul>
-        </nav>
-        <div className={styles.header__login}>
+        </nav>}
+        {!isTablet && <div className={styles.header__login}>
           <Link href={"/auth/log-in"} className={styles.header__login__link}>
             <div>
               <Image src={"/user-icon.svg"} fill alt={"user icon"} />
@@ -38,8 +56,77 @@ export default function Header() {
           <Link className={styles.header__login__button} href={"/auth/sign-up"}>
             Зареєструватись
           </Link>
-        </div>
+        </div>}
+        {isTablet
+          && !isMobile
+          && <Link
+            className={`
+              ${styles.header__login__button}
+              ${styles['header__login__button--tablet']}
+              ${open ? styles['header__login__button--tablet--open'] : ''}
+            `}
+            href={"/auth/sign-up"}
+          >
+            Зареєструватись
+          </Link>
+        }
+        {isTablet && <button className={styles.header__menu__button} onClick={() => setOpen(prev => !prev)}>
+          <Image src={open ? "/close-icon.svg" : "/burger-menu.svg"} alt={"menu"} fill />
+        </button>
+        }
       </div>
+      {isTablet && <aside className={`${styles.aside} ${open ? styles['aside--open'] : ""}`}>
+        <nav className={`${styles.nav} ${styles['nav--vertical']}`}>
+          <ul className={`${styles.nav__list} ${styles['nav__list--vertical']}`}>
+            <li>
+              <ActiveLink
+                href="/projects"
+                className={`${styles.nav__elem} ${styles['nav__elem--big']}`}
+              >
+                Проекти
+              </ActiveLink>
+            </li>
+            <li>
+              <ActiveLink
+                href="/authors"
+                className={`${styles.nav__elem} ${styles['nav__elem--big']}`}
+              >
+                Автори
+              </ActiveLink>
+            </li>
+            <li>
+              <ActiveLink
+                href="/become-an-author"
+                className={`${styles.nav__elem} ${styles['nav__elem--big']}`}
+              >
+                Стати атором
+              </ActiveLink>
+            </li>
+            <li>
+              <ActiveLink
+                href="/about-us"
+                className={`${styles.nav__elem} ${styles['nav__elem--big']}`}
+              >
+                Про нас
+              </ActiveLink>
+            </li>
+          </ul>
+        </nav>
+        <div className={`${styles.header__login} ${styles['header__login--vertical']}`}>
+          <Link href={"/auth/log-in"} className={styles.header__login__link}>
+            <div>
+              <Image src={"/user-icon.svg"} fill alt={"user icon"} />
+            </div>
+            <p>Увійти</p>
+          </Link>
+          <Link
+            className={`${styles.header__login__button} ${styles['header__login__button--full-width']}`}
+            href={"/auth/sign-up"}
+          >
+            Зареєструватись
+          </Link>
+        </div>
+      </aside>}
     </header>
   );
 }
