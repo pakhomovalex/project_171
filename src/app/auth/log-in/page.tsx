@@ -5,7 +5,6 @@ import styles from './LogIn.module.scss';
 import { logInAnimationIn, logInAnimationOut } from "@/utils/authAnimation";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import classNames from "classnames";
 
 
 export default function LogIn() {
@@ -85,43 +84,42 @@ export default function LogIn() {
           </button>
           <button
             type="submit"
-            className={classNames(
-              styles.auth__form__submitButton,
-              {
-                [styles['auth__form__submitButton--disabled']]: password.length < 8
-                  || password.length > 20
-                  || email.length === 0
+            className={`
+              ${styles.auth__form__submitButton}
+              ${(password.length < 8
+                || password.length > 20
+                || email.length === 0) ? styles['auth__form__submitButton--disabled'] : '' 
               }
-            )}>
-            Увійти
-          </button>
-        </form>
-        <div className={styles.auth__or}>
-          <div className={styles.auth__line} />
-          <p className={styles.auth__orText}>
-            Або
-          </p>
-          <div className={styles.auth__line} />
-        </div>
-        <button className={styles.auth__google}>
-          <Image src={"/google-icon.svg"} alt={"google icon"} width={20} height={20} />
-          Увійти через Google
+            `}>
+          Увійти
         </button>
-        <div className={styles.auth__signUp}>
-          <p className={styles.auth__signUpText}>Ще не маєш аккаунту?</p>
-          <button
-            onClick={() => logInAnimationOut(
-              imageRef,
-              '/auth/sign-up',
-              router
-            )}
-            className={styles.auth__signUpButton}
-          >
-            Зареєструватись
-          </button>
-        </div>
+      </form>
+      <div className={styles.auth__or}>
+        <div className={styles.auth__line} />
+        <p className={styles.auth__orText}>
+          Або
+        </p>
+        <div className={styles.auth__line} />
+      </div>
+      <button className={styles.auth__google}>
+        <Image src={"/google-icon.svg"} alt={"google icon"} width={20} height={20} />
+        Увійти через Google
+      </button>
+      <div className={styles.auth__signUp}>
+        <p className={styles.auth__signUpText}>Ще не маєш аккаунту?</p>
+        <button
+          onClick={() => logInAnimationOut(
+            imageRef,
+            '/auth/sign-up',
+            router
+          )}
+          className={styles.auth__signUpButton}
+        >
+          Зареєструватись
+        </button>
+      </div>
 
-      </section>
+    </section >
       <div className={styles.auth__imageBox}>
         <div ref={imageRef} className={styles.auth__image}>
           <Image src={"/log-in-sign-up-image.jpg"} alt={""} fill />

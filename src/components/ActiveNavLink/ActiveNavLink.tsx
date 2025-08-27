@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import classNames from 'classnames';
 import styles from './ActiveNavLink.module.scss';
 
 type Props = {
@@ -22,7 +21,7 @@ export default function ActiveLink({
   return (
     <Link
       href={href}
-      className={classNames(styles.navLink, { [styles['navLink--active']]: isActive })}
+      className={`${styles.navLink} ${ isActive ? styles['navLink--active']: '' }`}
     >
       {children}
     </Link>

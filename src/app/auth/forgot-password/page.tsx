@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import styles from './ForgotPassword.module.scss';
-import classNames from "classnames";
 
 export default function ForgotPassword() {
   const imageRef = useRef<HTMLDivElement>(null);
@@ -42,12 +41,12 @@ export default function ForgotPassword() {
           </label>
           <button
             type="submit"
-            className={classNames(
-              styles.auth__form__submitButton,
-              {
-                [styles['auth__form__submitButton--disabled']]: email.length === 0
+            className={`
+              ${styles.auth__form__submitButton}
+              ${
+                email.length === 0 ? styles['auth__form__submitButton--disabled'] : ''
               }
-            )}>
+            `}>
             Відправити посилання на пошту
           </button>
         </form>

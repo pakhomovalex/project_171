@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import styles from './FAQArticle.module.scss';
-import classNames from 'classnames';
 import Image from 'next/image';
 
 export const FAQArticle = ({ question, answer }: { question: string, answer: string }) => {
@@ -22,7 +21,7 @@ export const FAQArticle = ({ question, answer }: { question: string, answer: str
 
   return (
     <article
-      className={classNames(styles.article, { [styles['article--open']]: isOpen })}
+      className={`${styles.article} ${isOpen ? styles['article--open'] : ''}`}
       onClick={() => setIsOpen(prev => !prev)}
       ref={contentRef}
     >

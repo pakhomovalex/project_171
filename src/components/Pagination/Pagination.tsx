@@ -1,5 +1,4 @@
 import Link from "next/link";
-import classNames from "classnames";
 import styles from './Pagination.module.scss';
 
 interface Props {
@@ -21,12 +20,12 @@ export const Pagination = ({
 
   return (
     <ul className={styles.pagination}>
-      <li className={classNames(`${styles.pagination__item}`, { disabled: currentPage === 1 })}>
+      <li className={`${styles.pagination__item} ${ currentPage === 1 ? styles['disabled'] : ''}`}>
         <Link
           data-cy="prevLink"
-          className={classNames(styles.pagination__link, {
-            [styles.pagination__linkDisabled]: currentPage === 1
-          })}
+          className={`${styles.pagination__link} ${
+           currentPage === 1 ? [styles.pagination__linkDisabled] : ''
+          }`}
           href={`?page=${currentPage - 1}`}
           onClick={() => onPageChange(currentPage - 1)}
         >
@@ -42,8 +41,8 @@ export const Pagination = ({
         >
           <Link
             data-cy="pageLink"
-            className={classNames(`${styles.pagination__link}`,
-            { [styles.pagination__linkActive]: currentPage === count })}
+            className={`${styles.pagination__link}
+            ${ currentPage === count ? [styles.pagination__linkActive] : ''}`}
             href={`?page=${count}`}
           >
             {count}
@@ -55,9 +54,9 @@ export const Pagination = ({
       >
         <Link
           data-cy="nextLink"
-          className={classNames(styles.pagination__link, {
-            [styles.pagination__linkDisabled]: currentPage === paginationCount.length
-          })}
+          className={`${styles.pagination__link} ${
+           currentPage === paginationCount.length ? [styles.pagination__linkDisabled] : '' 
+          }`}
           href={`?page=${currentPage + 1}`}
           aria-disabled="false"
           onClick={() => onPageChange(currentPage + 1)}
