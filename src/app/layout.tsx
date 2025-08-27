@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 const lora = Lora({
-
+  subsets: ['cyrillic']
 });
 
 export default function RootLayout({
