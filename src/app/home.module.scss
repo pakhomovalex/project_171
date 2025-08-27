@@ -16,11 +16,11 @@
 }
 
 .homeSection {
-  height: 100vh;
+  height: calc(100vh - 100px);
   background-image: url('/main-bg-image.png');
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: top center;
+  background-position: center;
 
   display: flex;
   flex-direction: column;

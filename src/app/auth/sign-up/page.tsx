@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import styles from './SingUp.module.scss';
-import { signUpAnimationIn, signUpAnimationOut } from "@/utils/animation";
+import { signUpAnimationIn, signUpAnimationOut } from "@/utils/authAnimation";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import classNames from "classnames";

@@ -341,13 +341,13 @@ export default function Home() {
       <Header />
       <main className={styles.main}>
         <section className={styles.homeSection}>
-          <h1 className={styles.homeSection__title}>
+          <h1 className={`${styles.homeSection__title} fade-in`}>
             Твоя підтримка — це арт, що рятує життя
           </h1>
-          <h4 className={styles.homeSection__subtitle}>
+          <h4 className={`${styles.homeSection__subtitle} fade-in`}>
             Купуй роботи українських митців — і допомагай ЗСУ через творчість
           </h4>
-          <button className={styles.homeSection__button}>
+          <button className={`${styles.homeSection__button} fade-in`}>
             Підтримати проєкти
           </button>
         </section>
