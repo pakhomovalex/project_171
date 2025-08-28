@@ -8,13 +8,7 @@ import styles from './AuthorPage.module.scss';
 import { projects as serverProjects } from "@/app/page";
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
 
-interface PageProps {
-  params: {
-    authorId: string;
-  };
-}
-
-export default function AuthorDetails({ params }: PageProps) {
+export default function AuthorDetails({ params }: { params: { authorId: string } }) {
   const { authorId } = params;
 
   const author = authors.find(author => author.id === +authorId) || authors[0];

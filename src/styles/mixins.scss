@@ -186,9 +186,13 @@ $font-secondary: "Inter", sans-serif;
 }
 
 @mixin page-grid() {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(64px, 1fr));
-  column-gap: 24px;
+
+  & {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(64px, 1fr));
+    column-gap: 24px;
+  }
+
 
   @include on-tablet() {
     grid-template-columns: repeat(8, minmax(74px, 1fr));

@@ -3,13 +3,14 @@
 .navLink {
   @include main-text();
 
-  position: relative;
+  & {
+    position: relative;
+    padding-block: 16px;
+    text-decoration: none;
+    color: var(--black-color);
+    transition: .3s;
+  }
 
-  padding-block: 16px;
-
-  text-decoration: none;
-  color: var(--black-color);
-  transition: .3s;
 
   &::after {
     content: '';
@@ -38,7 +39,7 @@
       color: var(--button-blue-active-color);
     }
 
-     &::after {
+    &::after {
       width: 100%;
       background-color: var(--button-blue-active-color);
     }
