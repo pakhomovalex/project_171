@@ -3,6 +3,7 @@ import Header from "@/components/Header/Header";
 import styles from './projects.module.scss';
 import Image from "next/image";
 import ProjectsCategoryPagination from "@/components/ProjectsPagination/ProjectsCategoryPagination";
+import { Suspense } from "react";
 
 export default function Projects() {
   return (
@@ -16,7 +17,9 @@ export default function Projects() {
           <p className={styles.projectsSection__description}>
             Обирай серед авторських проєктів митців, які хочуть допомогти ЗСУ
           </p>
-          <ProjectsCategoryPagination />
+          <Suspense>
+            <ProjectsCategoryPagination />
+          </Suspense>
         </section>
         <section className={styles.supportSection}>
           <Image
