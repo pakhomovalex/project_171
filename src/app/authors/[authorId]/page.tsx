@@ -8,9 +8,10 @@ import styles from './AuthorPage.module.scss';
 import { projects as serverProjects } from "@/app/page";
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
 
-export default function AuthorDetails({ params }: { params: { authorId: string } }) {
+export default async function AuthorDetails({ params }: { params: Promise<{ authorId: string }> }) {
+  const { authorId } = await params;
 
-  const author = authors.find(author => author.id === +params.authorId) || authors[0];
+  const author = authors.find(author => author.id === +authorId) || authors[0];
 
   const { projects, username, first_name, last_name } = author;
 
@@ -42,7 +43,7 @@ export default function AuthorDetails({ params }: { params: { authorId: string }
           </p>
         </div>
         <div className={styles.main__author}>
-          <AuthorCard id={+params.authorId} full />
+          <AuthorCard id={+authorId} full />
         </div>
         <section className={styles.projects}>
           <h2 className={styles.projects__title}>

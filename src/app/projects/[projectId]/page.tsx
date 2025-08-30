@@ -8,8 +8,10 @@ import Image from "next/image";
 import { Slider } from "@/components/Slider/Slider";
 import { authors } from "@/app/page";
 
-export default function ProjectPage({ params }: { params: { projectId: string } }) {
-  const project: ProjectCardType = serverProjects.find(p => p.id === +params.projectId) || serverProjects[0];
+export default async function ProjectPage({ params }: { params: Promise<{ projectId: string }> }) {
+  const { projectId } = await params;
+
+  const project: ProjectCardType = serverProjects.find(p => p.id === +projectId) || serverProjects[0];
 
   const {
     title,
