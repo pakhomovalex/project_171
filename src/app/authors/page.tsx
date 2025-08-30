@@ -7,6 +7,7 @@ import { AuthorCard } from "@/components/AuthorCard/AuthorCard";
 import { AuthorsPagination } from "@/components/AuthorsPagination/AuthorsPagination";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export default function Authors() {
   return (
@@ -25,10 +26,12 @@ export default function Authors() {
               <AuthorCard key={author.id} id={author.id} full={false} />
             ))}
           </div>
-          <AuthorsPagination totalItems={authors.length} />
+          <Suspense>
+            <AuthorsPagination totalItems={authors.length} />
+          </Suspense>
         </section>
         <section className={styles.authors__supportSection}>
-          <Image src={"/authors-bg-image.png"} alt={"bg image"} fill/>
+          <Image src={"/authors-bg-image.png"} alt={"bg image"} fill />
           <h2 className={styles.authors__secondTitle}>
             Стань автором, що допомагає
           </h2>
