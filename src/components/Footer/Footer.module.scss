@@ -42,9 +42,21 @@
   &__link {
     @include small-text();
 
+    position: relative;
     color: var(--black-color);
     margin: 0;
     margin-top: 50px;
+    text-decoration: none;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 183px;
+      height: 1px;
+      background-color: var(--black-color);
+      left: 0;
+      bottom: 0;
+    }
 
     @include on-tablet() {
       margin-top: 16px;
@@ -169,7 +181,7 @@
 
   &__line {
     grid-column: 1/-1;
-    height: 2px;
+    height: 1px;
     background-color: var(--gray-50-color);
     margin-top: 40px;
   }

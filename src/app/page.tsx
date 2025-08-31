@@ -54,9 +54,9 @@ export const authors: UserType[] = [{
      фронту через продаж своїх цифрових робіт.`,
   city: 'Миколаїв',
   phone_number: '0974579737',
-  telegram_url: '',
-  instagram_url: '',
-  facebook_url: '',
+  telegram_url: '///',
+  instagram_url: '///',
+  facebook_url: '///',
   specialization: [{
     id: 0,
     name: 'Хз',

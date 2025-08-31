@@ -43,7 +43,7 @@ export default async function AuthorDetails({ params }: { params: Promise<{ auth
           </p>
         </div>
         <div className={styles.main__author}>
-          <AuthorCard id={+authorId} full />
+          <AuthorCard id={+authorId} full={false} />
         </div>
         <section className={styles.projects}>
           <h2 className={styles.projects__title}>

@@ -115,9 +115,10 @@ export const AuthorCard = ({ id, full }: { id: number, full: boolean }) => {
               </Link>}
             </div>
           </>}
-        <Link className={styles.card__button} href={`/authors/${author.id}`}>
+        {full && <Link className={styles.card__button} href={`/authors/${author.id}`}>
           Детальніше про автора
         </Link>
+        }
       </div>
     </article>
   );
