@@ -1,7 +1,7 @@
-import { Project } from "next/dist/build/swc/types";
+import { ProjectType } from "@/types/ProjectType";
 import { httpClient as client } from "../api/http";
 
-type CreateProjectType = Omit<Project,
+type CreateProjectType = Omit<ProjectType,
   'createdAt'
   & 'id'
   & 'images'
@@ -10,18 +10,18 @@ type CreateProjectType = Omit<Project,
 >
 
 export const projectsService = {
-  getActiveProjects: (): Promise<Project[]> => client.get('/projects'),
+  getActiveProjects: (): Promise<ProjectType[]> => client.get('/projects'),
 
-  createProject: (project: CreateProjectType): Promise<Project> =>
+  createProject: (project: CreateProjectType): Promise<ProjectType> =>
     client.post('/projects', project),
 
-  getProjectById: (id: number): Promise<Project> => client.get(`/projects/${id}`),
+  getProjectById: (id: number): Promise<ProjectType> => client.get(`/projects/${id}`),
 
-  updateProjectAll: (id: number, data: CreateProjectType): Promise<Project> => {
+  updateProjectAll: (id: number, data: CreateProjectType): Promise<ProjectType> => {
     return client.put(`/projects/${id}`, data);
   },
 
-  updateProject: (id: number, data: object): Promise<Project> => {
+  updateProject: (id: number, data: object): Promise<ProjectType> => {
     return client.patch(`/projects/${id}`, data);
   },
 

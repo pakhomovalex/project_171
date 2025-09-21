@@ -2,14 +2,19 @@ import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 
 import styles from './Authors.module.scss';
-import { authors } from "../page";
+// import { authors } from "../page";
 import { AuthorCard } from "@/components/AuthorCard/AuthorCard";
 import { AuthorsPagination } from "@/components/AuthorsPagination/AuthorsPagination";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
+import { authorsService } from "@/lib/services/authorsService";
 
-export default function Authors() {
+export default async function Authors() {
+  const authors = await authorsService.getAllAuthors();
+
+  
+
   return (
     <>
       <Header />
@@ -23,7 +28,7 @@ export default function Authors() {
           </p>
           <div className={styles.authors__authorsBox}>
             {authors.map(author => (
-              <AuthorCard key={author.id} id={author.id} full={false} />
+              <AuthorCard key={author.id} author={author} full />
             ))}
           </div>
           <Suspense>

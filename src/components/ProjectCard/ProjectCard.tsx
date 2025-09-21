@@ -8,11 +8,11 @@ export default function ProjectCard({
 }: { project: ProjectCardType }) {
   const {
     category,
-    images,
+    cover_image,
     title,
     subtitle,
-    percent,
-    lastDate,
+    donation_type,
+    end_date,
     id
   } = project;
 
@@ -35,7 +35,7 @@ export default function ProjectCard({
           />
         </div>
         <Image
-          src={images[0]}
+          src={cover_image}
           alt={'image'}
           fill
           className={styles.card__image}
@@ -51,13 +51,13 @@ export default function ProjectCard({
         Тип збору:
       </p>
       <p className={styles.card__percent}>
-        {percent > 0 ? `${percent}% з продажу на ЗСУ` : '100% автору'}
+        {donation_type > 0 ? `${donation_type}% з продажу на ЗСУ` : '100% автору'}
       </p>
       <p className={styles.card__termin}>
         Термін:
       </p>
       <p className={styles.card__lastDate}>
-        До {lastDate}
+        До {end_date}
       </p>
       <Link className={styles.card__button} href={`/projects/${id}`}>
         Підтримати

@@ -19,16 +19,18 @@ export const httpClient = axios.create({
   withCredentials: true,
 });
 
+
+
 // add `Authorization` header to all requests
-httpClient.interceptors.request.use(request => {
-  const accessToken = localStorage.getItem('accessToken');
+// httpClient.interceptors.request.use(request => {
+//   const accessToken = localStorage.getItem('accessToken');
 
-  if (accessToken) {
-    request.headers.Authorization = `Bearer ${accessToken}`;
-  }
+//   if (accessToken) {
+//     request.headers.Authorization = `Bearer ${accessToken}`;
+//   }
 
-  return request;
-});
+//   return request;
+// });
 
 httpClient.interceptors.response.use(
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return

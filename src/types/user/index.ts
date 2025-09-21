@@ -1,11 +1,8 @@
 export type User = {
   id: 0,
   username: string,
-  email: string,
-  first_name: string,
-  last_name: string,
+  full_name: string,
   avatar: string,
-  bio: string,
   city: string,
   specialization: [
     {
@@ -14,6 +11,8 @@ export type User = {
       slug: string
     }
   ],
+  date_joined: Date,
+  project_count: number,
   phone_number: string,
   telegram_url: string,
   instagram_url: string,

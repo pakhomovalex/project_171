@@ -1,24 +1,19 @@
-import { authors } from "@/app/page";
+// import { authors } from "@/app/page";
 import Image from "next/image";
 import styles from './AuthorCard.module.scss';
 import Link from "next/link";
+import { AuthorWithProject } from "@/types/AuthorWithProjects";
 
-export const AuthorCard = ({ id, full }: { id: number, full: boolean }) => {
-  const author = authors.find(author => author.id === id) || authors[0];
+export const AuthorCard = ({author, full}: { author: AuthorWithProject, full: boolean}) => {
 
   const {
-    username,
-    first_name,
-    last_name,
+    full_name,
     avatar,
-    bio,
-    specialization,
     city,
-    createdAt,
-    projects,
     telegram_url,
     instagram_url,
     facebook_url,
+    project_count,
   } = author;
 
   return (
@@ -32,15 +27,16 @@ export const AuthorCard = ({ id, full }: { id: number, full: boolean }) => {
       </div>
       <div className={styles.card__info}>
         <h3 className={styles.card__title}>
-          {username ?
+          {/* {username ?
             username : `${first_name} ${last_name}`
-          }
+          } */}
+          {full_name}
         </h3>
         <p className={styles.card__spezialization}>
-          {specialization[0].name}
+          {/* {specialization[0].name} */}
         </p>
         <p className={styles.card__slogan}>
-          {full ? bio : bio.split('.')[0]}
+          {/* {full_name ? bio : bio.split('.')[0]} */}
         </p>
         <div className={styles.card__localInfoBox}>
           <div className={styles.card__localInfoSubBox}>
@@ -62,7 +58,7 @@ export const AuthorCard = ({ id, full }: { id: number, full: boolean }) => {
               height={18}
             />
             <p className={styles.card__localInfoText}>
-              На платформі з {createdAt}
+              {/* На платформі з {date_joined.getMonth} */}
             </p>
           </div>
           <div className={styles.card__localInfoSubBox}>
@@ -73,7 +69,7 @@ export const AuthorCard = ({ id, full }: { id: number, full: boolean }) => {
               height={18}
             />
             <p className={styles.card__localInfoText}>
-              Кількість проектів: {projects.length}
+              Кількість проектів: {project_count}
             </p>
           </div>
         </div>
