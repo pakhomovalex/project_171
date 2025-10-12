@@ -8,7 +8,7 @@ export const AuthorCard = ({author, full}: { author: AuthorWithProject, full: bo
 
   const {
     full_name,
-    avatar,
+    // avatar,
     city,
     telegram_url,
     instagram_url,
@@ -19,11 +19,11 @@ export const AuthorCard = ({author, full}: { author: AuthorWithProject, full: bo
   return (
     <article className={styles.card}>
       <div className={styles.card__avatarBox}>
-        <Image
+        {/* <Image
           src={avatar}
           alt={"avatar"}
           fill
-        />
+        /> */}
       </div>
       <div className={styles.card__info}>
         <h3 className={styles.card__title}>
