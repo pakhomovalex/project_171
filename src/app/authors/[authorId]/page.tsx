@@ -1,4 +1,4 @@
-// import { authors } from "@/app/page";
+
 import { AuthorCard } from "@/components/AuthorCard/AuthorCard";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
