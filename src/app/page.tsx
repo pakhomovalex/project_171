@@ -148,6 +148,25 @@ export const authors: UserType[] = [{
 export default async function Home() {
   const projects = await projectsService.getActiveProjects();
 
+  const projectsForCards: ProjectCardType[] = projects.map(project => {
+
+    return (
+      {
+        id: project.id,
+        title: project.title,
+        subtitle: project.subtitle,
+        cover_image: '',
+        category: project.category,
+        description: project.description,
+        donation_type: project.donation_type,
+        donation_percentage: project.donation_percentage,
+        end_date: project.end_date,
+        status: project.status,
+        target_amount: +project.target_amount
+      }
+    )
+  })
+
   return (
     <>
       <Header />
@@ -202,7 +221,7 @@ export default async function Home() {
             Наші проекти
           </h2>
           <div className={styles.projectsSection__projectsBox}>
-            {projects.map(project => {
+            {projectsForCards.map(project => {
 
               return <ProjectCard
                 key={project.id}

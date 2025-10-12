@@ -1,13 +1,12 @@
-// import { projects as serverProjects } from "@/app/page";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import styles from './ProjectPage.module.scss';
 import Link from "next/link";
 import Image from "next/image";
 import { Slider } from "@/components/Slider/Slider";
-import { authors } from "@/app/page";
 import { ProjectType } from "@/types/ProjectType";
 import { projectsService } from "@/lib/services/projectsService";
+import { authorsService } from "@/lib/services/authorsService";
 
 export default async function ProjectPage({ params }: { params: Promise<{ projectId: string }> }) {
   const { projectId } = await params;
@@ -23,19 +22,21 @@ export default async function ProjectPage({ params }: { params: Promise<{ projec
     donation_percentage,
     price,
     end_date,
+    author
   } = project;
+
+  const authorFromServer = await authorsService.getAuthor(author.id);
 
   const {
     username,
-    first_name,
-    last_name,
+    full_name,
     avatar,
     id,
     bio,
     telegram_url,
     instagram_url,
     facebook_url,
-  } = authors[0];
+  } = authorFromServer;
 
   return (
     <>
@@ -72,7 +73,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ projec
             {subtitle}
           </p>
           <div className={styles.mainSection__swiperBox}>
-            <Slider images={images.map(image => image.image)} />
+            <Slider images={images} />
           </div>
         </section>
         <section className={styles.infoSection}>
@@ -127,7 +128,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ projec
                   Тип:
                 </p>
                 <h4 className={styles.infoSection__articleElem__value}>
-                  {donation_percentage}% від продажу на ЗСУ
+                  {donation_percentage ? `${donation_percentage}% від продажу на ЗСУ` : '100% автору'}
                 </h4>
               </div>
               <div className={styles.infoSection__articleElem}>
@@ -142,7 +143,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ projec
                   Термін:
                 </p>
                 <h4 className={styles.infoSection__articleElem__value}>
-                  {end_date.getMonth().toString()}
+                  {end_date.toString().slice(0, 10)}
                 </h4>
               </div>
             </div>
@@ -166,7 +167,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ projec
               <div className={styles.authorArticle__info}>
                 <h4 className={styles.authorArticle__name}>
                   {username ?
-                    username : `${first_name} ${last_name}`
+                    username : full_name
                   }
                 </h4>
                 <p className={styles.authorArticle__bio}>

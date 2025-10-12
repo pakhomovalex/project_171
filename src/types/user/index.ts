@@ -1,12 +1,12 @@
 export type User = {
-  id: 0,
+  id: number,
   username: string,
   full_name: string,
   avatar: string,
   city: string,
   specialization: [
     {
-      id: 0,
+      id: number,
       name: string,
       slug: string
     }

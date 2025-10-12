@@ -1,18 +1,41 @@
 'use client';
 
-import { projects } from "@/app/page";
 import { Pagination } from "../Pagination/Pagination";
 import styles from './ProjectsCategoryPagintaion.module.scss';
 import ProjectCard from "../ProjectCard/ProjectCard";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from 'next/navigation'
+import { ProjectType } from "@/types/ProjectType";
+import { ProjectCardType } from "@/types/ProjectCard";
 
 type CategoryKey = 'all' | 'painters' | 'jewerly' | 'decoration' | 'clothes' | 'games' | 'digital';
 
-export default function ProjectCategoryPagination() {
+export default function ProjectCategoryPagination({ projects }: { projects: ProjectType[] }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [filteredProjects, setFilteredProjects] = useState(projects);
+  
+
+  const projectsForCards: ProjectCardType[] = projects.map(project => {
+
+    return (
+      {
+        id: project.id,
+        title: project.title,
+        subtitle: project.subtitle,
+        cover_image: '',
+        category: project.category,
+        description: project.description,
+        donation_type: project.donation_type,
+        donation_percentage: project.donation_percentage,
+        end_date: project.end_date,
+        status: project.status,
+        target_amount: +project.target_amount
+      }
+    )
+  })
+
+  const [filteredProjects, setFilteredProjects] 
+  = useState<ProjectCardType[]>(projectsForCards);
 
   const categoryMap: Record<string, keyof typeof category> = {
     'Всі проекти': 'all',
@@ -81,14 +104,14 @@ export default function ProjectCategoryPagination() {
 
     for (const [displayName, key] of Object.entries(categoryMap)) {
       const count = projects.filter(project =>
-        project.category.includes(reverseCategoryMap[key])
+        project.category.name.includes(reverseCategoryMap[key])
       ).length;
 
       counts[displayName] = count;
     }
 
     return counts;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reverseCategoryMap]);
 
   const selectedCategoryNames = useMemo(() => {
@@ -111,14 +134,16 @@ export default function ProjectCategoryPagination() {
     };
 
     const filteredProjects = category.all
-      ? projects
-      : projects.filter(p => {
-        const key = projectCategoryToKey[p.category];
+      ? projectsForCards
+      : projectsForCards.filter(p => {
+        const key = projectCategoryToKey[p.category.name];
         return category[key];
       });
 
     setFilteredProjects(filteredProjects);
     setPage(1);
+    // don't add projectsForCards in dependens array -> infinity re-render
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category]);
 
   useEffect(() => {
@@ -132,7 +157,7 @@ export default function ProjectCategoryPagination() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [boxRef]);
 
   return (
     <>

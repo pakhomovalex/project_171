@@ -7,21 +7,21 @@ export type ProjectType = {
   title: string,
   subtitle: string,
   author: {
-    id: 0,
+    id: number,
     username: string,
     avatar: string,
     full_name: string
   },
   category: {
-    id: 0,
+    id: number,
     name: string,
-    slug: "L5tSg_FM94imu4_ahnOQGs7LWKRGZHbMY"
+    slug: string
   },
   images: [
     {
-      id: 0,
+      id: number,
       image: string,
-      order: 9223372036854776000
+      order: number
     }
   ],
   description: string,

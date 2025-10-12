@@ -11,8 +11,13 @@ import { Swiper as SwiperClass } from 'swiper/types';
 import '@/styles/SwiperStyles.scss';
 import styles from './Slider.module.scss';
 
+type ImageType = {
+  id: number;
+  image: string;
+  order: number;
+};
 
-export const Slider = ({ images }: { images: string[] }) => {
+export const Slider = ({ images }: { images: ImageType[] }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
 
   return (
@@ -23,9 +28,9 @@ export const Slider = ({ images }: { images: string[] }) => {
         className={styles.mainSlider}
         thumbs={{ swiper: thumbsSwiper }}
       >
-        {images.map((image, index) => (
-          <SwiperSlide key={index}>
-            <Image src={image} alt={`Image ${index}`} width={1280} height={600}/>
+        {images.map(image => (
+          <SwiperSlide key={image.id}>
+            <Image src={image.image} alt={`Image ${image.id}`} width={1280} height={600} />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -38,9 +43,9 @@ export const Slider = ({ images }: { images: string[] }) => {
         watchSlidesProgress
         className={`${styles.thumbSlider} ${styles[`thumbSlider--${images.length}`]}`}
       >
-        {images.map((src, index) => (
-          <SwiperSlide key={index} className={styles.thumbSlide}>
-            <Image src={src} alt={`Thumb ${index}`} fill className="object-cover" />
+        {images.map(image => (
+          <SwiperSlide key={image.id} className={styles.thumbSlide}>
+            <Image src={image.image} alt={`Thumb ${image.id}`} fill className="object-cover" />
           </SwiperSlide>
         ))}
       </Swiper>

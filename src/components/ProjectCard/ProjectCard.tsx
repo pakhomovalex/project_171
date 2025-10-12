@@ -13,7 +13,8 @@ export default function ProjectCard({
     subtitle,
     donation_type,
     end_date,
-    id
+    id,
+    donation_percentage
   } = project;
 
   return (
@@ -26,7 +27,7 @@ export default function ProjectCard({
             width={12}
             height={12}
           />
-          {category}
+          {category.name}
           <Image
             src={'/yellow-heart-icon.svg'}
             alt={'blue heart'}
@@ -51,13 +52,13 @@ export default function ProjectCard({
         Тип збору:
       </p>
       <p className={styles.card__percent}>
-        {donation_type > 0 ? `${donation_type}% з продажу на ЗСУ` : '100% автору'}
+        {donation_type === 'full_price' ? '100% автору': `${donation_percentage}% з продажу на ЗСУ` }
       </p>
       <p className={styles.card__termin}>
         Термін:
       </p>
       <p className={styles.card__lastDate}>
-        До {end_date}
+        До {end_date.toString().slice(0,10)}
       </p>
       <Link className={styles.card__button} href={`/projects/${id}`}>
         Підтримати

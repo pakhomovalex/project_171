@@ -1,3 +1,7 @@
+type DonationType = 'full_price' | 'percentage';
+
+type StatusType = 'moderation' | 'active' | 'archived' | 'draft';
+
 export type AuthorWithProject = {
   id: 0,
   username: string,
@@ -24,11 +28,17 @@ export type AuthorWithProject = {
       title: string,
       subtitle: string,
       description: string,
-      category: string,
+      category: {
+        id: number,
+        name: string,
+        slug: string
+      },
       cover_image: string,
-      donation_type: string,
-      status: string,
+      donation_type: DonationType,
+      status: StatusType,
       end_date: Date
+      target_amount: number,
+      donation_percentage: number
     }
   ]
 }

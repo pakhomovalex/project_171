@@ -4,8 +4,11 @@ import styles from './projects.module.scss';
 import Image from "next/image";
 import ProjectsCategoryPagination from "@/components/ProjectsPagination/ProjectsCategoryPagination";
 import { Suspense } from "react";
+import { projectsService } from "@/lib/services/projectsService";
 
-export default function Projects() {
+export default async function Projects() {
+    const projects = await projectsService.getActiveProjects();
+
   return (
     <>
       <Header />
@@ -18,7 +21,7 @@ export default function Projects() {
             Обирай серед авторських проєктів митців, які хочуть допомогти ЗСУ
           </p>
           <Suspense>
-            <ProjectsCategoryPagination />
+            <ProjectsCategoryPagination projects={projects} />
           </Suspense>
         </section>
         <section className={styles.supportSection}>
