@@ -3,14 +3,14 @@ import Header from "@/components/Header/Header";
 
 import styles from './Authors.module.scss';
 // import { AuthorCard } from "@/components/AuthorCard/AuthorCard";
-import { AuthorsPagination } from "@/components/AuthorsPagination/AuthorsPagination";
+// import { AuthorsPagination } from "@/components/AuthorsPagination/AuthorsPagination";
 // import Image from "next/image";
 // import Link from "next/link";
-import { Suspense } from "react";
-import { authorsService } from "@/lib/services/authorsService";
+// import { Suspense } from "react";
+// import { authorsService } from "@/lib/services/authorsService";
 
 export default async function Authors() {
-  const authors = await authorsService.getAllAuthors();
+  // const authors = await authorsService.getAllAuthors();
 
   return (
     <>
@@ -28,9 +28,9 @@ export default async function Authors() {
               <AuthorCard key={author.id} author={author} full />
             ))} */}
           </div>
-          <Suspense>
+          {/* <Suspense>
             <AuthorsPagination totalItems={authors.length} />
-          </Suspense>
+          </Suspense> */}
         </section>
         <section className={styles.authors__supportSection}>
           {/* <Image src={"/authors-bg-image.png"} alt={"bg image"} fill /> */}
