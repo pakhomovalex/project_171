@@ -2,7 +2,7 @@
 import { AuthorCard } from "@/components/AuthorCard/AuthorCard";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import styles from './AuthorPage.module.scss';
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
