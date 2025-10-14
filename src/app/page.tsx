@@ -3,11 +3,11 @@ import styles from "./home.module.scss";
 import FondCard from "@/components/FondCard/FondCard";
 import Image from "next/image";
 import Link from "next/link";
-import { ProjectCardType } from "@/types/ProjectCard";
-import ProjectCard from "@/components/ProjectCard/ProjectCard";
+// import { ProjectCardType } from "@/types/ProjectCard";
+// import ProjectCard from "@/components/ProjectCard/ProjectCard";
 import ForWhoCard from "@/components/ForWhoCard/ForWhoCard";
 import Footer from "@/components/Footer/Footer";
-import { projectsService } from "@/lib/services/projectsService";
+// import { projectsService } from "@/lib/services/projectsService";
 
 const FONDS = [
   {
@@ -40,26 +40,26 @@ const FONDS = [
 ];
 
 export default async function Home() {
-  const projects = await projectsService.getActiveProjects();
+  // const projects = await projectsService.getActiveProjects();
 
-  const projectsForCards: ProjectCardType[] = projects.map(project => {
+  // const projectsForCards: ProjectCardType[] = projects.map(project => {
 
-    return (
-      {
-        id: project.id,
-        title: project.title,
-        subtitle: project.subtitle,
-        cover_image: '',
-        category: project.category,
-        description: project.description,
-        donation_type: project.donation_type,
-        donation_percentage: project.donation_percentage,
-        end_date: project.end_date,
-        status: project.status,
-        target_amount: +project.target_amount
-      }
-    )
-  })
+  //   return (
+  //     {
+  //       id: project.id,
+  //       title: project.title,
+  //       subtitle: project.subtitle,
+  //       cover_image: '',
+  //       category: project.category,
+  //       description: project.description,
+  //       donation_type: project.donation_type,
+  //       donation_percentage: project.donation_percentage,
+  //       end_date: project.end_date,
+  //       status: project.status,
+  //       target_amount: +project.target_amount
+  //     }
+  //   )
+  // })
 
   return (
     <>
@@ -115,13 +115,13 @@ export default async function Home() {
             Наші проекти
           </h2>
           <div className={styles.projectsSection__projectsBox}>
-            {projectsForCards.map(project => {
+            {/* {projectsForCards.map(project => {
 
               return <ProjectCard
                 key={project.id}
                 project={project}
               />
-            })}
+            })} */}
           </div>
           <Link href={"/projects"} className={styles.projectsSection__link}>
             Усі проекти

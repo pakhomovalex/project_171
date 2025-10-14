@@ -1,5 +1,4 @@
-// import { authors } from "@/app/page";
-// import Image from "next/image";
+import Image from "next/image";
 import styles from './AuthorCard.module.scss';
 import Link from "next/link";
 import { AuthorWithProject } from "@/types/AuthorWithProjects";
@@ -8,22 +7,22 @@ export const AuthorCard = ({ author, full }: { author: AuthorWithProject, full: 
 
   const {
     full_name,
-    // avatar,
+    avatar,
     city,
-    // telegram_url,
-    // instagram_url,
-    // facebook_url,
+    telegram_url,
+    instagram_url,
+    facebook_url,
     project_count,
   } = author;
 
   return (
     <article className={styles.card}>
       <div className={styles.card__avatarBox}>
-        {/* <Image
+        <Image
           src={avatar}
           alt={"avatar"}
           fill
-        /> */}
+        />
       </div>
       <div className={styles.card__info}>
         <h3 className={styles.card__title}>
@@ -40,34 +39,34 @@ export const AuthorCard = ({ author, full }: { author: AuthorWithProject, full: 
         </p>
         <div className={styles.card__localInfoBox}>
           <div className={styles.card__localInfoSubBox}>
-            {/* <Image
+            <Image
               src={"/location-icon.svg"}
               alt={"icon"}
               width={18}
               height={18}
-            /> */}
+            />
             <p className={styles.card__localInfoText}>
               {city}
             </p>
           </div>
           <div className={styles.card__localInfoSubBox}>
-            {/* <Image
+            <Image
               src={"/sqedule-icon.svg"}
               alt={"icon"}
               width={18}
               height={18}
-            /> */}
+            />
             <p className={styles.card__localInfoText}>
               {/* На платформі з {date_joined.getMonth} */}
             </p>
           </div>
           <div className={styles.card__localInfoSubBox}>
-            {/* <Image
+            <Image
               src={"/puzzle-icon.svg"}
               alt={"icon"}
               width={18}
               height={18}
-            /> */}
+            />
             <p className={styles.card__localInfoText}>
               Кількість проектів: {project_count}
             </p>
@@ -79,7 +78,7 @@ export const AuthorCard = ({ author, full }: { author: AuthorWithProject, full: 
               Соціальні мережі:
             </p>
             <div className={styles.card__socialsBox}>
-              {/* {telegram_url && <Link
+              {telegram_url && <Link
                 href={telegram_url}
                 className={styles.card__icon}
               >
@@ -88,8 +87,8 @@ export const AuthorCard = ({ author, full }: { author: AuthorWithProject, full: 
                   alt="icon"
                   fill
                 />
-              </Link>} */}
-              {/* {facebook_url && <Link
+              </Link>}
+              {facebook_url && <Link
                 href={facebook_url}
                 className={styles.card__icon}
               >
@@ -99,8 +98,8 @@ export const AuthorCard = ({ author, full }: { author: AuthorWithProject, full: 
                   fill
                 />
               </Link>
-              } */}
-              {/* {instagram_url && <Link
+              }
+              {instagram_url && <Link
                 href={instagram_url}
                 className={styles.card__icon}
               >
@@ -110,7 +109,7 @@ export const AuthorCard = ({ author, full }: { author: AuthorWithProject, full: 
                   fill
                 />
               </Link>
-              } */}
+              }
             </div>
           </>
         {full && <Link className={styles.card__button} href={`/authors/${author.id}`}>
