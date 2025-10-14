@@ -4,7 +4,7 @@ import styles from './AuthorCard.module.scss';
 import Link from "next/link";
 import { AuthorWithProject } from "@/types/AuthorWithProjects";
 
-export const AuthorCard = ({author, full}: { author: AuthorWithProject, full: boolean}) => {
+export const AuthorCard = ({ author, full }: { author: AuthorWithProject, full: boolean }) => {
 
   const {
     full_name,

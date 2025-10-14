@@ -12,6 +12,11 @@ authClient.interceptors.response.use(
   res => res.data,
 );
 
+authClient.interceptors.request.use((config) => {
+  config.headers["Origin"] = "https://pidtrumyi.vercel.app";
+  return config;
+});
+
 
 
 export const httpClient = axios.create({
@@ -33,7 +38,6 @@ export const httpClient = axios.create({
 // });
 
 httpClient.interceptors.response.use(
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   res => res.data,
 
   // retry request after refreshing access token

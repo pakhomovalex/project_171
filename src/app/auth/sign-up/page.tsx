@@ -5,6 +5,7 @@ import styles from './SingUp.module.scss';
 import { signUpAnimationIn, signUpAnimationOut } from "@/utils/authAnimation";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { authService } from "@/lib/services/authService";
 
 export default function SignUp() {
   const imageRef = useRef<HTMLDivElement>(null);
@@ -13,7 +14,13 @@ export default function SignUp() {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
 
-  useEffect(() => { signUpAnimationIn(imageRef) })
+  useEffect(() => { signUpAnimationIn(imageRef) });
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    await authService.registration(email, password);
+  }
 
   return (
     <>
@@ -31,7 +38,11 @@ export default function SignUp() {
         <h2 className={styles.auth__title}>
           Спробуй себе!
         </h2>
-        <form action="submit" className={`${styles.auth__form} ${styles['auth__form--margin-top']}`}>
+        <form
+          action="submit"
+          className={`${styles.auth__form} ${styles['auth__form--margin-top']}`}
+          onSubmit={handleSubmit}
+        >
           <label htmlFor="email" className={styles.auth__form__label}>
             Електронна пошта
             <input
@@ -72,43 +83,43 @@ export default function SignUp() {
             type="submit"
             className={`
               ${styles.auth__form__submitButton}
-              ${
-                (password.length < 8
+              ${(password.length < 8
                 || password.length > 20
                 || email.length === 0
                 || repeatPassword !== password)
-                 ? styles['auth__form__submitButton--disabled'] : ''
+                ? styles['auth__form__submitButton--disabled'] : ''
               }
-            `}>
-          Зареєструватись
+            `}
+          >
+            Зареєструватись
+          </button>
+        </form>
+        <div className={styles.auth__or}>
+          <div className={styles.auth__line} />
+          <p className={styles.auth__orText}>
+            Або
+          </p>
+          <div className={styles.auth__line} />
+        </div>
+        <button className={styles.auth__google}>
+          <Image src={"/google-icon.svg"} alt={"google icon"} width={20} height={20} />
+          Реєстрація через Google
         </button>
-      </form>
-      <div className={styles.auth__or}>
-        <div className={styles.auth__line} />
-        <p className={styles.auth__orText}>
-          Або
-        </p>
-        <div className={styles.auth__line} />
-      </div>
-      <button className={styles.auth__google}>
-        <Image src={"/google-icon.svg"} alt={"google icon"} width={20} height={20} />
-        Реєстрація через Google
-      </button>
-      <div className={styles.auth__signUp}>
-        <p className={styles.auth__signUpText}>Вже маєте аккаунт?</p>
-        <button
-          onClick={() => signUpAnimationOut(
-            imageRef,
-            '/auth/log-in',
-            router
-          )}
-          className={styles.auth__signUpButton}
-        >
-          Увійти
-        </button>
-      </div>
+        <div className={styles.auth__signUp}>
+          <p className={styles.auth__signUpText}>Вже маєте аккаунт?</p>
+          <button
+            onClick={() => signUpAnimationOut(
+              imageRef,
+              '/auth/log-in',
+              router
+            )}
+            className={styles.auth__signUpButton}
+          >
+            Увійти
+          </button>
+        </div>
 
-    </section >
+      </section >
       <div className={styles.auth__imageBox}>
         <div ref={imageRef} className={styles.auth__image}>
           <Image src={"/log-in-sign-up-image.jpg"} alt={""} fill />

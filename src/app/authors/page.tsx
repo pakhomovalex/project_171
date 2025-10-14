@@ -2,7 +2,6 @@ import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 
 import styles from './Authors.module.scss';
-// import { authors } from "../page";
 import { AuthorCard } from "@/components/AuthorCard/AuthorCard";
 import { AuthorsPagination } from "@/components/AuthorsPagination/AuthorsPagination";
 import Image from "next/image";
@@ -12,8 +11,6 @@ import { authorsService } from "@/lib/services/authorsService";
 
 export default async function Authors() {
   const authors = await authorsService.getAllAuthors();
-
-  
 
   return (
     <>
@@ -36,7 +33,7 @@ export default async function Authors() {
           </Suspense>
         </section>
         <section className={styles.authors__supportSection}>
-          <Image src={"/authors-bg-image.png"} alt={"bg image"} fill />
+          {/* <Image src={"/authors-bg-image.png"} alt={"bg image"} fill /> */}
           <h2 className={styles.authors__secondTitle}>
             Стань автором, що допомагає
           </h2>
