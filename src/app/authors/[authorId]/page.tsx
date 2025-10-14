@@ -2,7 +2,7 @@
 import { AuthorCard } from "@/components/AuthorCard/AuthorCard";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
-// import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 import styles from './AuthorPage.module.scss';
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
@@ -24,21 +24,21 @@ export default async function AuthorDetails({ params }: { params: Promise<{ auth
           <Link href={"/"} className={styles.main__categoryLink}>
             Головна
           </Link>
-          {/* <Image
+          <Image
             src={"/arrow-right-gray-icon.svg"}
             width={16}
             height={16}
             alt={"arrow"}
-          /> */}
+          />
           <Link href={"/authors"} className={styles.main__categoryLink}>
             Автори
           </Link>
-          {/* <Image
+          <Image
             src={"/arrow-right-gray-icon.svg"}
             width={16}
             height={16}
             alt={"arrow"}
-          /> */}
+          />
           <p className={styles.main__categoryTitle}>
             {username ? username : full_name}
           </p>

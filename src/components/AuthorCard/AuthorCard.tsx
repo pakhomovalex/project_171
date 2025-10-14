@@ -72,7 +72,7 @@ export const AuthorCard = ({ author, full }: { author: AuthorWithProject, full: 
             </p>
           </div>
         </div>
-        {/* {(facebook_url || telegram_url || instagram_url) */}
+        {(facebook_url || telegram_url || instagram_url)
           && <>
             <p className={styles.card__socials}>
               Соціальні мережі:
@@ -112,6 +112,7 @@ export const AuthorCard = ({ author, full }: { author: AuthorWithProject, full: 
               }
             </div>
           </>
+        }
         {full && <Link className={styles.card__button} href={`/authors/${author.id}`}>
           Детальніше про автора
         </Link>
