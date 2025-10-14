@@ -2,15 +2,15 @@ import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 
 import styles from './Authors.module.scss';
-// import { AuthorCard } from "@/components/AuthorCard/AuthorCard";
-// import { AuthorsPagination } from "@/components/AuthorsPagination/AuthorsPagination";
+import { AuthorCard } from "@/components/AuthorCard/AuthorCard";
+import { AuthorsPagination } from "@/components/AuthorsPagination/AuthorsPagination";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
-// import { authorsService } from "@/lib/services/authorsService";
+import { authorsService } from "@/lib/services/authorsService";
 
 export default async function Authors() {
-  // const authors = await authorsService.getAllAuthors();
+  const authors = await authorsService.getAllAuthors();
 
   return (
     <>
@@ -24,12 +24,12 @@ export default async function Authors() {
             Кожна робота тут — це крок до нашої спільної перемоги
           </p>
           <div className={styles.authors__authorsBox}>
-            {/* {authors.map(author => (
+            {authors.map(author => (
               <AuthorCard key={author.id} author={author} full />
-            ))} */}
+            ))}
           </div>
           <Suspense>
-            {/* <AuthorsPagination totalItems={authors.length} /> */}
+            <AuthorsPagination totalItems={authors.length} />
           </Suspense>
         </section>
         <section className={styles.authors__supportSection}>
