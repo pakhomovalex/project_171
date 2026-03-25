@@ -7,8 +7,8 @@ interface AuthData {
 }
 
 export const authService = {
-  registration: (email: string, password: string) => {
-    return client.post('/registration', { email, password });
+  registration: (email: string, password: string, password2: string) => {
+    return client.post('/registration/', { email, password, password2 });
   },
 
   activate: (email: string, token: string): Promise<AuthData> => {
@@ -16,26 +16,26 @@ export const authService = {
   },
 
   login: (email: string, password: string): Promise<AuthData> => {
-    return client.post('/login', { email, password });
+    return client.post('/login/', { email, password });
   },
 
-  logout: () => client.post('/logout'),
+  logout: () => client.post('/logout/'),
 
-  refresh: (): Promise<AuthData> => client.get('/token/refresh'),
+  refresh: (): Promise<AuthData> => client.get('/token/refresh/'),
 
   verify: (token: string) => {
-    return client.post('/token/verify', { token });
+    return client.post('/token/verify/', { token });
   },
 
   changePassword: (newPassword: string) => {
-    return client.post('/password/change', { newPassword});
+    return client.post('/password/change/', { newPassword});
   },
 
   resetPassword: (email: string) => {
-    return client.post('/password/reset', { email });
+    return client.post('/password/reset/', { email });
   },
 
   confirmResetPassword: (newPassword: string, uId: number, token: string) => {
-    return client.post('/password/confirm', { newPassword, uId, token});
+    return client.post('/password/confirm/', { newPassword, uId, token});
   },
 };

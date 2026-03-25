@@ -12,12 +12,6 @@ authClient.interceptors.response.use(
   res => res.data,
 );
 
-authClient.interceptors.request.use((config) => {
-  config.headers["Origin"] = "https://pidtrumyi.vercel.app";
-  return config;
-});
-
-
 
 export const httpClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL as string,

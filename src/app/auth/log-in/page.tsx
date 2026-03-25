@@ -3,8 +3,10 @@
 import Image from "next/image";
 import styles from './LogIn.module.scss';
 import { logInAnimationIn, logInAnimationOut } from "@/utils/authAnimation";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { authService } from "@/lib/services/authService";
+// import { User } from "@/types/user";
 
 
 export default function LogIn() {
@@ -15,6 +17,17 @@ export default function LogIn() {
   const [password, setPassword] = useState('');
 
   useEffect(() => { logInAnimationIn(imageRef) })
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    await authService.login(email, password)
+    .then(() => {
+      redirect('https://charity-platform-backend-ldsu.onrender.com/admin/');
+    });
+
+  }
+
 
   return (
     <>
@@ -37,7 +50,7 @@ export default function LogIn() {
           <br />
           щоб підтримати ЗСУ креативом
         </p>
-        <form action="submit" className={styles.auth__form}>
+        <form className={styles.auth__form} onSubmit={handleSubmit}>
           <label htmlFor="email" className={styles.auth__form__label}>
             Електронна пошта
             <input
@@ -63,7 +76,9 @@ export default function LogIn() {
             />
             <button
               type='button'
-              onClick={() => setIsVisiblePassword(prev => !prev)} className={styles.auth__form__changeVisibility}>
+              onClick={() => {
+                setIsVisiblePassword(prev => !prev)
+              }} className={styles.auth__form__changeVisibility}>
               {isVisiblePassword ?
                 <Image src={"/password-visible-icon.svg"} alt={"password defended"} fill />
                 :
@@ -73,11 +88,11 @@ export default function LogIn() {
           </label>
           <button
             type="button"
-            onClick={() => logInAnimationOut(
-              imageRef,
-              '/auth/forgot-password',
-              router
-            )}
+            // onClick={() => logInAnimationOut(
+            //   imageRef,
+            //   '/auth/forgot-password',
+            //   router
+            // )}
             className={styles.auth__form__link}
           >
             Забули пароль?
@@ -88,38 +103,38 @@ export default function LogIn() {
               ${styles.auth__form__submitButton}
               ${(password.length < 8
                 || password.length > 20
-                || email.length === 0) ? styles['auth__form__submitButton--disabled'] : '' 
+                || email.length === 0) ? styles['auth__form__submitButton--disabled'] : ''
               }
             `}>
-          Увійти
+            Увійти
+          </button>
+        </form>
+        <div className={styles.auth__or}>
+          <div className={styles.auth__line} />
+          <p className={styles.auth__orText}>
+            Або
+          </p>
+          <div className={styles.auth__line} />
+        </div>
+        <button className={styles.auth__google}>
+          <Image src={"/google-icon.svg"} alt={"google icon"} width={20} height={20} />
+          Увійти через Google
         </button>
-      </form>
-      <div className={styles.auth__or}>
-        <div className={styles.auth__line} />
-        <p className={styles.auth__orText}>
-          Або
-        </p>
-        <div className={styles.auth__line} />
-      </div>
-      <button className={styles.auth__google}>
-        <Image src={"/google-icon.svg"} alt={"google icon"} width={20} height={20} />
-        Увійти через Google
-      </button>
-      <div className={styles.auth__signUp}>
-        <p className={styles.auth__signUpText}>Ще не маєш аккаунту?</p>
-        <button
-          onClick={() => logInAnimationOut(
-            imageRef,
-            '/auth/sign-up',
-            router
-          )}
-          className={styles.auth__signUpButton}
-        >
-          Зареєструватись
-        </button>
-      </div>
+        <div className={styles.auth__signUp}>
+          <p className={styles.auth__signUpText}>Ще не маєш аккаунту?</p>
+          <button
+            onClick={() => logInAnimationOut(
+              imageRef,
+              '/auth/sign-up',
+              router
+            )}
+            className={styles.auth__signUpButton}
+          >
+            Зареєструватись
+          </button>
+        </div>
 
-    </section >
+      </section >
       <div className={styles.auth__imageBox}>
         <div ref={imageRef} className={styles.auth__image}>
           <Image src={"/log-in-sign-up-image.jpg"} alt={""} fill />
