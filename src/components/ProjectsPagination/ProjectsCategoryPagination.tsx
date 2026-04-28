@@ -7,7 +7,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from 'next/navigation'
 import { ProjectType } from "@/types/ProjectType";
-import { ProjectCardType } from "@/types/ProjectCard";
+import { ProjectBrief } from "@/types/user/index";
 
 type CategoryKey = 'all' | 'painters' | 'jewerly' | 'decoration' | 'clothes' | 'games' | 'digital';
 
@@ -15,7 +15,7 @@ export default function ProjectCategoryPagination({ projects }: { projects: Proj
   const [isOpen, setIsOpen] = useState(false);
   
 
-  const projectsForCards: ProjectCardType[] = projects.map(project => {
+  const projectsForCards: ProjectBrief[] = projects.map(project => {
 
     return (
       {
@@ -35,7 +35,7 @@ export default function ProjectCategoryPagination({ projects }: { projects: Proj
   })
 
   const [filteredProjects, setFilteredProjects] 
-  = useState<ProjectCardType[]>(projectsForCards);
+  = useState<ProjectBrief[]>(projectsForCards);
 
   const categoryMap: Record<string, keyof typeof category> = {
     'Всі проекти': 'all',

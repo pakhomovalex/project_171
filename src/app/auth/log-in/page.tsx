@@ -3,11 +3,10 @@
 import Image from "next/image";
 import styles from './LogIn.module.scss';
 import { logInAnimationIn, logInAnimationOut } from "@/utils/authAnimation";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { authService } from "@/lib/services/authService";
-// import { User } from "@/types/user";
-
+import 'dotenv/config';
 
 export default function LogIn() {
   const imageRef = useRef<HTMLDivElement>(null);
@@ -22,8 +21,8 @@ export default function LogIn() {
     e.preventDefault();
 
     await authService.login(email, password)
-    .then(() => {
-      redirect('https://charity-platform-backend-ldsu.onrender.com/admin/');
+    .then((res) => {
+      console.log(res);
     });
 
   }

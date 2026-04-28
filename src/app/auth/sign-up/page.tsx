@@ -19,7 +19,10 @@ export default function SignUp() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    await authService.registration(email, password, repeatPassword);
+    await authService.registration(email, password, repeatPassword)
+    .then((res) => {
+      console.log(res);
+    })
   }
 
   return (

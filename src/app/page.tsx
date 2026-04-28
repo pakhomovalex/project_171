@@ -3,11 +3,11 @@ import styles from "./home.module.scss";
 import FondCard from "@/components/FondCard/FondCard";
 import Image from "next/image";
 import Link from "next/link";
-import { ProjectCardType } from "@/types/ProjectCard";
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
 import ForWhoCard from "@/components/ForWhoCard/ForWhoCard";
 import Footer from "@/components/Footer/Footer";
 import { projectsService } from "@/lib/services/projectsService";
+import { ProjectBrief } from "@/types/user";
 
 const FONDS = [
   {
@@ -42,7 +42,7 @@ const FONDS = [
 export default async function Home() {
   const projects = await projectsService.getActiveProjects();
 
-  const projectsForCards: ProjectCardType[] = projects.map(project => {
+  const projectsForCards: ProjectBrief[] = projects.map(project => {
 
     return (
       {

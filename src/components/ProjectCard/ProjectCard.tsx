@@ -1,11 +1,11 @@
-import { ProjectCardType } from '@/types/ProjectCard';
 import styles from './ProjectCard.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ProjectBrief } from '@/types/user';
 
 export default function ProjectCard({
   project
-}: { project: ProjectCardType }) {
+}: { project: ProjectBrief }) {
   const {
     category,
     cover_image,

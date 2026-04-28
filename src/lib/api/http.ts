@@ -1,50 +1,131 @@
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import 'dotenv/config';
 import { authService } from '../services/authService';
 import { accessTokenService } from '../services/accessTokenService';
 
+// ==================== AUTH CLIENT ====================
+// Для эндпоинтов аутентификации (/auth/...)
 export const authClient = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_API_URL}/auth`,
   withCredentials: true,
 });
 
 authClient.interceptors.response.use(
-  res => res.data,
+  (res) => res.data,
+  (error: AxiosError) => Promise.reject(error)
 );
 
-
+// ==================== HTTP CLIENT ====================
+// Для всех остальных API-запросов (/users/, /projects/...)
 export const httpClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL as string,
   withCredentials: true,
 });
 
+// Добавляем access token к каждому запросу
+httpClient.interceptors.request.use(
+  (request: InternalAxiosRequestConfig) => {
+    const accessToken = accessTokenService.get(); // или localStorage.getItem('accessToken')
 
+    if (accessToken && request.headers) {
+      request.headers.Authorization = `Bearer ${accessToken}`;
+    }
 
-// add `Authorization` header to all requests
-// httpClient.interceptors.request.use(request => {
-//   const accessToken = localStorage.getItem('accessToken');
+    // Если отправляем FormData (файл), не трогаем Content-Type
+    // axios сам установит multipart/form-data с boundary
+    if (request.data instanceof FormData) {
+      delete request.headers['Content-Type'];
+    }
 
-//   if (accessToken) {
-//     request.headers.Authorization = `Bearer ${accessToken}`;
-//   }
+    return request;
+  },
+  (error) => Promise.reject(error)
+);
 
-//   return request;
-// });
-
+// Обработка 401 + автоматический refresh
 httpClient.interceptors.response.use(
-  res => res.data,
+  (res) => res.data,
 
-  // retry request after refreshing access token
   async (error: AxiosError) => {
-    if (error.response?.status !== 401) {
+    const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
+
+    // Если ошибка не 401 или уже пытались обновить токен — пробрасываем дальше
+    if (error.response?.status !== 401 || originalRequest._retry) {
       throw error;
     }
 
-    const originalRequest = error.config;
-    const { accessToken } = await authService.refresh();
+    originalRequest._retry = true;
 
-    accessTokenService.save(accessToken);
+    try {
+      const refreshToken = typeof window !== 'undefined' 
+      ? localStorage.getItem('refreshToken') : null;
 
-    return httpClient.request(originalRequest!);
-  },
+      if (!refreshToken) {
+        throw new Error('No refresh token available');
+      }
+
+      // Передаём refresh token как параметр
+      const { accessToken } = await authService.refresh(refreshToken);
+
+      // Сохраняем новый токен
+      accessTokenService.save(accessToken);
+
+      // Обновляем заголовок в оригинальном запросе и повторяем
+      if (originalRequest.headers) {
+        originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+      }
+
+      return httpClient.request(originalRequest);
+    } catch (refreshError) {
+      // Refresh не сработал — разлогиниваем
+      accessTokenService.remove();
+      // Можно добавить редирект на логин или событие
+      window.location.href = '/login';
+      throw refreshError;
+    }
+  }
 );
+
+// ==================== API МЕТОДЫ ====================
+
+export const profileApi = {
+  /**
+   * Получить профиль текущего пользователя
+   * GET /api/v1/users/me/
+   */
+  getProfile: () => httpClient.get('/users/me/'),
+
+  /**
+   * Обновить профиль (JSON или FormData для файлов)
+   * PATCH /api/v1/users/me/
+   */
+  updateProfile: (data: FormData | Record<string, unknown>) => {
+    const isFormData = data instanceof FormData;
+    
+    return httpClient.patch('/users/me/', data, {
+      headers: isFormData
+        ? { 'Content-Type': 'multipart/form-data' }
+        : { 'Content-Type': 'application/json' },
+    });
+  },
+};
+
+export const projectsApi = {
+  /**
+   * Получить список проектов
+   */
+  getProjects: () => httpClient.get('/projects/'),
+
+  /**
+   * Создать проект
+   */
+  createProject: (data: FormData | Record<string, unknown>) => {
+    const isFormData = data instanceof FormData;
+    
+    return httpClient.post('/projects/', data, {
+      headers: isFormData
+        ? { 'Content-Type': 'multipart/form-data' }
+        : { 'Content-Type': 'application/json' },
+    });
+  },
+};

@@ -1,9 +1,9 @@
 import Image from "next/image";
 import styles from './AuthorCard.module.scss';
 import Link from "next/link";
-import { AuthorWithProject } from "@/types/AuthorWithProjects";
+import { UserWithProjects } from "@/types/user";
 
-export const AuthorCard = ({ author, full }: { author: AuthorWithProject, full: boolean }) => {
+export const AuthorCard = ({ author, full }: { author: UserWithProjects, full: boolean }) => {
 
   const {
     full_name,
@@ -18,11 +18,16 @@ export const AuthorCard = ({ author, full }: { author: AuthorWithProject, full: 
   return (
     <article className={styles.card}>
       <div className={styles.card__avatarBox}>
-        <Image
+        {avatar ? (
+          <Image
           src={avatar}
           alt={"avatar"}
           fill
         />
+        ): (
+          <div></div>
+        )}
+        
       </div>
       <div className={styles.card__info}>
         <h3 className={styles.card__title}>
