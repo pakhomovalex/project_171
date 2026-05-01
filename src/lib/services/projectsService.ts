@@ -1,32 +1,37 @@
-import { ProjectType } from "@/types/ProjectType";
 import { httpClient as client } from "../api/http";
-
-type CreateProjectType = Omit<ProjectType,
-  'createdAt'
-  & 'id'
-  & 'images'
-  & 'category'
-  & 'author'
->
+import { ProjectBrief } from "@/types/user";
+import { Project } from "next/dist/build/swc/types";
 
 export const projectsService = {
-  getActiveProjects: (): Promise<ProjectType[]> => client.get('/projects'),
-
-  createProject: (project: CreateProjectType): Promise<ProjectType> =>
-    client.post('/projects', project),
-
-  getProjectById: (id: number): Promise<ProjectType> => client.get(`/projects/${id}`),
-
-  updateProjectAll: (id: number, data: CreateProjectType): Promise<ProjectType> => {
-    return client.put(`/projects/${id}`, data);
+  // Получить список проектов (краткие)
+  getProjects: (): Promise<ProjectBrief[]> => 
+    client.get('/projects/'),
+  
+  // Получить детали проекта (полный)
+  getProject: (id: number): Promise<Project> => 
+    client.get(`/projects/${id}/`),
+  
+  // Создать проект
+  createProject: (data: FormData | Partial<Project>) => {
+    const isFormData = data instanceof FormData;
+    return client.post('/projects/', data, {
+      headers: isFormData 
+        ? { 'Content-Type': 'multipart/form-data' }
+        : { 'Content-Type': 'application/json' },
+    });
   },
-
-  updateProject: (id: number, data: object): Promise<ProjectType> => {
-    return client.patch(`/projects/${id}`, data);
+  
+  // Обновить проект
+  updateProject: (id: number, data: FormData | Partial<Project>) => {
+    const isFormData = data instanceof FormData;
+    return client.patch(`/projects/${id}/`, data, {
+      headers: isFormData 
+        ? { 'Content-Type': 'multipart/form-data' }
+        : { 'Content-Type': 'application/json' },
+    });
   },
-
-  deleteProject: (id: number) => client.delete(`/projects/${id}`),
-
-  uploadImageToProject: (id: number, photo: string) =>
-    client.post(`/projects/${id}/upload-image`, { photo })
+  
+  // Удалить проект
+  deleteProject: (id: number) => 
+    client.delete(`/projects/${id}/`),
 };

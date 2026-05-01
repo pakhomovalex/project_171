@@ -40,7 +40,7 @@ const FONDS = [
 ];
 
 export default async function Home() {
-  const projects = await projectsService.getActiveProjects();
+  const projects = await projectsService.getProjects();
 
   const projectsForCards: ProjectBrief[] = projects.map(project => {
 
