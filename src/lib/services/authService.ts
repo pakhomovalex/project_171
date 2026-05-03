@@ -2,7 +2,8 @@ import { authClient as client } from '../api/http';
 import { User } from '../../types/user';
 
 interface AuthData {
-  accessToken: string;
+  access: string;
+  refresh: string;
   user: User;
 }
 

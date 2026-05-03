@@ -1,4 +1,4 @@
-const key = 'accessToken';
+const key = 'access';
 
 export const accessTokenService = {
   get: (): string | null => {

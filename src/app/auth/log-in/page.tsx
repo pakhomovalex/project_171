@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { authService } from "@/lib/services/authService";
 import 'dotenv/config';
+import { accessTokenService } from "@/lib/services/accessTokenService";
 
 export default function LogIn() {
   const imageRef = useRef<HTMLDivElement>(null);
@@ -23,6 +24,8 @@ export default function LogIn() {
     await authService.login(email, password)
     .then((res) => {
       console.log(res);
+      accessTokenService.save(res.access);
+      router.push('/profile')
     });
 
   }

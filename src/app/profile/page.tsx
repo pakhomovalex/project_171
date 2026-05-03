@@ -17,15 +17,19 @@ export default function ProfilePage() {
   useEffect(() => {
     const loadProfile = async () => {
       const token = accessTokenService.get();
+      console.log(token);
+      
       
       if (!token) {
-        router.push('/login');
+        router.push('/auth/log-in');
         return;
       }
 
       try {
         const response = await profileApi.getProfile();
-        setUser(response.data);
+        console.log(response);
+        
+        setUser(response as unknown as User);
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
         setError('Не вдалося завантажити профіль');

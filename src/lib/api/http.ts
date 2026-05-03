@@ -65,14 +65,14 @@ httpClient.interceptors.response.use(
       }
 
       // Передаём refresh token как параметр
-      const { accessToken } = await authService.refresh(refreshToken);
+      const { refresh } = await authService.refresh(refreshToken);
 
       // Сохраняем новый токен
-      accessTokenService.save(accessToken);
+      accessTokenService.save(refresh);
 
       // Обновляем заголовок в оригинальном запросе и повторяем
       if (originalRequest.headers) {
-        originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+        originalRequest.headers.Authorization = `Bearer ${refresh}`;
       }
 
       return httpClient.request(originalRequest);
@@ -91,9 +91,9 @@ httpClient.interceptors.response.use(
 export const profileApi = {
   /**
    * Получить профиль текущего пользователя
-   * GET /api/v1/users/me/
+   * GET /api/v1/profile
    */
-  getProfile: () => httpClient.get('/users/me/'),
+  getProfile: () => httpClient.get('/profile'),
 
   /**
    * Обновить профиль (JSON или FormData для файлов)

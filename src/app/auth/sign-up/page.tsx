@@ -6,6 +6,7 @@ import { signUpAnimationIn, signUpAnimationOut } from "@/utils/authAnimation";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { authService } from "@/lib/services/authService";
+import { accessTokenService } from "@/lib/services/accessTokenService";
 
 export default function SignUp() {
   const imageRef = useRef<HTMLDivElement>(null);
@@ -20,8 +21,7 @@ export default function SignUp() {
     e.preventDefault();
 
     await authService.registration(email, password, repeatPassword)
-    .then((res) => {
-      console.log(res);
+    .then(() => {
     })
   }
 
