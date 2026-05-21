@@ -6,12 +6,11 @@ import ProjectCard from "../ProjectCard/ProjectCard";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from 'next/navigation'
-import { ProjectType } from "@/types/ProjectType";
 import { ProjectBrief } from "@/types/user/index";
 
 type CategoryKey = 'all' | 'painters' | 'jewerly' | 'decoration' | 'clothes' | 'games' | 'digital';
 
-export default function ProjectCategoryPagination({ projects }: { projects: ProjectType[] }) {
+export default function ProjectCategoryPagination({ projects }: { projects: ProjectBrief[] }) {
   const [isOpen, setIsOpen] = useState(false);
   
 

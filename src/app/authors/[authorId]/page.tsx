@@ -48,7 +48,7 @@ export default async function AuthorDetails({ params }: { params: Promise<{ auth
         </div>
         <section className={styles.projects}>
           <h2 className={styles.projects__title}>
-            Проетки автора
+            Проекти автора
           </h2>
           {projects.map(project => {
             return (

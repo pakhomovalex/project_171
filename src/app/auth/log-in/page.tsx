@@ -4,6 +4,7 @@ import Image from "next/image";
 import styles from './LogIn.module.scss';
 import { logInAnimationIn, logInAnimationOut } from "@/utils/authAnimation";
 import { useRouter } from "next/navigation";
+// import { redirect } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { authService } from "@/lib/services/authService";
 import 'dotenv/config';
@@ -26,6 +27,7 @@ export default function LogIn() {
       console.log(res);
       accessTokenService.save(res.access);
       router.push('/profile')
+      // redirect('https://charity-platform-backend-va70.onrender.com/admin/')
     });
 
   }
@@ -90,11 +92,11 @@ export default function LogIn() {
           </label>
           <button
             type="button"
-            // onClick={() => logInAnimationOut(
-            //   imageRef,
-            //   '/auth/forgot-password',
-            //   router
-            // )}
+            onClick={() => logInAnimationOut(
+              imageRef,
+              '/auth/forgot-password',
+              router
+            )}
             className={styles.auth__form__link}
           >
             Забули пароль?

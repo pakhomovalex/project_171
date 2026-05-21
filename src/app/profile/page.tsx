@@ -2,24 +2,24 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import ProfileCard from '@/components/profile/ProfileCard';
 import { profileApi } from '@/lib/api/http';
 import { accessTokenService } from '@/lib/services/accessTokenService';
-import { User } from '@/types/user';
+import { UserWithProjects } from '@/types/user';
 import styles from './page.module.scss';
+import Header from '@/components/Header/Header';
+import Footer from '@/components/Footer/Footer';
+import { AuthorCard } from '@/components/AuthorCard/AuthorCard';
 
 export default function ProfilePage() {
   const router = useRouter();
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<UserWithProjects | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
     const loadProfile = async () => {
       const token = accessTokenService.get();
-      console.log(token);
-      
-      
+
       if (!token) {
         router.push('/auth/log-in');
         return;
@@ -27,11 +27,14 @@ export default function ProfilePage() {
 
       try {
         const response = await profileApi.getProfile();
-        console.log(response);
-        
-        setUser(response as unknown as User);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      } catch (err) {
+
+        setUser(response as unknown as UserWithProjects);
+
+        if (response) {
+          localStorage.setItem('userId', (response as unknown as UserWithProjects).id.toString())
+        }
+
+      } catch {
         setError('Не вдалося завантажити профіль');
       } finally {
         setLoading(false);
@@ -65,8 +68,12 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className={styles.page}>
-      <ProfileCard user={user} />
-    </div>
+    <>
+      <Header />
+      <main>
+        <AuthorCard author={user} full />
+      </main>
+      <Footer />
+    </>
   );
 }

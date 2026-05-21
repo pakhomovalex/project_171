@@ -7,7 +7,7 @@ import { Suspense } from "react";
 import { projectsService } from "@/lib/services/projectsService";
 
 export default async function Projects() {
-    const projects = await projectsService.getActiveProjects();
+    const projects = await projectsService.getProjects();
 
   return (
     <>
