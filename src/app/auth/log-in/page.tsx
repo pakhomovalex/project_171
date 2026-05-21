@@ -24,9 +24,8 @@ export default function LogIn() {
 
     await authService.login(email, password)
     .then((res) => {
-      console.log(res);
       accessTokenService.save(res.access);
-      router.push('/profile')
+      router.push(`/authors/${res.user.id}`)
       // redirect('https://charity-platform-backend-va70.onrender.com/admin/')
     });
 

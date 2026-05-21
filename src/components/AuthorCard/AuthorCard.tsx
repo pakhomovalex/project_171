@@ -25,7 +25,11 @@ export const AuthorCard = ({ author, full }: { author: UserWithProjects, full: b
           fill
         />
         ): (
-          <div></div>
+          <Image
+          src={'/default-user-icon.jpg'}
+          alt={"avatar"}
+          fill
+        />
         )}
         
       </div>
