@@ -5,13 +5,27 @@ import Image from "next/image";
 import styles from './Header.module.scss';
 import ActiveLink from "../ActiveNavLink/ActiveNavLink";
 import { useEffect, useState } from "react";
+import { useUser } from "@/lib/store/store";
+// import { authStorage } from "@/utils/auth";
+
+interface HeaderUser {
+    id: number
+    username: string
+    avatar: string | null // URL аватарки
+    email?: string
+}
 
 export default function Header() {
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState<HeaderUser | null>(null);
 
   useEffect(() => {
+    setUser(useUser.getState().user);
+    console.log(user);
+
+
     const handleResize = () => {
       setIsTablet(window.innerWidth < 1040);
       setIsMobile(window.innerWidth < 768);
@@ -22,7 +36,7 @@ export default function Header() {
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [user]);
 
   return (
     <header className={styles.header}>
@@ -46,17 +60,22 @@ export default function Header() {
             </li>
           </ul>
         </nav>}
-        {!isTablet && <div className={styles.header__login}>
-          <Link href={"/auth/log-in"} className={styles.header__login__link}>
-            <div>
-              <Image src={"/user-icon.svg"} fill alt={"user icon"} />
-            </div>
-            <p>Увійти</p>
-          </Link>
-          <Link className={styles.header__login__button} href={"/auth/sign-up"}>
-            Зареєструватись
-          </Link>
-        </div>}
+        {!isTablet && (<div className={styles.header__login}>
+          {!!user ? (
+            <Image src={user?.avatar || './arrow-left.svg'} alt={"avatar"} width={40} height={40} />
+          ) : (
+            <>
+              <Link href={"/auth/log-in"} className={styles.header__login__link}>
+                <div>
+                  <Image src={"/user-icon.svg"} fill alt={"user icon"} />
+                </div>
+                <p>Увійти</p>
+              </Link>
+              <Link className={styles.header__login__button} href={"/auth/sign-up"}>
+                Зареєструватись
+              </Link>
+            </>)}
+        </div>)}
         {isTablet
           && !isMobile
           && <Link

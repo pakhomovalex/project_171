@@ -1,5 +1,5 @@
 import { httpClient as client } from "../api/http";
-import { ProjectBrief } from "@/types/user";
+import { ProjectBrief } from "@/utils/types/user";
 import { Project } from "next/dist/build/swc/types";
 
 export const projectsService = {

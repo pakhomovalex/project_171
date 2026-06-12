@@ -3,7 +3,7 @@
 import { useState, useRef, ChangeEvent, FormEvent } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { User, UserProfileUpdate } from '@/types/user';
+import { User, UserProfileUpdate } from '@/utils/types/user';
 import { profileApi } from '@/lib/api/http';
 import styles from './ProfileForm.module.scss';
 

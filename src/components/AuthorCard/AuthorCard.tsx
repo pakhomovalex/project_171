@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from './AuthorCard.module.scss';
 import Link from "next/link";
-import { UserWithProjects } from "@/types/user";
+import { UserWithProjects } from "@/utils/types/user";
 
 export const AuthorCard = ({ author, full }: { author: UserWithProjects, full: boolean }) => {
 

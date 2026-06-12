@@ -9,12 +9,13 @@ import { useEffect, useRef, useState } from "react";
 import { authService } from "@/lib/services/authService";
 import 'dotenv/config';
 import { accessTokenService } from "@/lib/services/accessTokenService";
+import { useUser } from "@/lib/store/store";
 
 export default function LogIn() {
   const imageRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const [isVisiblePassword, setIsVisiblePassword] = useState(false);
-  const [email, setEmail] = useState('');
+  const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
 
   useEffect(() => { logInAnimationIn(imageRef) })
@@ -22,13 +23,22 @@ export default function LogIn() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    await authService.login(email, password)
-    .then((res) => {
-      accessTokenService.save(res.access);
+    try {
+      const res = await authService.login(userEmail, password)
+      const { id, username, avatar, email } = res.user; 
+
+
+      accessTokenService.save(res.access)
+      useUser.getState().updateUser({ id, username, avatar, email })
+      console.log(useUser.getState().user)
+
       router.push(`/authors/${res.user.id}`)
       // redirect('https://charity-platform-backend-va70.onrender.com/admin/')
-    });
-
+      // redirect('https://charity-platform-backend-ldsu.onrender.com/admin/')
+    } catch (error) {
+      useUser.getState().updateUser(null)
+      throw error
+    }
   }
 
 
@@ -62,8 +72,8 @@ export default function LogIn() {
               id="email"
               className={styles.auth__form__input}
               placeholder="Example@gmail.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={userEmail}
+              onChange={(e) => setUserEmail(e.target.value)}
             />
           </label>
           <label htmlFor="password" className={styles.auth__form__label}>
@@ -106,7 +116,7 @@ export default function LogIn() {
               ${styles.auth__form__submitButton}
               ${(password.length < 8
                 || password.length > 20
-                || email.length === 0) ? styles['auth__form__submitButton--disabled'] : ''
+                || userEmail.length === 0) ? styles['auth__form__submitButton--disabled'] : ''
               }
             `}>
             Увійти

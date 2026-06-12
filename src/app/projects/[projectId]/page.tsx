@@ -4,7 +4,7 @@ import styles from './ProjectPage.module.scss';
 import Link from "next/link";
 import Image from "next/image";
 import { Slider } from "@/components/Slider/Slider";
-import { ProjectType } from "@/types/ProjectType";
+import { ProjectType } from "@/utils/types/ProjectType";
 import { projectsService } from "@/lib/services/projectsService";
 import { authorsService } from "@/lib/services/authorsService";
 

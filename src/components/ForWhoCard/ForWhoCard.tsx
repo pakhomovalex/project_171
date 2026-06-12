@@ -1,4 +1,4 @@
-import { ForWhoCardType } from "@/types/ForWhoCard";
+import { ForWhoCardType } from "@/utils/types/ForWhoCard";
 import styles from './ForWhoCard.module.scss';
 import Image from "next/image";
 

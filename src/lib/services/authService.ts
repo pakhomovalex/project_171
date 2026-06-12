@@ -1,5 +1,5 @@
 import { authClient as client } from '../api/http';
-import { User } from '../../types/user';
+import { User } from '../../utils/types/user';
 
 interface AuthData {
   access: string;

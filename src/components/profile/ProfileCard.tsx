@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { User } from '@/types/user';
+import { User } from '@/utils/types/user';
 import styles from './ProfileCard.module.scss';
 
 interface ProfileCardProps {

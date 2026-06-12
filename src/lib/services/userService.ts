@@ -1,13 +1,12 @@
 import { httpClient as client } from '../api/http';
-import { User } from '../../types/user';
+import { User } from '../../utils/types/user';
 
-interface AuthData {
-  accessToken: string;
-  user: User;
-}
+// interface AuthData {
+//   accessToken: string;
+//   user: User;
+// }
 
 export const userService = {
-  getUser: (): Promise<AuthData> => client.get('/users'),
 
   changeAvatar: (avatar: string) => client.patch('/users/avatar', { avatar }, {
     headers: {

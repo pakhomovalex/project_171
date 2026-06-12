@@ -7,7 +7,7 @@ import ProjectCard from "@/components/ProjectCard/ProjectCard";
 import ForWhoCard from "@/components/ForWhoCard/ForWhoCard";
 import Footer from "@/components/Footer/Footer";
 import { projectsService } from "@/lib/services/projectsService";
-import { ProjectBrief } from "@/types/user";
+import { ProjectBrief } from "@/utils/types/user";
 
 const FONDS = [
   {

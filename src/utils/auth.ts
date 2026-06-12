@@ -1,4 +1,4 @@
-import { User } from "@/types/user";
+import { User } from "@/utils/types/user";
 
 const ACCESS_TOKEN_KEY = 'access_token';
 const REFRESH_TOKEN_KEY = 'refresh_token';
@@ -47,4 +47,12 @@ export const authStorage = {
       localStorage.removeItem(USER_KEY);
     }
   },
+
+  getUserId: (): number | null => {
+    if (typeof window !== 'undefined') {
+      const data = localStorage.getItem('userId');
+      return data ? JSON.parse(data) : null;
+    }
+    return null;
+  }
 };

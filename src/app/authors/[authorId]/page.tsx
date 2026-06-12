@@ -7,7 +7,7 @@ import Link from "next/link";
 import styles from './AuthorPage.module.scss';
 import ProjectCard from "@/components/ProjectCard/ProjectCard";
 import { authorsService } from "@/lib/services/authorsService";
-import { UserWithProjects } from "@/types/user";
+import { UserWithProjects } from "@/utils/types/user";
 
 export default async function AuthorDetails({ params }: { params: Promise<{ authorId: string }> }) {
   const { authorId } = await params;
