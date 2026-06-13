@@ -7,16 +7,27 @@ import { User } from '../../utils/types/user';
 // }
 
 export const userService = {
+  /**
+   * Получить профиль текущего пользователя
+   * GET /api/v1/profile/
+   */
+  getProfile: (): Promise<User> => client.get('/profile/'),
 
-  changeAvatar: (avatar: string) => client.patch('/users/avatar', { avatar }, {
-    headers: {
-      "Content-Type": 'multipart/form-data',
-    }
-  }),
+  /**
+   * Обновить профиль (JSON — без смены аватара)
+   * PATCH /api/v1/profile/
+   */
+  updateProfile: (data: Record<string, unknown>): Promise<User> => 
+    client.patch('/profile/', data, {
+      headers: { 'Content-Type': 'application/json' },
+    }),
 
-  changeInfo: (data: object): Promise<User> => client.patch('/users/', data, {
-    headers: {
-      "Content-Type": 'application/json',
-    }
-  })
+  /**
+   * Обновить профиль с аватаром (FormData)
+   * PATCH /api/v1/profile/
+   */
+  updateProfileWithAvatar: (data: FormData): Promise<User> => 
+    client.patch('/profile/', data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }),
 };

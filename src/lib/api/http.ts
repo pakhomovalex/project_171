@@ -93,7 +93,7 @@ export const profileApi = {
    * Получить профиль текущего пользователя
    * GET /api/v1/profile
    */
-  getProfile: () => httpClient.get('/profile'),
+  getProfile: () => httpClient.get('/profile/'),
 
   /**
    * Обновить профиль (JSON или FormData для файлов)
@@ -102,27 +102,7 @@ export const profileApi = {
   updateProfile: (data: FormData | Record<string, unknown>) => {
     const isFormData = data instanceof FormData;
     
-    return httpClient.patch('/users/me/', data, {
-      headers: isFormData
-        ? { 'Content-Type': 'multipart/form-data' }
-        : { 'Content-Type': 'application/json' },
-    });
-  },
-};
-
-export const projectsApi = {
-  /**
-   * Получить список проектов
-   */
-  getProjects: () => httpClient.get('/projects/'),
-
-  /**
-   * Создать проект
-   */
-  createProject: (data: FormData | Record<string, unknown>) => {
-    const isFormData = data instanceof FormData;
-    
-    return httpClient.post('/projects/', data, {
+    return httpClient.patch('/profile/', data, {
       headers: isFormData
         ? { 'Content-Type': 'multipart/form-data' }
         : { 'Content-Type': 'application/json' },
