@@ -1,13 +1,13 @@
 
-import { AuthorCard } from "@/components/AuthorCard/AuthorCard";
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
+import { AuthorCard } from "../../../components/AuthorCard/AuthorCard";
+import Footer from "../../../components/Footer/Footer";
+import Header from "../../../components/Header/Header";
 import Image from "next/image";
 import Link from "next/link";
 import styles from './AuthorPage.module.scss';
-import ProjectCard from "@/components/ProjectCard/ProjectCard";
-import { authorsService } from "@/lib/services/authorsService";
-import { UserWithProjects } from "@/utils/types/user";
+import ProjectCard from "../../../components/ProjectCard/ProjectCard";
+import { authorsService } from "../../../lib/services/authorsService";
+import { UserWithProjects } from "../../../utils/types/user";
 
 export default async function AuthorDetails({ params }: { params: Promise<{ authorId: string }> }) {
   const { authorId } = await params;

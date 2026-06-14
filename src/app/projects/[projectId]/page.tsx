@@ -1,17 +1,17 @@
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
+import Footer from "../../../components/Footer/Footer";
+import Header from "../../../components/Header/Header";
 import styles from './ProjectPage.module.scss';
 import Link from "next/link";
 import Image from "next/image";
-import { Slider } from "@/components/Slider/Slider";
-import { ProjectType } from "@/utils/types/ProjectType";
-import { projectsService } from "@/lib/services/projectsService";
-import { authorsService } from "@/lib/services/authorsService";
+import { Slider } from "../../../components/Slider/Slider";
+import { ProjectType } from "../../../utils/types/ProjectType";
+import { projectsService } from "../../../lib/services/projectsService";
+import { authorsService } from "../../../lib/services/authorsService";
 
 export default async function ProjectPage({ params }: { params: Promise<{ projectId: string }> }) {
   const { projectId } = await params;
 
-  const project = await projectsService.getProjectById(+projectId) as ProjectType;
+  const project = await projectsService.getProject(+projectId) as ProjectType;
 
   const {
     title,

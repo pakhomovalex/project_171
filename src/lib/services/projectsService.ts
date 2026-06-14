@@ -1,6 +1,7 @@
 import { httpClient as client } from "../api/http";
-import { ProjectBrief } from "@/utils/types/user";
+import { ProjectBrief } from "../../utils/types/user";
 import { Project } from "next/dist/build/swc/types";
+import { ProjectType } from "../../utils/types/ProjectType";
 
 export const projectsService = {
   // Получить список проектов (краткие)
@@ -8,7 +9,7 @@ export const projectsService = {
     client.get('/projects/'),
   
   // Получить детали проекта (полный)
-  getProject: (id: number): Promise<Project> => 
+  getProject: (id: number): Promise<ProjectType> => 
     client.get(`/projects/${id}/`),
   
   // Создать проект

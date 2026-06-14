@@ -5,7 +5,7 @@ import Image from "next/image";
 import styles from './Header.module.scss';
 import ActiveLink from "../ActiveNavLink/ActiveNavLink";
 import { useEffect, useState } from "react";
-import { useUser } from "@/lib/store/store";
+import { useUser } from "../../lib/store/store";
 // import { authStorage } from "@/utils/auth";
 
 interface HeaderUser {

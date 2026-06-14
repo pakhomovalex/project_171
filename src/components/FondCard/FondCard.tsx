@@ -1,4 +1,4 @@
-import { FondCardType } from '@/utils/types/FondCard';
+import { FondCardType } from '../../utils/types/FondCard';
 import styles from './FondCard.module.scss';
 
 

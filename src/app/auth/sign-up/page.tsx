@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import styles from './SingUp.module.scss';
-import { signUpAnimationIn, signUpAnimationOut } from "@/utils/authAnimation";
+import { signUpAnimationIn, signUpAnimationOut } from "../../../utils/authAnimation";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { authService } from "@/lib/services/authService";
-import { accessTokenService } from "@/lib/services/accessTokenService";
+import { authService } from "../../../lib/services/authService";
+// import { accessTokenService } from "../../../lib/services/accessTokenService";
 
 export default function SignUp() {
   const imageRef = useRef<HTMLDivElement>(null);

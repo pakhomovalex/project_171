@@ -1,5 +1,5 @@
 import { httpClient as client } from "../api/http";
-import { UserWithProjects } from "@/utils/types/user/index";
+import { UserWithProjects } from "../../utils/types/user/index";
 
 
 export const authorsService = {

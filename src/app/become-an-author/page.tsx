@@ -1,10 +1,10 @@
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
+import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Header/Header";
 import Link from "next/link";
 import Image from "next/image";
 
 import styles from './BecomeAnAuthor.module.scss';
-import { FAQArticle } from "@/components/FAQArticle/FAQArticle";
+import { FAQArticle } from "../../components/FAQArticle/FAQArticle";
 
 const FAQ = [
   {

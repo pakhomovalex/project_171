@@ -1,7 +1,7 @@
 import styles from './ProjectCard.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ProjectBrief } from '@/utils/types/user';
+import { ProjectBrief } from '../../utils/types/user';
 
 export default function ProjectCard({
   project

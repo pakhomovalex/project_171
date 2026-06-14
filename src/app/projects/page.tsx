@@ -1,10 +1,10 @@
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
+import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Header/Header";
 import styles from './projects.module.scss';
 import Image from "next/image";
-import ProjectsCategoryPagination from "@/components/ProjectsPagination/ProjectsCategoryPagination";
+import ProjectsCategoryPagination from "../../components/ProjectsPagination/ProjectsCategoryPagination";
 import { Suspense } from "react";
-import { projectsService } from "@/lib/services/projectsService";
+import { projectsService } from "../../lib/services/projectsService";
 
 export default async function Projects() {
     const projects = await projectsService.getProjects();

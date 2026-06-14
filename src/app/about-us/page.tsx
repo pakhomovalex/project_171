@@ -1,5 +1,5 @@
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
+import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Header/Header";
 import styles from './AboutUs.module.scss';
 import Image from "next/image";
 import Link from "next/link";

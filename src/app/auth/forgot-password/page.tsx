@@ -1,6 +1,6 @@
 'use client';
 
-import { forgotPasswordAnimationIn, forgotPasswordAnimationOut } from "@/utils/authAnimation";
+import { forgotPasswordAnimationIn, forgotPasswordAnimationOut } from "../../../utils/authAnimation";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";

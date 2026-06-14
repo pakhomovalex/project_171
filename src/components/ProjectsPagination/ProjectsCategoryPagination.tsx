@@ -6,7 +6,7 @@ import ProjectCard from "../ProjectCard/ProjectCard";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from 'next/navigation'
-import { ProjectBrief } from "@/utils/types/user/index";
+import { ProjectBrief } from "../../utils/types/user/index";
 
 type CategoryKey = 'all' | 'painters' | 'jewerly' | 'decoration' | 'clothes' | 'games' | 'digital';
 
