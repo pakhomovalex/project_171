@@ -1,14 +1,28 @@
+'use client'
+
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import styles from './projects.module.scss';
 import Image from "next/image";
 import ProjectsCategoryPagination from "../../components/ProjectsPagination/ProjectsCategoryPagination";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { projectsService } from "../../lib/services/projectsService";
+import { ProjectBrief } from "../../utils/types/user";
 
-export default async function Projects() {
-    const projects = await projectsService.getProjects();
+export default function Projects() {
+  const [projects, setProjects] = useState<ProjectBrief[]>([]);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    setLoading(true);
+    projectsService.getProjects()
+      .then((res) => {
+        setProjects(res);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+  
   return (
     <>
       <Header />
@@ -20,9 +34,9 @@ export default async function Projects() {
           <p className={styles.projectsSection__description}>
             Обирай серед авторських проєктів митців, які хочуть допомогти ЗСУ
           </p>
-          <Suspense>
+          {loading ? <div>Завантаження...</div> : <Suspense>
             <ProjectsCategoryPagination projects={projects} />
-          </Suspense>
+          </Suspense>}
         </section>
         <section className={styles.supportSection}>
           <Image

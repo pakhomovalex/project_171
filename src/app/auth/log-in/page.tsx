@@ -10,7 +10,6 @@ import { authService } from "../../../lib/services/authService";
 import 'dotenv/config';
 import { accessTokenService } from "../../../lib/services/accessTokenService";
 import { useUser } from "../../../lib/store/store";
-import { profileApi } from "../../../lib/api/http";
 
 export default function LogIn() {
   const imageRef = useRef<HTMLDivElement>(null);
@@ -28,13 +27,8 @@ export default function LogIn() {
       const res = await authService.login(userEmail, password)
       const { id, username, avatar, email } = res.user; 
       
-      accessTokenService.save(res.access)
+       accessTokenService.saveTokens(res.access, res.refresh);
       useUser.getState().updateUser({ id, username, avatar, email })
-
-      const newUser = await profileApi.updateProfile({username: 'pepsi'});
-
-      console.log('newUser', newUser);
-      
 
       router.push(`/authors/${res.user.id}`)
       // redirect('https://charity-platform-backend-va70.onrender.com/admin/')

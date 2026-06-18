@@ -6,13 +6,18 @@ import { UserWithProjects } from "../../utils/types/user";
 export const AuthorCard = ({ author, full }: { author: UserWithProjects, full: boolean }) => {
 
   const {
-    full_name,
+    username,
+    first_name,
+    last_name,
     avatar,
     city,
     telegram_url,
     instagram_url,
     facebook_url,
     project_count,
+    specialization,
+    bio,
+    date_joined
   } = author;
 
   return (
@@ -35,16 +40,15 @@ export const AuthorCard = ({ author, full }: { author: UserWithProjects, full: b
       </div>
       <div className={styles.card__info}>
         <h3 className={styles.card__title}>
-          {/* {username ?
+          {username ?
             username : `${first_name} ${last_name}`
-          } */}
-          {full_name}
+          }
         </h3>
         <p className={styles.card__spezialization}>
-          {/* {specialization[0].name} */}
+          {specialization.name || ''}
         </p>
         <p className={styles.card__slogan}>
-          {/* {full_name ? bio : bio.split('.')[0]} */}
+          {bio}
         </p>
         <div className={styles.card__localInfoBox}>
           <div className={styles.card__localInfoSubBox}>
@@ -66,7 +70,7 @@ export const AuthorCard = ({ author, full }: { author: UserWithProjects, full: b
               height={18}
             />
             <p className={styles.card__localInfoText}>
-              {/* На платформі з {date_joined.getMonth} */}
+              На платформі з {date_joined.slice(0, 10).split('-').join('.')}
             </p>
           </div>
           <div className={styles.card__localInfoSubBox}>

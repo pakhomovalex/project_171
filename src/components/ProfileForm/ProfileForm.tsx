@@ -76,7 +76,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
         await userService.updateProfile(data);
       }
 
-      router.push('/profile');
+      router.push(`/authors/${user.id}`);
       router.refresh();
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {

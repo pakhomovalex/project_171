@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import ProfileForm from '@/components/profile/ProfileForm';
+import ProfileForm from '../../../../components/ProfileForm/ProfileForm';
 import { userService } from '../../../../lib/services/userService';
 import { accessTokenService } from '../../../../lib/services/accessTokenService';
 import { User } from '../../../../utils/types/user/index';

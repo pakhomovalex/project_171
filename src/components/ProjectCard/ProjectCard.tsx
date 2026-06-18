@@ -35,13 +35,18 @@ export default function ProjectCard({
             height={12}
           />
         </div>
-        <Image
-          src={cover_image}
-          alt={'image'}
-          fill
-          className={styles.card__image}
-          loading='lazy'
-        />
+        {/* {cover_image ? ( */}
+          <Image
+            src={cover_image}
+            alt={'image'}
+            fill
+            className={styles.card__image}
+          />
+        {/* ) : (
+          <div className={styles.card__imagePlaceholder}>
+            <span>Немає фото</span>
+          </div>
+        )} */}
       </div>
       <h4 className={styles.card__title}>
         «{title}»

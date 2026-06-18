@@ -45,6 +45,8 @@ export default async function AuthorDetails({ params }: { params: Promise<{ auth
         </div>
         <div className={styles.main__author}>
           <AuthorCard author={author} full={false} />
+          <Link href={`/authors/${authorId}/edit`}>Рtдагувати профіль</Link>
+          <Link href={`/authors/${authorId}/create-project`}>Створити проект</Link>
         </div>
         <section className={styles.projects}>
           <h2 className={styles.projects__title}>

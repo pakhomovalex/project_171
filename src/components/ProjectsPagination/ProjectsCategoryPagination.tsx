@@ -21,7 +21,7 @@ export default function ProjectCategoryPagination({ projects }: { projects: Proj
         id: project.id,
         title: project.title,
         subtitle: project.subtitle,
-        cover_image: '',
+        cover_image: project.cover_image,
         category: project.category,
         description: project.description,
         donation_type: project.donation_type,

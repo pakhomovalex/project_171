@@ -23,33 +23,11 @@ export const httpClient = axios.create({
 });
 
 // Добавляем access token к каждому запросу
-httpClient.interceptors.request.use(
-  (request: InternalAxiosRequestConfig) => {
-    const accessToken = accessTokenService.get(); // или localStorage.getItem('accessToken')
-
-    if (accessToken && request.headers) {
-      request.headers.Authorization = `Bearer ${accessToken}`;
-    }
-
-    // Если отправляем FormData (файл), не трогаем Content-Type
-    // axios сам установит multipart/form-data с boundary
-    if (request.data instanceof FormData) {
-      delete request.headers['Content-Type'];
-    }
-
-    return request;
-  },
-  (error) => Promise.reject(error)
-);
-
-// Обработка 401 + автоматический refresh
 httpClient.interceptors.response.use(
   (res) => res.data,
-
   async (error: AxiosError) => {
     const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
 
-    // Если ошибка не 401 или уже пытались обновить токен — пробрасываем дальше
     if (error.response?.status !== 401 || originalRequest._retry) {
       throw error;
     }
@@ -57,35 +35,35 @@ httpClient.interceptors.response.use(
     originalRequest._retry = true;
 
     try {
-      const refreshToken = typeof window !== 'undefined' 
-      ? localStorage.getItem('refreshToken') : null;
-
+      const refreshToken = accessTokenService.getRefresh();
+      
       if (!refreshToken) {
-        throw new Error('No refresh token available');
+        throw new Error('No refresh token');
       }
 
-      // Передаём refresh token как параметр
-      const { refresh } = await authService.refresh(refreshToken);
+      // Запрашиваем новую пару токенов
+      const response = await authService.refresh(refreshToken);
+      
+      // ВАЖНО: dj-rest-auth с ROTATE_REFRESH_TOKENS возвращает ОБА токена
+      const { access, refresh } = response;
 
-      // Сохраняем новый токен
-      accessTokenService.save(refresh);
+      // Сохраняем ОБА токена
+      accessTokenService.saveTokens(access, refresh);
 
-      // Обновляем заголовок в оригинальном запросе и повторяем
+      // Повторяем запрос
       if (originalRequest.headers) {
-        originalRequest.headers.Authorization = `Bearer ${refresh}`;
+        originalRequest.headers.Authorization = `Bearer ${access}`;
       }
 
       return httpClient.request(originalRequest);
+
     } catch (refreshError) {
-      // Refresh не сработал — разлогиниваем
       accessTokenService.remove();
-      // Можно добавить редирект на логин или событие
       window.location.href = '/login';
       throw refreshError;
     }
   }
 );
-
 // ==================== API МЕТОДЫ ====================
 
 export const profileApi = {

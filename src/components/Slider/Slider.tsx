@@ -8,7 +8,7 @@ import 'swiper/css';
 import Image from 'next/image';
 import { Swiper as SwiperClass } from 'swiper/types';
 
-import '@/styles/SwiperStyles.scss';
+import '../../styles/SwiperStyles.scss';
 import styles from './Slider.module.scss';
 
 type ImageType = {
@@ -19,6 +19,8 @@ type ImageType = {
 
 export const Slider = ({ images }: { images: ImageType[] }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
+  console.log(images);
+  
 
   return (
     <div className={styles.galleryWrapper}>
