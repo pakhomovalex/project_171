@@ -73,6 +73,11 @@
       }
     }
 
+    &__profile {
+      align-self: center;
+      justify-self: center;
+    }
+
     &__link {
       box-sizing: border-box;
       display: flex;

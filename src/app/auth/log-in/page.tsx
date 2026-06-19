@@ -120,7 +120,7 @@ export default function LogIn() {
             Увійти
           </button>
         </form>
-        <div className={styles.auth__or}>
+        {/* <div className={styles.auth__or}>
           <div className={styles.auth__line} />
           <p className={styles.auth__orText}>
             Або
@@ -130,7 +130,7 @@ export default function LogIn() {
         <button className={styles.auth__google}>
           <Image src={"/google-icon.svg"} alt={"google icon"} width={20} height={20} />
           Увійти через Google
-        </button>
+        </button> */}
         <div className={styles.auth__signUp}>
           <p className={styles.auth__signUpText}>Ще не маєш аккаунту?</p>
           <button

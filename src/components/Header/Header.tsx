@@ -6,13 +6,14 @@ import styles from './Header.module.scss';
 import ActiveLink from "../ActiveNavLink/ActiveNavLink";
 import { useEffect, useState } from "react";
 import { useUser } from "../../lib/store/store";
+import { ProfileDropdown } from "../ProfileDropdown/ProfileDropdown";
 // import { authStorage } from "@/utils/auth";
 
 interface HeaderUser {
-    id: number
-    username: string
-    avatar: string | null // URL аватарки
-    email?: string
+  id: number
+  username: string
+  avatar: string | null // URL аватарки
+  email?: string
 }
 
 export default function Header() {
@@ -60,9 +61,10 @@ export default function Header() {
         </nav>}
         {!isTablet && (<div className={styles.header__login}>
           {!!user ? (
-            <Link href={`/authors/${user.id}`}>
-              <Image src={user.avatar || './arrow-left.svg'} alt={"avatar"} width={40} height={40} />
-            </Link>
+            <>
+              <div></div>
+              <ProfileDropdown />
+            </>
           ) : (
             <>
               <Link href={"/auth/log-in"} className={styles.header__login__link}>
