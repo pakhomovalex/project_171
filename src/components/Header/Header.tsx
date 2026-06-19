@@ -23,8 +23,6 @@ export default function Header() {
 
   useEffect(() => {
     setUser(useUser.getState().user);
-    console.log(user);
-
 
     const handleResize = () => {
       setIsTablet(window.innerWidth < 1040);

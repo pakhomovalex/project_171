@@ -270,7 +270,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
         </button>
         <button
           type="button"
-          onClick={() => router.push('/profile')}
+          onClick={() => router.push(`/authors/${user.id}`)}
           className={styles.cancelBtn}
         >
           Скасувати

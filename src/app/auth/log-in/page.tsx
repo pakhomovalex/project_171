@@ -26,9 +26,8 @@ export default function LogIn() {
     try {
       const res = await authService.login(userEmail, password)
       const { id, username, avatar, email, is_superuser } = res.user; 
-      
+
        accessTokenService.saveTokens(res.access, res.refresh);
-       console.log(is_superuser);
        
       useUser.getState().updateUser({ id, username, avatar, email, is_superuser })
 

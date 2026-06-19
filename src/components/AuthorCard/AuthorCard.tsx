@@ -23,8 +23,6 @@ export const AuthorCard = ({
 
   // Может редактировать: владелец или админ
   const canEdit = isOwner || isAdmin;
-
-  console.log('canEdit:', canEdit, 'isAdmin:', isAdmin, 'isOwner', isOwner);
   
 
   const {
@@ -155,10 +153,13 @@ export const AuthorCard = ({
         </Link>
         }
         {canEdit && (
+          <>
           <Link href={`/authors/${currentUser.id}/edit`} className={styles.editButton}>
             Редагувати профіль
           </Link>
-        )}
+          <Link href={`/authors/${currentUser.id}/create-project`}>Створити проект</Link>
+        </>
+      )}
 
         {isAdmin && (
           <a

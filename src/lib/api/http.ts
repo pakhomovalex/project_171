@@ -23,43 +23,71 @@ export const httpClient = axios.create({
 });
 
 // Добавляем access token к каждому запросу
+httpClient.interceptors.request.use(
+  (config) => {
+    const access = accessTokenService.getAccess();
+    if (access && config.headers) {
+      config.headers.Authorization = `Bearer ${access}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+// Глобальная переменная для дедупликации refresh-запросов
+let refreshPromise: Promise<string> | null = null;
+
 httpClient.interceptors.response.use(
   (res) => res.data,
   async (error: AxiosError) => {
     const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean };
 
+    // Не 401 или уже retry — прокидываем дальше
     if (error.response?.status !== 401 || originalRequest._retry) {
+      throw error;
+    }
+
+    // Не обрабатываем 401 на самом запросе refresh (если вдруг попадёт сюда)
+    if (originalRequest.url?.includes('/token/refresh/')) {
+      accessTokenService.remove();
+      window.location.href = '/auth/log-in';
       throw error;
     }
 
     originalRequest._retry = true;
 
+    // Дедупликация: если refresh уже в процессе — ждём его, не запускаем новый
+    if (!refreshPromise) {
+      refreshPromise = (async () => {
+        const refreshToken = accessTokenService.getRefresh();
+        
+        if (!refreshToken) {
+          throw new Error('No refresh token');
+        }
+
+        const response = await authService.refresh(refreshToken);
+        const { access, refresh } = response;
+
+        accessTokenService.saveTokens(access, refresh);
+        return access;
+      })().finally(() => {
+        refreshPromise = null;
+      });
+    }
+
     try {
-      const refreshToken = accessTokenService.getRefresh();
+      const access = await refreshPromise;
       
-      if (!refreshToken) {
-        throw new Error('No refresh token');
-      }
-
-      // Запрашиваем новую пару токенов
-      const response = await authService.refresh(refreshToken);
-      
-      // ВАЖНО: dj-rest-auth с ROTATE_REFRESH_TOKENS возвращает ОБА токена
-      const { access, refresh } = response;
-
-      // Сохраняем ОБА токена
-      accessTokenService.saveTokens(access, refresh);
-
-      // Повторяем запрос
+      // Повторяем оригинальный запрос с новым токеном
       if (originalRequest.headers) {
         originalRequest.headers.Authorization = `Bearer ${access}`;
       }
-
+      
       return httpClient.request(originalRequest);
-
     } catch (refreshError) {
+      // Refresh упал (токен протух, сервер отказал) — чистим и редиректим
       accessTokenService.remove();
-      window.location.href = '/login';
+      window.location.href = '/auth/log-in';
       throw refreshError;
     }
   }

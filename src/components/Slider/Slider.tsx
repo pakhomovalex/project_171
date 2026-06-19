@@ -19,8 +19,6 @@ type ImageType = {
 
 export const Slider = ({ images }: { images: ImageType[] }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
-  console.log(images);
-  
 
   return (
     <div className={styles.galleryWrapper}>

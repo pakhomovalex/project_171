@@ -18,7 +18,7 @@ export default function EditProfilePage() {
       const token = accessTokenService.getAccess();
       
       if (!token) {
-        router.push('/login');
+        router.push('/auth/log-in');
         return;
       }
 
