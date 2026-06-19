@@ -16,6 +16,7 @@ export default async function AuthorDetails({ params }: { params: Promise<{ auth
 
   const { projects, username, full_name } = author as UserWithProjects;
 
+
   return (
     <>
       <Header />

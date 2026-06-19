@@ -62,7 +62,9 @@ export default function Header() {
         </nav>}
         {!isTablet && (<div className={styles.header__login}>
           {!!user ? (
-            <Image src={user?.avatar || './arrow-left.svg'} alt={"avatar"} width={40} height={40} />
+            <Link href={`/authors/${user.id}`}>
+              <Image src={user.avatar || './arrow-left.svg'} alt={"avatar"} width={40} height={40} />
+            </Link>
           ) : (
             <>
               <Link href={"/auth/log-in"} className={styles.header__login__link}>

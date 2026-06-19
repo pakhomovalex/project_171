@@ -1,12 +1,35 @@
+'use client'
+
 import Image from "next/image";
 import styles from './AuthorCard.module.scss';
 import Link from "next/link";
 import { UserWithProjects } from "../../utils/types/user";
+import { useUser } from "../../lib/store/store";
+import { useParams } from "next/navigation";
 
-export const AuthorCard = ({ author, full }: { author: UserWithProjects, full: boolean }) => {
+export const AuthorCard = ({
+  author,
+  full,
+}: {
+  author: UserWithProjects,
+  full: boolean,
+}) => {
+  const currentUser = useUser((state) => state.user);
+  const params = useParams();
+
+  // Проверяем, является ли текущий пользователь владельцем профиля
+  const isOwner = currentUser?.id === +params.authorId;
+  const isAdmin = currentUser?.is_superuser;
+
+  // Может редактировать: владелец или админ
+  const canEdit = isOwner || isAdmin;
+
+  console.log('canEdit:', canEdit, 'isAdmin:', isAdmin, 'isOwner', isOwner);
+  
 
   const {
     username,
+    full_name,
     first_name,
     last_name,
     avatar,
@@ -25,24 +48,25 @@ export const AuthorCard = ({ author, full }: { author: UserWithProjects, full: b
       <div className={styles.card__avatarBox}>
         {avatar ? (
           <Image
-          src={avatar}
-          alt={"avatar"}
-          fill
-        />
-        ): (
+            src={avatar}
+            alt={"avatar"}
+            fill
+          />
+        ) : (
           <Image
-          src={'/default-user-icon.jpg'}
-          alt={"avatar"}
-          fill
-        />
+            src={'/default-user-icon.jpg'}
+            alt={"avatar"}
+            fill
+          />
         )}
-        
+
       </div>
       <div className={styles.card__info}>
         <h3 className={styles.card__title}>
           {username ?
-            username : `${first_name} ${last_name}`
+            username : full_name || `${first_name} ${last_name}`
           }
+          {/* {full_name} */}
         </h3>
         <p className={styles.card__spezialization}>
           {specialization.name || ''}
@@ -130,6 +154,21 @@ export const AuthorCard = ({ author, full }: { author: UserWithProjects, full: b
           Детальніше про автора
         </Link>
         }
+        {canEdit && (
+          <Link href={`/authors/${currentUser.id}/edit`} className={styles.editButton}>
+            Редагувати профіль
+          </Link>
+        )}
+
+        {isAdmin && (
+          <a
+            href="https://charity-platform-backend-va70.onrender.com/admin/"
+            target="_blank"
+            className={styles.adminButton}
+          >
+            Адмін-панель
+          </a>
+        )}
       </div>
     </article>
   );

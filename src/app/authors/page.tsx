@@ -1,6 +1,5 @@
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
-
 import styles from './Authors.module.scss';
 import { AuthorCard } from "../../components/AuthorCard/AuthorCard";
 import { AuthorsPagination } from "../../components/AuthorsPagination/AuthorsPagination";

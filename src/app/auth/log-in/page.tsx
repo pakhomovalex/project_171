@@ -25,14 +25,15 @@ export default function LogIn() {
 
     try {
       const res = await authService.login(userEmail, password)
-      const { id, username, avatar, email } = res.user; 
+      const { id, username, avatar, email, is_superuser } = res.user; 
       
        accessTokenService.saveTokens(res.access, res.refresh);
-      useUser.getState().updateUser({ id, username, avatar, email })
+       console.log(is_superuser);
+       
+      useUser.getState().updateUser({ id, username, avatar, email, is_superuser })
 
       router.push(`/authors/${res.user.id}`)
       // redirect('https://charity-platform-backend-va70.onrender.com/admin/')
-      // redirect('https://charity-platform-backend-ldsu.onrender.com/admin/')
     } catch (error) {
       useUser.getState().updateUser(null)
       throw error

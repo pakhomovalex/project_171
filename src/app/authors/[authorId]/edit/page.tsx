@@ -15,7 +15,7 @@ export default function EditProfilePage() {
 
   useEffect(() => {
     const loadProfile = async () => {
-      const token = accessTokenService.get();
+      const token = accessTokenService.getAccess();
       
       if (!token) {
         router.push('/login');

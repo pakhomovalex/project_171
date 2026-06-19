@@ -6,7 +6,8 @@ interface UserState {
     id: number
     username: string
     avatar: string | null // URL аватарки
-    email?: string
+    email?: string,
+    is_superuser: boolean
   } | null
   updateUser: (user: UserState['user']) => void
   logout: () => void
