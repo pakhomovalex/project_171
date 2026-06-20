@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+// import { persist } from 'zustand/middleware'
 
 interface UserState {
   user: {
@@ -14,7 +14,7 @@ interface UserState {
 }
 
 export const useUser = create<UserState>()(
-  persist(
+  // persist(
     (set) => ({
       user: null,
       updateUser: (user) => set({ user }),
@@ -23,10 +23,10 @@ export const useUser = create<UserState>()(
         // localStorage очистится автоматически благодаря persist
       },
     }),
-    {
-      name: 'user-storage',
-      // Сохраняем только публичные поля
-      partialize: (state) => ({ user: state.user }),
-    }
-  )
+    // {
+    //   name: 'user-storage',
+    //   // Сохраняем только публичные поля
+    //   partialize: (state) => ({ user: state.user }),
+    // }
+  // )
 )
