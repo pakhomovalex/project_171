@@ -27,7 +27,10 @@ export default function ProjectPage() {
       }
 
       try {
-        const data = await projectsService.getProject(+params.projectId);
+        const id = params.projectId ? +params.projectId : 0;
+        if (!id) throw new Error('Invalid project ID');
+
+        const data = await projectsService.getProject(id);
         setProject(data);
       } catch (err) {
         console.error(err);
