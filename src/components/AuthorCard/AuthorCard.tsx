@@ -18,7 +18,7 @@ export const AuthorCard = ({
   const params = useParams();
 
   // Проверяем, является ли текущий пользователь владельцем профиля
-  const isOwner = currentUser?.id === +params.authorId;
+  const isOwner = params.authorId !== undefined && currentUser?.id === +params.authorId;
   const isAdmin = currentUser?.is_superuser;
 
   // Может редактировать: владелец или админ
