@@ -4,23 +4,17 @@ import { Suspense, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import styles from './page.module.scss';
 
-export const dynamic = 'force-dynamic';
-
-export default function ResetPasswordPage() {
+function ResetPasswordForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
 
-  const searchParams = useSearchParams();
-
   const uid = searchParams.get('uid') || '';
   const token = searchParams.get('token') || '';
-
-  console.log('UID:', uid);
-  console.log('Token:', token);
-  console.log('Token length:', token.length);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,9 +60,8 @@ export default function ResetPasswordPage() {
     }
   };
 
-  return (
-    <Suspense>
-      <div className={styles.container}>
+return (
+    <div className={styles.container}>
         <h1>Новий пароль</h1>
 
         {status === 'success' ? (
@@ -107,6 +100,13 @@ export default function ResetPasswordPage() {
           </form>
         )}
       </div>
+  );
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={<div className={styles.loading}>Завантаження...</div>}>
+      <ResetPasswordForm />
     </Suspense>
   );
 }
