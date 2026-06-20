@@ -21,11 +21,11 @@ export default function ProjectPage() {
 
   useEffect(() => {
     const loadProject = async () => {
-      const token = accessTokenService.getAccess();
-      if (!token) {
-        // Редирект на логин
-        return;
-      }
+      // const token = accessTokenService.getAccess();
+      // if (!token) {
+      //   // Редирект на логин
+      //   return;
+      // }
 
       try {
         const id = params.projectId ? +params.projectId : 0;
