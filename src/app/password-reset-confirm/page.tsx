@@ -1,8 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import styles from './ResetPassword.module.scss';
+import styles from './page.module.scss';
+
+export const dynamic = 'force-dynamic';
 
 export default function ResetPasswordPage() {
   const router = useRouter();
@@ -11,11 +13,11 @@ export default function ResetPasswordPage() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
 
-   const searchParams = useSearchParams();
-  
+  const searchParams = useSearchParams();
+
   const uid = searchParams.get('uid') || '';
   const token = searchParams.get('token') || '';
-  
+
   console.log('UID:', uid);
   console.log('Token:', token);
   console.log('Token length:', token.length);
@@ -65,44 +67,46 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <div className={styles.container}>
-      <h1>Новий пароль</h1>
+    <Suspense>
+      <div className={styles.container}>
+        <h1>Новий пароль</h1>
 
-      {status === 'success' ? (
-        <div className={styles.success}>
-          <p>{message}</p>
-          <p>Перенаправляємо на вхід...</p>
-        </div>
-      ) : (
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <label>
-            Новий пароль
-            <input
-              type="password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              required
-              minLength={8}
-            />
-          </label>
+        {status === 'success' ? (
+          <div className={styles.success}>
+            <p>{message}</p>
+            <p>Перенаправляємо на вхід...</p>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <label>
+              Новий пароль
+              <input
+                type="password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                required
+                minLength={8}
+              />
+            </label>
 
-          <label>
-            Підтвердіть пароль
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-          </label>
+            <label>
+              Підтвердіть пароль
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            </label>
 
-          <button type="submit" disabled={status === 'loading'}>
-            {status === 'loading' ? 'Зберігаємо...' : 'Змінити пароль'}
-          </button>
+            <button type="submit" disabled={status === 'loading'}>
+              {status === 'loading' ? 'Зберігаємо...' : 'Змінити пароль'}
+            </button>
 
-          {status === 'error' && <p className={styles.error}>{message}</p>}
-        </form>
-      )}
-    </div>
+            {status === 'error' && <p className={styles.error}>{message}</p>}
+          </form>
+        )}
+      </div>
+    </Suspense>
   );
 }
