@@ -30,7 +30,7 @@ export const Slider = ({ images }: { images: ImageType[] }) => {
       >
         {images.map(image => (
           <SwiperSlide key={image.id}>
-            <Image src={image.image} alt={`Image ${image.id}`} width={1280} height={600} />
+            <Image src={image.image} alt={`Image ${image.id}`} fill objectPosition='center' />
           </SwiperSlide>
         ))}
       </Swiper>

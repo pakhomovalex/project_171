@@ -9,8 +9,12 @@ export type ProjectType = {
   author: {
     id: number,
     username: string,
+    bio: string,
     avatar: string,
-    full_name: string
+    full_name: string,
+    telegram_url: string,
+    instagram_url: string,
+    facebook_url: string
   },
   category: {
     id: number,

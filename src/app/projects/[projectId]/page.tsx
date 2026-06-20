@@ -11,10 +11,11 @@ import { useEffect, useState } from "react";
 import { accessTokenService } from "../../../lib/services/accessTokenService";
 import { useParams } from "next/navigation";
 import DonationModal from "../../../components/DonationModal/DonationModal";
+import { ProjectType } from "@/utils/types/ProjectType";
 
 export default function ProjectPage() {
   const params = useParams();
-  const [project, setProject] = useState(null);
+  const [project, setProject] = useState<ProjectType | null>(null);
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -60,6 +61,7 @@ export default function ProjectPage() {
     username,
     full_name,
     id,
+    avatar,
     bio,
     telegram_url,
     instagram_url,
@@ -196,6 +198,13 @@ export default function ProjectPage() {
                 Про автора
               </h2>
               <div className={styles.authorArticle__box}>
+                <Image
+                  src={avatar}
+                  alt={"avatar"}
+                  width={140}
+                  height={140}
+                  className={styles.authorArticle__avatar}
+                />
                 <div className={styles.authorArticle__info}>
                   <h4 className={styles.authorArticle__name}>
                     {username ?
