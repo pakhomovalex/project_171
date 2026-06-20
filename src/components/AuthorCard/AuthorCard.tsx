@@ -23,7 +23,7 @@ export const AuthorCard = ({
 
   // Может редактировать: владелец или админ
   const canEdit = isOwner;
-  
+
 
   const {
     username,
@@ -45,18 +45,18 @@ export const AuthorCard = ({
     <article className={styles.card}>
       <div className={styles.card__avatarBox}>
         {avatar ? (
-           <Image
+          <Image
             src={avatar}
             alt={"avatar"}
             fill
-          /> 
-        ) : ( 
+          />
+        ) : (
           <Image
             src={'/default-user-icon.jpg'}
             alt={"avatar"}
             fill
           />
-         )} 
+        )}
 
       </div>
       <div className={styles.card__info}>
@@ -152,25 +152,31 @@ export const AuthorCard = ({
           Детальніше про автора
         </Link>
         }
-        {canEdit && (
-          <>
-          <Link href={`/authors/${currentUser.id}/edit`} className={styles.editButton}>
-            Редагувати профіль
-          </Link>
-          <Link href={`/authors/${currentUser.id}/create-project`}>Створити проект</Link>
-        </>
-      )}
-
-        {isAdmin && isOwner && (
-          <a
-            href="https://charity-platform-backend-va70.onrender.com/admin/"
-            target="_blank"
-            className={styles.adminButton}
-          >
-            Адмін-панель
-          </a>
-        )}
-      </div>
+        <div className={styles.card__buttonBox}>
+          {canEdit && (
+            <>
+              <Link href={`/authors/${currentUser.id}/edit`} className={styles.card__editButton}>
+                Редагувати профіль
+              </Link>
+              <Link
+                href={`/authors/${currentUser.id}/create-project`}
+                className={styles.card__editButton}
+              >
+                Створити проект
+              </Link>
+            </>
+          )}
+          {isAdmin && isOwner && (
+            <a
+              href="https://charity-platform-backend-va70.onrender.com/admin/"
+              target="_blank"
+              className={styles.card__adminButton}
+            >
+              Адмін-панель
+            </a>
+          )}
+                </div>
+        </div>
     </article>
   );
 };

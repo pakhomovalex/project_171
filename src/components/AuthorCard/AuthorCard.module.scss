@@ -125,4 +125,26 @@
     background-color: transparent;
     text-decoration: none;
   }
+
+  &__buttonBox {
+    display: flex;
+    gap: 30px;
+  }
+
+  &__editButton {
+    @include yellow-button(302px, 48px);
+
+    margin-top: 24px;
+    background-color: transparent;
+    text-decoration: none;
+    color: #000;
+  }
+
+  &__adminButton {
+    @include blue-button(302px, 48px);
+
+    margin-top: 24px;
+    text-decoration: none;
+    border: 2px solid var(--button-blue-color);
+  }
 }

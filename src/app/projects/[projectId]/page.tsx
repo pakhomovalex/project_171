@@ -10,11 +10,13 @@ import { projectsService } from "../../../lib/services/projectsService";
 import { useEffect, useState } from "react";
 import { accessTokenService } from "../../../lib/services/accessTokenService";
 import { useParams } from "next/navigation";
+import { useUser } from "../../../lib/store/store";
 
 export default function ProjectPage() {
   const params = useParams();
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
+  const authorStore = useUser((store) => store.user);
 
   useEffect(() => {
     const loadProject = async () => {
@@ -185,7 +187,7 @@ export default function ProjectPage() {
               </h2>
               <div className={styles.authorArticle__box}>
                 <Image
-                  src={avatar}
+                  src={authorStore.avatar || avatar}
                   alt={"avatar"}
                   width={160}
                   height={160}

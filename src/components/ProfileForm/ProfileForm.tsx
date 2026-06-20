@@ -11,13 +11,14 @@ interface ProfileFormProps {
   user: User;
 }
 
+
 export default function ProfileForm({ user }: ProfileFormProps) {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [previewAvatar, setPreviewAvatar] = useState<string | null>(user.avatar);
-  
+
   const [formData, setFormData] = useState({
     first_name: user.first_name || '',
     last_name: user.last_name || '',
@@ -27,7 +28,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
     telegram_url: user.telegram_url || '',
     instagram_url: user.instagram_url || '',
     facebook_url: user.facebook_url || '',
-    specialization: user.specialization?.id?.toString() || '',
+    // specialization: user.specialization[0]?.id.toString() || '',
   });
 
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
@@ -70,15 +71,18 @@ export default function ProfileForm({ user }: ProfileFormProps) {
           }
         });
         // specialization отправляем как число
-        if (data.specialization) {
-          data.specialization = Number(data.specialization);
-        }
+
+        // console.log(data.specialization);
+        
+        // if (data.specialization) {
+        //   data.specialization = [categories[4]];
+        // }
         await userService.updateProfile(data);
       }
 
       router.push(`/authors/${user.id}`);
       router.refresh();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.response?.data?.detail || 'Помилка оновлення профілю');
     } finally {
@@ -87,28 +91,21 @@ export default function ProfileForm({ user }: ProfileFormProps) {
   };
 
   const getInitials = () => {
-    return `${formData.first_name?.[0] || ''}${formData.last_name?.[0] || ''}`.toUpperCase() 
+    return `${formData.first_name?.[0] || ''}${formData.last_name?.[0] || ''}`.toUpperCase()
       || user.username[0].toUpperCase();
   };
-
-  const specializations = [
-    { id: 1, name: 'Волонтер' },
-    { id: 2, name: 'Організатор' },
-    { id: 3, name: 'Донор' },
-    { id: 4, name: 'Ветеран' },
-  ];
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <h1 className={styles.title}>Редагування профілю</h1>
-      
+
       {error && (
         <div className={styles.error}>{error}</div>
       )}
 
       {/* Аватар */}
       <div className={styles.avatarSection}>
-        <div 
+        <div
           className={styles.avatarPreview}
           onClick={() => fileInputRef.current?.click()}
         >
@@ -168,6 +165,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
       </div>
 
       {/* Специализация */}
+      {/* <div className={styles.sectionTitle}>Спеціалізація</div>
       <div className={styles.formGroup}>
         <label className={styles.label}>Спеціалізація</label>
         <select
@@ -175,13 +173,14 @@ export default function ProfileForm({ user }: ProfileFormProps) {
           value={formData.specialization}
           onChange={handleChange}
           className={styles.select}
+          required
         >
           <option value="">Оберіть спеціалізацію</option>
-          {specializations.map(spec => (
-            <option key={spec.id} value={spec.id}>{spec.name}</option>
+          {categories.map(cat => (
+            <option key={cat.id} value={cat.id}>{cat.name}</option>
           ))}
         </select>
-      </div>
+      </div> */}
 
       {/* Город */}
       <div className={styles.formGroup}>
@@ -211,7 +210,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
 
       {/* Контакты */}
       <h2 className={styles.sectionTitle}>Контакти</h2>
-      
+
       <div className={styles.formGroup}>
         <label className={styles.label}>Телефон</label>
         <input

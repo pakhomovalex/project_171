@@ -4,7 +4,6 @@ import Image from "next/image";
 import styles from './LogIn.module.scss';
 import { logInAnimationIn, logInAnimationOut } from "../../../utils/authAnimation";
 import { useRouter } from "next/navigation";
-import { redirect } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { authService } from "../../../lib/services/authService";
 import 'dotenv/config';
@@ -32,7 +31,6 @@ export default function LogIn() {
       useUser.getState().updateUser({ id, username, avatar, email, is_superuser })
 
       router.push(`/authors/${res.user.id}`)
-      // redirect('https://charity-platform-backend-va70.onrender.com/admin/')
     } catch (error) {
       useUser.getState().updateUser(null)
       throw error
