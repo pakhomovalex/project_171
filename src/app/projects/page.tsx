@@ -22,7 +22,7 @@ export default function Projects() {
       })
       .catch(() => setLoading(false));
   }, []);
-  
+
   return (
     <>
       <Header />
@@ -34,9 +34,12 @@ export default function Projects() {
           <p className={styles.projectsSection__description}>
             Обирай серед авторських проєктів митців, які хочуть допомогти ЗСУ
           </p>
-          {loading ? <div>Завантаження...</div> : <Suspense>
-            <ProjectsCategoryPagination projects={projects} />
-          </Suspense>}
+          {loading ?
+            <div className={styles.projectsSection__description}>
+              Завантаження...
+            </div> : <Suspense>
+              <ProjectsCategoryPagination projects={projects} />
+            </Suspense>}
         </section>
         <section className={styles.supportSection}>
           <Image

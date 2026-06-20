@@ -10,13 +10,13 @@ import { projectsService } from "../../../lib/services/projectsService";
 import { useEffect, useState } from "react";
 import { accessTokenService } from "../../../lib/services/accessTokenService";
 import { useParams } from "next/navigation";
-import { useUser } from "../../../lib/store/store";
+import DonationModal from "../../../components/DonationModal/DonationModal";
 
 export default function ProjectPage() {
   const params = useParams();
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
-  const authorStore = useUser((store) => store.user);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const loadProject = async () => {
@@ -56,7 +56,6 @@ export default function ProjectPage() {
   const {
     username,
     full_name,
-    avatar,
     id,
     bio,
     telegram_url,
@@ -176,9 +175,17 @@ export default function ProjectPage() {
                   </h4>
                 </div>
               </div>
-              <button className={styles.infoSection__article__button}>
+              <button
+                className={styles.infoSection__article__button}
+                onClick={() => setIsModalOpen(true)}
+              >
                 Підтримати проект
               </button>
+              <DonationModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                project={project}
+              />
             </article>
 
             <article className={styles.authorArticle}>
@@ -186,13 +193,6 @@ export default function ProjectPage() {
                 Про автора
               </h2>
               <div className={styles.authorArticle__box}>
-                <Image
-                  src={authorStore.avatar || avatar}
-                  alt={"avatar"}
-                  width={160}
-                  height={160}
-                  className={styles.authorArticle__avatar}
-                />
                 <div className={styles.authorArticle__info}>
                   <h4 className={styles.authorArticle__name}>
                     {username ?
