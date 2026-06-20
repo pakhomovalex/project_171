@@ -41,6 +41,7 @@ export default function ProjectCard({
             alt={'image'}
             fill
             className={styles.card__image}
+            loading='eager'
           />
       </div>
       <h4 className={styles.card__title}>

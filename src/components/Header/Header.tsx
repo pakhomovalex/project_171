@@ -63,7 +63,7 @@ export default function Header() {
           {!!user ? (
             <>
               <div></div>
-              <ProfileDropdown />
+              <ProfileDropdown up={false} />
             </>
           ) : (
             <>
@@ -80,7 +80,7 @@ export default function Header() {
         </div>)}
         {isTablet
           && !isMobile
-          && <Link
+          &&  !!!user && <Link
             className={`
               ${styles.header__login__button}
               ${styles['header__login__button--tablet']}
@@ -134,18 +134,26 @@ export default function Header() {
           </ul>
         </nav>
         <div className={`${styles.header__login} ${styles['header__login--vertical']}`}>
-          <Link href={"/auth/log-in"} className={styles.header__login__link}>
-            <div>
-              <Image src={"/user-icon.svg"} fill alt={"user icon"} />
-            </div>
-            <p>Увійти</p>
-          </Link>
-          <Link
-            className={`${styles.header__login__button} ${styles['header__login__button--full-width']}`}
-            href={"/auth/sign-up"}
-          >
-            Зареєструватись
-          </Link>
+          {!!user ? (
+            <>
+              <div></div>
+              <ProfileDropdown up/>
+            </>
+          ) : (
+            <>
+              <Link href={"/auth/log-in"} className={styles.header__login__link}>
+                <div>
+                  <Image src={"/user-icon.svg"} fill alt={"user icon"} />
+                </div>
+                <p>Увійти</p>
+              </Link>
+              <Link
+                className={`${styles.header__login__button} ${styles['header__login__button--full-width']}`}
+                href={"/auth/sign-up"}
+              >
+                Зареєструватись
+              </Link>
+            </>)}
         </div>
       </aside>}
     </header>

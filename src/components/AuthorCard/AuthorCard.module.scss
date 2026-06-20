@@ -129,6 +129,11 @@
   &__buttonBox {
     display: flex;
     gap: 30px;
+
+    @include on-tablet() {
+      flex-direction: column;
+      gap: 0;
+    }
   }
 
   &__editButton {
@@ -138,6 +143,10 @@
     background-color: transparent;
     text-decoration: none;
     color: #000;
+
+    @include on-tablet() {
+      margin-top: 16px;
+    }
   }
 
   &__adminButton {
@@ -146,5 +155,9 @@
     margin-top: 24px;
     text-decoration: none;
     border: 2px solid var(--button-blue-color);
+
+    @include on-tablet() {
+      margin-top: 16px;
+    }
   }
 }

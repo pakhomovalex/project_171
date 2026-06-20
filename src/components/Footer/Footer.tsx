@@ -66,9 +66,9 @@ export default function Footer() {
           <h4 className={styles.footer__support}>
             Допоможи ЗСУ вже зараз
           </h4>
-          <button className={styles.footer__button}>
+          <Link href={'/projects'} className={styles.footer__button}>
             Підтримати проекти
-          </button>
+          </Link>
         </div>
         <div className={styles.footer__line} />
         <div className={styles.footer__info}>

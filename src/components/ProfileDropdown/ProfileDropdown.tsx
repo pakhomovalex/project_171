@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useUser } from '../../lib/store/store';
 import styles from './ProfileDropdown.module.scss';
 
-export const ProfileDropdown = () => {
+export const ProfileDropdown = ({ up }: { up: boolean}) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -49,7 +49,6 @@ export const ProfileDropdown = () => {
               fill
               className={styles.avatarImage}
             />
-            // <div></div>
           ) : (
             <div className={styles.avatarFallback}>
               {(user.username || 'U').charAt(0).toUpperCase()}
@@ -59,7 +58,7 @@ export const ProfileDropdown = () => {
       </button>
 
       {isOpen && (
-        <div className={styles.menu}>
+        <div className={up ? `${styles.menu} ${styles.menu__up}` : styles.menu}>
           <div className={styles.userInfo}>
             <p className={styles.userName}>{user.username}</p>
             <p className={styles.userEmail}>{user.email}</p>

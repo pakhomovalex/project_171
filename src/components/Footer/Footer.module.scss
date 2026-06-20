@@ -173,6 +173,7 @@
     @include blue-button(100%, 48px);
 
     margin-top: 16px;
+    text-decoration: none;
 
     @include on-tablet() {
       margin-top: 8px;
