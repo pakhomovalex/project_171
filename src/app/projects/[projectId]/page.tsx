@@ -8,7 +8,6 @@ import Image from "next/image";
 import { Slider } from "../../../components/Slider/Slider";
 import { projectsService } from "../../../lib/services/projectsService";
 import { useEffect, useState } from "react";
-import { accessTokenService } from "../../../lib/services/accessTokenService";
 import { useParams } from "next/navigation";
 import DonationModal from "../../../components/DonationModal/DonationModal";
 import { ProjectType } from "@/utils/types/ProjectType";
@@ -21,11 +20,6 @@ export default function ProjectPage() {
 
   useEffect(() => {
     const loadProject = async () => {
-      // const token = accessTokenService.getAccess();
-      // if (!token) {
-      //   // Редирект на логин
-      //   return;
-      // }
 
       try {
         const id = params.projectId ? +params.projectId : 0;
