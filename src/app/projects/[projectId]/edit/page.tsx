@@ -6,6 +6,7 @@ import { projectsService } from '../../../../lib/services/projectsService';
 import { useUser } from '../../../../lib/store/store';
 import ProjectCreateForm from '../../../../components/ProjectCreateForm/ProjectCreateForm';
 import styles from './page.module.scss';
+import { ProjectType } from '@/utils/types/ProjectType';
 
 interface Category {
   id: number;
@@ -19,7 +20,7 @@ export default function EditProjectPage() {
   const router = useRouter();
   const currentUser = useUser((state) => state.user);
 
-  const [project, setProject] = useState(null);
+  const [project, setProject] = useState<ProjectType | null>(null);
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
