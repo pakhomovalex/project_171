@@ -36,7 +36,6 @@ export const AuthorCard = ({
     instagram_url,
     facebook_url,
     project_count,
-    specialization,
     bio,
     date_joined
   } = author;
@@ -66,9 +65,6 @@ export const AuthorCard = ({
           }
           {/* {full_name} */}
         </h3>
-        <p className={styles.card__spezialization}>
-          {specialization.name || ''}
-        </p>
         <p className={styles.card__slogan}>
           {bio}
         </p>
