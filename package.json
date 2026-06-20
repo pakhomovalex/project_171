@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
+  },
+  "engines": {
+    "node": "20.x"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -14,12 +17,13 @@
     "axios": "^1.11.0",
     "dotenv": "^17.2.1",
     "gsap": "^3.13.0",
-    "next": "^16.2.1",
+    "next": "15.3.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sass": "^1.91.0",
     "swiper": "^11.2.10",
-    "zod": "^4.0.16"
+    "zod": "^4.0.16",
+    "zustand": "^5.0.14"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -29,5 +33,8 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.5",
     "typescript": "^5"
+  },
+  "overrides": {
+    "zustand": "^5.0.14"
   }
 }
