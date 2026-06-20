@@ -178,6 +178,10 @@
     @include on-tablet() {
       margin-top: 8px;
     }
+
+    @include on-phone() {
+      width: 60%;
+    }
   }
 
   &__line {

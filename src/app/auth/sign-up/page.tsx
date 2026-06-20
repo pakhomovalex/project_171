@@ -22,6 +22,7 @@ export default function SignUp() {
 
     await authService.registration(email, password, repeatPassword)
     .then(() => {
+      router.push('/auth/log-in');
     })
   }
 
