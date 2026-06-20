@@ -18,13 +18,13 @@ export default function EditProjectPage() {
   const params = useParams();
   const router = useRouter();
   const currentUser = useUser((state) => state.user);
-  
+
   const [project, setProject] = useState(null);
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const projectId = +params.projectId;
+  const projectId = params.projectId ? +params.projectId : 0;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,10 +33,10 @@ export default function EditProjectPage() {
           projectsService.getProject(+projectId),
           projectsService.getCategories(),
         ]);
-        
+
         setProject(projectData);
         setCategories(categoriesData);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
         setError('Не вдалося завантажити проект');
         console.log(err);
@@ -77,7 +77,7 @@ export default function EditProjectPage() {
     <div className={styles.container}>
       {error && <div className={styles.errorBanner}>{error}</div>}
 
-      <ProjectCreateForm 
+      <ProjectCreateForm
         categories={categories}
         initialData={project}
         isEditing={true}
