@@ -3,6 +3,12 @@ import { ProjectBrief } from "../../utils/types/user";
 import { Project } from "next/dist/build/swc/types";
 import { ProjectType } from "../../utils/types/ProjectType";
 
+interface Category {
+  id: number;
+  name: string;
+  slug: string;
+}
+
 export const projectsService = {
   // Получить список проектов (краткие)
   getProjects: (): Promise<ProjectBrief[]> =>
@@ -22,8 +28,7 @@ export const projectsService = {
     });
   },
 
-  getCategories: (): Promise<{ id: number; name: string; slug: string }[]> => 
-    client.get('/projects/categories/'),
+  getCategories: async (): Promise<Category[]> => client.get('/projects/categories/'),
 
   // Обновить проект
   updateProject: (id: number, data: FormData | Partial<Project>) => {

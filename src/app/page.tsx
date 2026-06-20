@@ -59,7 +59,9 @@ export default async function Home() {
         target_amount: +project.target_amount
       }
     )
-  })
+  });
+
+
 
   return (
     <>

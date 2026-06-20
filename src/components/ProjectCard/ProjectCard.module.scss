@@ -85,5 +85,13 @@
 
     margin-top: 16px;
     text-decoration: none;
+
+    &__yellow {
+      @include yellow-button(100%, 48px);
+       margin-top: 16px;
+      text-decoration: none;
+      background-color: transparent;
+
+    }
   }
 }

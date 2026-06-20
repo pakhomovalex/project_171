@@ -20,7 +20,18 @@ export const accessTokenService = {
     if (typeof window !== 'undefined') {
       localStorage.setItem(ACCESS_KEY, access);
       localStorage.setItem(REFRESH_KEY, refresh);
+
+      document.cookie = `access_token=${access}; path=/; max-age=86400; SameSite=Lax`;
     }
+  },
+
+  getAccessFromCookie: (): string | null => {
+    // Для Server Components
+    if (typeof document !== 'undefined') {
+      const match = document.cookie.match(/access_token=([^;]+)/);
+      return match ? match[1] : null;
+    }
+    return null;
   },
 
   saveAccess: (access: string) => {

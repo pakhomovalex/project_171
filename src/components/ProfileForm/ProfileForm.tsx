@@ -120,6 +120,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
               height={128}
               className={styles.avatarImage}
             />
+            // <div></div>
           ) : (
             <div className={styles.avatarPlaceholder}>
               {getInitials()}

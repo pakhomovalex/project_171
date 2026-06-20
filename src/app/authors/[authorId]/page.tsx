@@ -8,11 +8,15 @@ import styles from './AuthorPage.module.scss';
 import ProjectCard from "../../../components/ProjectCard/ProjectCard";
 import { authorsService } from "../../../lib/services/authorsService";
 import { UserWithProjects } from "../../../utils/types/user";
+import { cookies } from 'next/headers';
 
 export default async function AuthorDetails({ params }: { params: Promise<{ authorId: string }> }) {
   const { authorId } = await params;
 
-  const author = await authorsService.getAuthor(+authorId);
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get('access_token')?.value;
+
+  const author = await authorsService.getAuthor(+authorId, accessToken);
 
   const { projects, username, full_name } = author as UserWithProjects;
 

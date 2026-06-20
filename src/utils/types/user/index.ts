@@ -33,6 +33,7 @@ export interface ProjectBrief {
   end_date: Date; // ISO строка, не Date
   target_amount: number;
   donation_percentage: number;
+  can_edit?: boolean
 }
 
 // ============ ПОЛЬЗОВАТЕЛЬ (единый тип) ============

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, ChangeEvent, FormEvent } from 'react';
+import { useState, useRef, ChangeEvent, FormEvent, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { projectsService } from '../../lib/services/projectsService';
@@ -15,9 +15,20 @@ interface Category {
 
 interface ProjectCreateFormProps {
   categories: Category[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  initialData?: any;      // ← для редактирования
+  isEditing?: boolean;     // ← флаг редактирования
+  projectId?: number;      // ← ID проекта для обновления
+  onSuccess?: () => void;  // ← колбэк после успеха
 }
 
-export default function ProjectCreateForm({ categories }: ProjectCreateFormProps) {
+export default function ProjectCreateForm({
+  categories,
+  initialData,
+  isEditing,
+  projectId,
+  onSuccess
+}: ProjectCreateFormProps) {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -42,6 +53,39 @@ export default function ProjectCreateForm({ categories }: ProjectCreateFormProps
     other_payment_details: '',
   });
 
+  useEffect(() => {
+    if (initialData) {
+      setFormData({
+        title: initialData.title || '',
+        subtitle: initialData.subtitle || '',
+        description: initialData.description || '',
+        category: initialData.category?.id?.toString() || '',
+        donation_type: initialData.donation_type || 'full_price',
+        price: initialData.price?.toString() || '',
+        target_amount: initialData.target_amount?.toString() || '',
+        donation_percentage: initialData.donation_percentage?.toString() || '',
+        fundraising_goal: initialData.fundraising_goal || '',
+        end_date: initialData.end_date ? initialData.end_date.split('T')[0] : '',
+        monobank_jar_url: initialData.monobank_jar_url || '',
+        privatbank_konvert_url: initialData.privatbank_konvert_url || '',
+        paypal_me_url: initialData.paypal_me_url || '',
+        other_payment_details: initialData.other_payment_details || '',
+      });
+
+      // Если есть существующие изображения, показать их
+      if (initialData.images) {
+        console.log('images:', initialData.images);
+        console.log('first image:', initialData.images?.[0]);
+
+        setPreviewImages(initialData.images.map((img: {
+          id: number,
+          image: string,
+          order: number
+        }) => img.image));
+      }
+    }
+  }, [initialData]);
+
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -62,60 +106,70 @@ export default function ProjectCreateForm({ categories }: ProjectCreateFormProps
   };
 
   const handleSubmit = async (e: FormEvent) => {
-  e.preventDefault();
-  setIsLoading(true);
-  setError('');
+    e.preventDefault();
+    setIsLoading(true);
+    setError('');
 
-  try {
-    const data = new FormData();
+    try {
+      const data = new FormData();
 
-    // Текстовые поля
-    data.append('title', formData.title);
-    data.append('subtitle', formData.subtitle);
-    data.append('description', formData.description);
-    data.append('category', formData.category);  // ID категории
-    data.append('donation_type', formData.donation_type);
-    data.append('fundraising_goal', formData.fundraising_goal);
-    data.append('end_date', formData.end_date);
-    data.append('status', 'active');
+      // Текстовые поля
+      data.append('title', formData.title);
+      data.append('subtitle', formData.subtitle);
+      data.append('description', formData.description);
+      data.append('category', formData.category);  // ID категории
+      data.append('donation_type', formData.donation_type);
+      data.append('fundraising_goal', formData.fundraising_goal);
+      data.append('end_date', formData.end_date);
+      data.append('status', 'active');
 
-    // Числовые поля
-    if (formData.donation_type === 'full_price') {
-      data.append('price', formData.price);
-    } else {
-      data.append('target_amount', formData.target_amount);
-      data.append('donation_percentage', formData.donation_percentage);
+      // Числовые поля
+      if (formData.donation_type === 'full_price') {
+        data.append('price', formData.price);
+      } else {
+        data.append('target_amount', formData.target_amount);
+        data.append('donation_percentage', formData.donation_percentage);
+      }
+
+      // URL поля
+      if (formData.monobank_jar_url) data.append('monobank_jar_url', formData.monobank_jar_url);
+      if (formData.privatbank_konvert_url) data.append('privatbank_konvert_url', formData.privatbank_konvert_url);
+      if (formData.paypal_me_url) data.append('paypal_me_url', formData.paypal_me_url);
+      if (formData.other_payment_details) data.append('other_payment_details', formData.other_payment_details);
+
+      // Картинки — важно: имя поля должно совпадать с ожиданиями бэкенда
+      imageFiles.forEach((file) => {
+        data.append('images', file);  // или 'image' если один файл
+      });
+
+
+      if (isEditing && projectId) {
+        // Обновление существующего проекта
+        await projectsService.updateProject(projectId, data);
+        onSuccess?.();
+      } else {
+        // Создание нового проекта
+        await projectsService.createProject(data);
+        router.push('/projects');
+        router.refresh();
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      setError(err.response?.data?.detail || 'Помилка створення проєкту');
+      console.error('Create project error:', err.response?.data);
+    } finally {
+      setIsLoading(false);
     }
-
-    // URL поля
-    if (formData.monobank_jar_url) data.append('monobank_jar_url', formData.monobank_jar_url);
-    if (formData.privatbank_konvert_url) data.append('privatbank_konvert_url', formData.privatbank_konvert_url);
-    if (formData.paypal_me_url) data.append('paypal_me_url', formData.paypal_me_url);
-    if (formData.other_payment_details) data.append('other_payment_details', formData.other_payment_details);
-
-    // Картинки — важно: имя поля должно совпадать с ожиданиями бэкенда
-    imageFiles.forEach((file) => {
-      data.append('images', file);  // или 'image' если один файл
-    });
-
-    await projectsService.createProject(data);
-    router.push('/projects');
-    router.refresh();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (err: any) {
-    setError(err.response?.data?.detail || 'Помилка створення проєкту');
-    console.error('Create project error:', err.response?.data);
-  } finally {
-    setIsLoading(false);
-  }
-};
-
-  // const isPercentage = formData.donation_type === 'percentage';
+  };
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      <h1 className={styles.title}>Створення проєкту</h1>
-      
+      {isEditing ?
+        <h1 className={styles.title}>Редагування проекту</h1>
+        :
+        <h1 className={styles.title}>Створення проєкту</h1>
+      }
+
       {error && (
         <div className={styles.error}>{error}</div>
       )}
@@ -334,42 +388,56 @@ export default function ProjectCreateForm({ categories }: ProjectCreateFormProps
       </div>
 
       {/* Изображения */}
-      <h2 className={styles.sectionTitle}>Фото проєкту</h2>
+      {!isEditing &&
+        <>
+          <h2 className={styles.sectionTitle}>Фото проєкту</h2>
 
-      <div className={styles.imagesSection}>
-        <div className={styles.imageUpload} onClick={() => fileInputRef.current?.click()}>
-          <span className={styles.uploadIcon}>+</span>
-          <span className={styles.uploadText}>Додати фото</span>
-        </div>
-        
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="image/*"
-          multiple
-          onChange={handleImageChange}
-          className={styles.hiddenInput}
-        />
+          <div className={styles.imagesSection}>
+            <div className={styles.imageUpload} onClick={() => fileInputRef.current?.click()}>
+              <span className={styles.uploadIcon}>+</span>
+              <span className={styles.uploadText}>Додати фото</span>
+            </div>
 
-        {previewImages.map((src, index) => (
-          <div key={index} className={styles.imagePreview}>
-            <Image
-              src={src}
-              alt={`Preview ${index + 1}`}
-              width={120}
-              height={120}
-              className={styles.previewImg}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={handleImageChange}
+              className={styles.hiddenInput}
             />
-            <button
-              type="button"
-              onClick={() => removeImage(index)}
-              className={styles.removeBtn}
-            >
-              ×
-            </button>
+
+            {previewImages.map((src, index) => {
+              console.log('Type:', typeof src);
+              console.log('Value:', src);
+
+
+              return (
+
+                <div key={src} className={styles.imagePreview}>
+                  <Image
+                    src={src}
+                    alt={`Preview ${index + 1}`}
+                    width={120}
+                    height={120}
+                    className={styles.previewImg}
+                    onError={(e) => {
+                      console.error('Image failed:', src);
+                      (e.target as HTMLImageElement).style.border = '2px solid red';
+                    }}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeImage(index)}
+                    className={styles.removeBtn}
+                  >
+                    ×
+                  </button>
+                </div>
+              )
+            })}
           </div>
-        ))}
-      </div>
+        </>}
 
       {/* Кнопки */}
       <div className={styles.buttons}>
@@ -378,7 +446,8 @@ export default function ProjectCreateForm({ categories }: ProjectCreateFormProps
           disabled={isLoading}
           className={styles.submitBtn}
         >
-          {isLoading ? 'Створення...' : 'Створити проєкт'}
+          {!isEditing && (isLoading ? 'Створення...' : 'Створити проект')}
+          {isEditing && (isLoading ? 'Змінення...' : 'Змінити проект')}
         </button>
         <button
           type="button"

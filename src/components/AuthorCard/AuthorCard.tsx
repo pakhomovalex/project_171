@@ -22,7 +22,7 @@ export const AuthorCard = ({
   const isAdmin = currentUser?.is_superuser;
 
   // Может редактировать: владелец или админ
-  const canEdit = isOwner || isAdmin;
+  const canEdit = isOwner;
   
 
   const {
@@ -45,18 +45,18 @@ export const AuthorCard = ({
     <article className={styles.card}>
       <div className={styles.card__avatarBox}>
         {avatar ? (
-          <Image
+           <Image
             src={avatar}
             alt={"avatar"}
             fill
-          />
-        ) : (
+          /> 
+        ) : ( 
           <Image
             src={'/default-user-icon.jpg'}
             alt={"avatar"}
             fill
           />
-        )}
+         )} 
 
       </div>
       <div className={styles.card__info}>
@@ -161,7 +161,7 @@ export const AuthorCard = ({
         </>
       )}
 
-        {isAdmin && (
+        {isAdmin && isOwner && (
           <a
             href="https://charity-platform-backend-va70.onrender.com/admin/"
             target="_blank"

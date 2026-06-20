@@ -14,9 +14,10 @@ export default function ProjectCard({
     donation_type,
     end_date,
     id,
-    donation_percentage
+    donation_percentage,
+    can_edit
   } = project;
-
+  
   return (
     <article className={styles.card}>
       <div className={styles.card__imageBox}>
@@ -35,18 +36,12 @@ export default function ProjectCard({
             height={12}
           />
         </div>
-        {/* {cover_image ? ( */}
           <Image
             src={cover_image}
             alt={'image'}
             fill
             className={styles.card__image}
           />
-        {/* ) : (
-          <div className={styles.card__imagePlaceholder}>
-            <span>Немає фото</span>
-          </div>
-        )} */}
       </div>
       <h4 className={styles.card__title}>
         «{title}»
@@ -69,6 +64,14 @@ export default function ProjectCard({
       <Link className={styles.card__button} href={`/projects/${id}`}>
         Підтримати
       </Link>
+      {can_edit && (
+          <Link 
+            href={`/projects/${project.id}/edit`}
+            className={styles.card__button__yellow}
+          >
+            Редагувати проект
+          </Link>
+        )}
     </article>
   );
 }

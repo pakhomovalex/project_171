@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from './LogIn.module.scss';
 import { logInAnimationIn, logInAnimationOut } from "../../../utils/authAnimation";
 import { useRouter } from "next/navigation";
-// import { redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { authService } from "../../../lib/services/authService";
 import 'dotenv/config';

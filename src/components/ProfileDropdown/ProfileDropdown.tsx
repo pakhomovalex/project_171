@@ -49,6 +49,7 @@ export const ProfileDropdown = () => {
               fill
               className={styles.avatarImage}
             />
+            // <div></div>
           ) : (
             <div className={styles.avatarFallback}>
               {(user.username || 'U').charAt(0).toUpperCase()}
