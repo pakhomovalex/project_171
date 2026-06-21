@@ -45,7 +45,7 @@ export default function ProjectCard({
           />
       </div>
       <h4 className={styles.card__title}>
-        «{title}»
+        «{title.length >= 23 ? `${title.slice(0, 111)}...` : title}»
       </h4>
       <p className={styles.card__description}>
         {subtitle.length >= 112 ? `${subtitle.slice(0, 111)}...` : subtitle}
