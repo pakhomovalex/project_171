@@ -386,7 +386,7 @@ export default function ProjectCreateForm({
       </div>
 
       {/* Изображения */}
-        <>
+        {!isEditing && <>
           <h2 className={styles.sectionTitle}>Фото проєкту</h2>
 
           <div className={styles.imagesSection}>
@@ -431,7 +431,7 @@ export default function ProjectCreateForm({
               )
             })}
           </div>
-        </>
+        </>}
 
       {/* Кнопки */}
       <div className={styles.buttons}>
