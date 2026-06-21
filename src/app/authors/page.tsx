@@ -19,7 +19,6 @@ export default function Authors() {
     .then((res) => setAuthors(res))
   }, [])
 
-  
 
   return (
     <>

@@ -20,6 +20,7 @@ export default function ProfileForm({ user }: ProfileFormProps) {
   const [previewAvatar, setPreviewAvatar] = useState<string | null>(user.avatar);
 
   const [formData, setFormData] = useState({
+    username: user.username || '',
     first_name: user.first_name || '',
     last_name: user.last_name || '',
     bio: user.bio || '',
@@ -141,6 +142,16 @@ export default function ProfileForm({ user }: ProfileFormProps) {
       </div>
 
       {/* Имя и фамилия */}
+      <div className={styles.formGroup}>
+          <label className={styles.label}>Нікнейм</label>
+          <input
+            type="text"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            className={styles.input}
+          />
+        </div>
       <div className={styles.formGrid}>
         <div className={styles.formGroup}>
           <label className={styles.label}>Ім&apos;я</label>
