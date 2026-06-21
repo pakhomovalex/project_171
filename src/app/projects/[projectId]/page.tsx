@@ -45,7 +45,7 @@ export default function ProjectPage() {
     loadProject();
   }, [params.projectId, router]);
 
-  if (!project) return <div>Проєкт не знайдено</div>;
+  if (!project) return <div>Завантаження...</div>;
 
   const {
     title,
