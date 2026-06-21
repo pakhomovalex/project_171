@@ -52,7 +52,7 @@ export default function Header() {
               <ActiveLink href="/authors">Автори</ActiveLink>
             </li>
             <li className={styles.nav__elem}>
-              <ActiveLink href="/become-an-author">Стати атором</ActiveLink>
+              <ActiveLink href="/become-an-author">Стати автором</ActiveLink>
             </li>
             <li className={styles.nav__elem}>
               <ActiveLink href="/about-us">Про нас</ActiveLink>
@@ -120,7 +120,7 @@ export default function Header() {
                 href="/become-an-author"
                 className={`${styles.nav__elem} ${styles['nav__elem--big']}`}
               >
-                Стати атором
+                Стати автором
               </ActiveLink>
             </li>
             <li>
