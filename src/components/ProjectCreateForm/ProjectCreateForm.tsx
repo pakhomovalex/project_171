@@ -74,8 +74,6 @@ export default function ProjectCreateForm({
 
       // Если есть существующие изображения, показать их
       if (initialData.images) {
-        console.log('images:', initialData.images);
-        console.log('first image:', initialData.images?.[0]);
 
         setPreviewImages(initialData.images.map((img: {
           id: number,
