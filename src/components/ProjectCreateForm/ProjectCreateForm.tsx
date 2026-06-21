@@ -388,7 +388,6 @@ export default function ProjectCreateForm({
       </div>
 
       {/* Изображения */}
-      {!isEditing &&
         <>
           <h2 className={styles.sectionTitle}>Фото проєкту</h2>
 
@@ -408,9 +407,6 @@ export default function ProjectCreateForm({
             />
 
             {previewImages.map((src, index) => {
-              console.log('Type:', typeof src);
-              console.log('Value:', src);
-
 
               return (
 
@@ -437,7 +433,7 @@ export default function ProjectCreateForm({
               )
             })}
           </div>
-        </>}
+        </>
 
       {/* Кнопки */}
       <div className={styles.buttons}>
