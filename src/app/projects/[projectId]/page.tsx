@@ -201,7 +201,7 @@ export default function ProjectPage() {
               </h2>
               <div className={styles.authorArticle__box}>
                 <Image
-                  src={avatar}
+                  src={avatar || '/default-user-icon.jpg'}
                   alt={"avatar"}
                   width={140}
                   height={140}
