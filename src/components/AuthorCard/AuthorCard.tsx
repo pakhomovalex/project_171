@@ -61,7 +61,7 @@ export const AuthorCard = ({
       <div className={styles.card__info}>
         <h3 className={styles.card__title}>
           {username ?
-            username : `${first_name} ${last_name}` || full_name
+            username : full_name || `${first_name} ${last_name}`
           }
           {/* {full_name} */}
         </h3>

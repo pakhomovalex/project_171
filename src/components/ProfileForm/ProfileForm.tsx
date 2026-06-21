@@ -29,7 +29,6 @@ export default function ProfileForm({ user }: ProfileFormProps) {
     telegram_url: user.telegram_url || '',
     instagram_url: user.instagram_url || '',
     facebook_url: user.facebook_url || '',
-    // specialization: user.specialization[0]?.id.toString() || '',
   });
 
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
