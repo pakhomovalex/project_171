@@ -56,7 +56,8 @@ export default function ProjectPage() {
     donation_percentage,
     price,
     end_date,
-    author
+    author,
+    target_amount
   } = project;
 
   const {
@@ -148,7 +149,7 @@ export default function ProjectPage() {
                     Ціль:
                   </p>
                   <h4 className={styles.infoSection__articleElem__value}>
-                    {price} грн
+                    {price || target_amount} грн
                   </h4>
                 </div>
                 <div className={styles.infoSection__articleElem}>
