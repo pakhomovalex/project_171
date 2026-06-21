@@ -16,11 +16,13 @@ export default function LogIn() {
   const [isVisiblePassword, setIsVisiblePassword] = useState(false);
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => { logInAnimationIn(imageRef) })
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setError('');
 
     try {
       const res = await authService.login(userEmail, password)
@@ -33,6 +35,7 @@ export default function LogIn() {
       router.push(`/authors/${res.user.id}`)
     } catch (error) {
       useUser.getState().updateUser(null)
+      setError('Невірний логін або пароль');
       throw error
     }
   }
@@ -60,6 +63,9 @@ export default function LogIn() {
           щоб підтримати ЗСУ креативом
         </p>
         <form className={styles.auth__form} onSubmit={handleSubmit}>
+          {error && (
+            <p className={styles.auth__error}>{error}</p>
+          )}
           <label htmlFor="email" className={styles.auth__form__label}>
             Електронна пошта
             <input
@@ -118,17 +124,6 @@ export default function LogIn() {
             Увійти
           </button>
         </form>
-        {/* <div className={styles.auth__or}>
-          <div className={styles.auth__line} />
-          <p className={styles.auth__orText}>
-            Або
-          </p>
-          <div className={styles.auth__line} />
-        </div>
-        <button className={styles.auth__google}>
-          <Image src={"/google-icon.svg"} alt={"google icon"} width={20} height={20} />
-          Увійти через Google
-        </button> */}
         <div className={styles.auth__signUp}>
           <p className={styles.auth__signUpText}>Ще не маєш аккаунту?</p>
           <button

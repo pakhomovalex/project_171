@@ -269,8 +269,8 @@ export default function ProjectCreateForm({
               <label className={styles.label}>Цільова сума (грн) *</label>
               <input
                 type="number"
-                name="target_amount"
-                value={formData.target_amount}
+                name="price"
+                value={formData.price}
                 onChange={handleChange}
                 className={styles.input}
                 placeholder="50000"

@@ -228,6 +228,13 @@
     }
   }
 
+  &__error {
+    color: #e74c3c;
+    font-size: 14px;
+    margin: 0 0 12px 0;
+    text-align: center;
+  }
+
   &__signUp {
     display: flex;
     margin-top: 24px;

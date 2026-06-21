@@ -8,11 +8,13 @@ import Image from "next/image";
 import { Slider } from "../../../components/Slider/Slider";
 import { projectsService } from "../../../lib/services/projectsService";
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import DonationModal from "../../../components/DonationModal/DonationModal";
 import { ProjectType } from "@/utils/types/ProjectType";
+import { accessTokenService } from "@/lib/services/accessTokenService";
 
 export default function ProjectPage() {
+  const router = useRouter();
   const params = useParams();
   const [project, setProject] = useState<ProjectType | null>(null);
   const [loading, setLoading] = useState(true);
@@ -20,6 +22,12 @@ export default function ProjectPage() {
 
   useEffect(() => {
     const loadProject = async () => {
+      const token = accessTokenService.getAccess();
+      if (!token) {
+        // Редирект на логин
+        router.push('/auth/log-in');
+        return;
+      }
 
       try {
         const id = params.projectId ? +params.projectId : 0;
@@ -35,7 +43,7 @@ export default function ProjectPage() {
     };
 
     loadProject();
-  }, [params.projectId]);
+  }, [params.projectId, router]);
 
   if (!project) return <div>Проєкт не знайдено</div>;
 
