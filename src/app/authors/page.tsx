@@ -1,3 +1,5 @@
+'use client'
+
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import styles from './Authors.module.scss';
@@ -5,11 +7,19 @@ import { AuthorCard } from "../../components/AuthorCard/AuthorCard";
 import { AuthorsPagination } from "../../components/AuthorsPagination/AuthorsPagination";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { authorsService } from "../../lib/services/authorsService";
+import { UserWithProjects } from "@/utils/types/user";
 
-export default async function Authors() {
-  const authors = await authorsService.getAllAuthors();
+export default function Authors() {
+  const [authors, setAuthors] = useState<UserWithProjects[]>([]);
+
+  useEffect(() => {
+    authorsService.getAllAuthors()
+    .then((res) => setAuthors(res))
+  }, [])
+
+  
 
   return (
     <>
