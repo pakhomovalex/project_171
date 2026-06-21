@@ -51,7 +51,7 @@ export default function BecomeAnAuthor() {
             Поділись своїм мистецтвом і стань частиною спільноти, яка
             <br />перетворює креатив на силу для ЗСУ
           </p>
-          <Link href={""} className={styles.firstSection__button}>
+          <Link href={"/auth/log-in"} className={styles.firstSection__button}>
             Стати автором
           </Link>
           <div className={styles.firstSection__articleBox}>
