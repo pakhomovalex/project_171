@@ -17,18 +17,20 @@ export default function LogIn() {
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => { logInAnimationIn(imageRef) })
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError('');
+    setIsLoading(true);
 
     try {
       const res = await authService.login(userEmail, password)
       const { id, username, avatar, email, is_superuser } = res.user; 
 
-       accessTokenService.saveTokens(res.access, res.refresh);
+      accessTokenService.saveTokens(res.access, res.refresh);
        
       useUser.getState().updateUser({ id, username, avatar, email, is_superuser })
 
@@ -37,6 +39,8 @@ export default function LogIn() {
       useUser.getState().updateUser(null)
       setError('Невірний логін або пароль');
       throw error
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -121,8 +125,9 @@ export default function LogIn() {
                 || userEmail.length === 0) ? styles['auth__form__submitButton--disabled'] : ''
               }
             `}>
-            Увійти
+            {isLoading ? 'Завантажуємо данні...' : 'Увійти'}
           </button>
+          
         </form>
         <div className={styles.auth__signUp}>
           <p className={styles.auth__signUpText}>Ще не маєш аккаунту?</p>
